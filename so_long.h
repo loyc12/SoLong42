@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/10/10 15:59:44 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/10 17:20:32 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ typedef struct s_coords
 
 typedef struct s_tile
 {
-	mlx_image_t	*image;
-	int			type;		//type of tile (0 for normal, 1 for walls, 2 for finish line)
-	int 		z;			//elevation (in 1/8 asset_size) of the center of the tile
-	t_tile		*north;
-	t_tile		*east
-	t_tile		*south
-	t_tile		*west;
-}				t_tile;
+	mlx_image_t		*image;
+	int				type;	//type of tile (0 for normal, 1 for walls, 2 for finish line)
+	int 			z;		//elevation (in 1/8 asset_size) of the center of the tile
+	struct s_tile	*north;
+	struct s_tile	*east;
+	struct s_tile	*south;
+	struct s_tile	*west;
+}					t_tile;
 
 typedef struct s_entity
 {
