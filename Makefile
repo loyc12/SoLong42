@@ -1,82 +1,87 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/09/22 12:48:17 by llord             #+#    #+#              #
-#    Updated: 2022/05/14 14:12:26 by llord            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-#Standard
-
-NAME		= libftprintf.a
-INCLUDES	= include
-LIBFT		= libft42
-SRCS_DIR	= src/
-OBJS_DIR	= obj/
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -I
-RM			= rm -f
-AR			= ar rc
-
-# Colors
+#------------------------------------------------------------------------------#
+#                                  COLOURS                                     #
+#------------------------------------------------------------------------------#
 
 DEF_COLOR = \033[0;39m
-GRAY = \033[0;90m
-RED = \033[0;91m
-GREEN = \033[0;92m
-YELLOW = \033[0;93m
-BLUE = \033[0;94m
 MAGENTA = \033[0;95m
+RED = \033[0;91m
+YELLOW = \033[0;93m
+GREEN = \033[0;92m
 CYAN = \033[0;96m
+BLUE = \033[0;94m
+GRAY = \033[0;90m
 WHITE = \033[0;97m
 
-#Sources
+#------------------------------------------------------------------------------#
+#                                  GENERICS                                    #
+#------------------------------------------------------------------------------#
 
-SRCS_FILES	=	ft_printf
+# Special variables
+DEFAULT_GOAL: all
+.DELETE_ON_ERROR: $(NAME)
+.PHONY: all bonus clean fclean re run
+
+# Hide calls
+export VERBOSE	=	TRUE
+ifeq ($(VERBOSE),TRUE)
+	HIDE =
+else
+	HIDE = @
+endif
 
 
-SRCS 		= 	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
-OBJS 		= 	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))
+#------------------------------------------------------------------------------#
+#                                 VARIABLES                                    #
+#------------------------------------------------------------------------------#
 
-###
+# Compiler and flags
+CC		=	gcc
+CFLAGS	=	-Wall -Werror -Wextra
+RM		=	rm -rf
+INCLUDE =	-I include
+LIBS	=	libs/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 
-OBJSF		=	.cache_exists
+# Dir and file names
+NAME	=	so_long
+SRCDIR	=	src/
+OBJDIR	=	bin/
+SRCS	=	$(wildcard $(SRCDIR)*.c)
+OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
 
-all:		$(NAME)
 
-$(NAME):	$(OBJS)
-			@make -C $(LIBFT)
-			@cp libft/libft.a .
-			@mv libft.a $(NAME)
-			@$(AR) $(NAME) $(OBJS)
-			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
+#------------------------------------------------------------------------------#
+#                                 TARGETS                                      #
+#------------------------------------------------------------------------------#
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJSF)
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+all: $(NAME)
 
-$(OBJSF):
-			@mkdir -p $(OBJS_DIR)
+$(NAME): $(OBJS)
+	$(HIDE)$(CC) $(CFLAGS) -o $@ $^ $(INCLUDE) $(LIBS)
+	@echo "$(GREEN)Files compiled$(DEF_COLOR)"
 
+$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
+	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
+	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+
+$(OBJDIR):
+	$(HIDE)mkdir -p $(OBJDIR)
+
+# Removes objects
 clean:
-			@$(RM) -rf $(OBJS_DIR)
-			@make clean -C $(LIBFT)
-			@echo "$(BLUE)ft_printf object files cleaned!$(DEF_COLOR)"
+	$(HIDE)$(RM) $(OBJS)
+	@echo "$(MAGENTA)Object files cleaned$(DEF_COLOR)"
 
-fclean:		clean
-			@$(RM) -f $(NAME)
-			@$(RM) -f $(LIBFT)/libft.a
-			@echo "$(CYAN)ft_printf executable files cleaned!$(DEF_COLOR)"
-			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
+# Removes objects and executables
+fclean: clean
+	$(HIDE)$(RM) $(NAME)
+	@echo "$(RED)Executable files cleaned$(DEF_COLOR)"
 
-re:			fclean all
-			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
+# Removes objects and executables and remakes
+re: fclean all
+	@echo "$(CYAN)Cleaned and rebuilt everything!$(DEF_COLOR)"
 
-norm:
-			@norminette $(SRCS) $(INCLUDES) $(LIBFT) | grep -v Norme -B1 || true
+# Runs the resulting file
+run: re
+	@echo "$(BLUE)Starting the program...$(DEF_COLOR)"
+	./$(NAME)
 
-.PHONY:		all clean fclean re norm
