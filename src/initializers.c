@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/17 08:34:24 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/17 10:08:26 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,13 @@
 //puts harcoded data into the d struct (prints the board)
 void	initiate_data(t_data *d)
 {
-	d->window_x = 2048;	//window width				ALL HARDCODED FOR NOW
-	d->window_y = 1024;	//window height
-	d->window = mlx_init(d->window_x, d->window_y, "Test Window", true);	//the window itself
+	d->max_wx = 2048;	//window width				ALL HARDCODED FOR NOW
+	d->max_wy = 1024;	//window height
+	d->window = mlx_init(d->max_wx, d->max_wy, "Test Window", true);	//the window itself
 
-	d->board_x = 16;	//board width
-	d->board_y = 32;	//board height
+	d->max_bx = 16;	//board width
+	d->max_by = 32;	//board height
 	//d->board ...
-
-	d->x_offset = 0;	//allow screen movement
-	d->y_offset = 0;	//allow screen movement
 
 	d->asset_size = 64;	//asset resolution (static)
 }
@@ -33,7 +30,7 @@ void	initiate_window(t_data *d)
 {
 	mlx_image_t	*image;
 		
-	image = mlx_new_image(d->window, d->window_x, d->window_y);
+	image = mlx_new_image(d->window, d->max_wx, d->max_wy);
 	memset(image->pixels, 128, image->width * image->height * sizeof(int32_t));
 	mlx_image_to_window(d->window, image, 0, 0);
 	mlx_image_to_window(d->window, mlx_texture_to_image(d->window, mlx_load_png("./Assets/Misc/Tittle.png")), 0, 0); //MOVE ME

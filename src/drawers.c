@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/12 16:58:26 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/17 10:07:50 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ void	draw_static_board(t_data *d)
 
 	bc.y = -1;
 	bc.z = 0;
-	while (++bc.y < d->board_y)
+	while (++bc.y < d->max_by)
 	{
 	bc.x = -1;
-		while (++bc.x < d->board_x)
+		while (++bc.x < d->max_bx)
 		{
 			wx = find_wx(&bc, d);
 			wy = find_wy(&bc, d);
-			if (-d->asset_size < wx && wx < d->window_x \
-			&& -d->asset_size < wy && wy < d->window_y)
+			if (-d->asset_size < wx && wx < d->max_wx \
+			&& -d->asset_size < wy && wy < d->max_wy)
 			{
-				if (bc.x * bc.y == 0 || bc.x + 1 == d->board_x || bc.y + 1 == d->board_y)
+				if (bc.x * bc.y == 0 || bc.x + 1 == d->max_bx || bc.y + 1 == d->max_by)
 					put_image(&bc, d, "./Assets/Slabs/Slab.png");
 				else
 					put_image(&bc, d, "./Assets/Misc/TileFloor.png");

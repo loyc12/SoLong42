@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checkers.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/17 10:06:47 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/17 10:03:27 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	is_in_board(t_data *d, t_coords *bc)
-{
-	if (0 <= bc->x && bc->x <= d->max_bx)
-		if (0 <= bc->y && bc->y <= d->max_by)
-			return (1);
-	return (0);
-}
+//gcc -Werror -Wextra -Wall ./src/* ./libs/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
 
-int	is_in_window(t_data *d, t_coords *wc)
+int	main(void)
 {
-	if (0 <= wc->x && wc->x <= d->max_wx)
-		if (0 <= wc->y && wc->y <= d->max_wy)
-			return (1);
+	t_data		d;
+	t_entity	p;
+	
+	initiate_data(&d);
+	initiate_player(&d, &p);
+	initiate_window(&d);
+
+	//draws a plane of squares
+	draw_static_board(&d);
+
+	//displays the end (hole)
+	put_end(6, 9, &d);		//hardocded (temp)
+
+	//displays the player (ball)
+	put_entity(&d, &p);
+
+	mlx_loop(d.window);
+    mlx_terminate(d.window);
+
 	return (0);
 }

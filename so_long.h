@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/10/17 08:40:41 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/17 10:06:21 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,17 @@ typedef struct s_board
 {
 	t_tile		*tiles;		//lists all tiles
 	t_entity	*entities;	//lists all enties
-	int 		board_x;	//width (in tiles) of the board
-	int 		board_y;	//height (in tiles) of the board
 }				t_board;
 
 typedef struct s_data
 {
-	int 	window_x;	//width (in pixels) of the window
-	int 	window_y;	//height (in pixels) of the window
+	int 	max_wx;	//width (in pixels) of the window
+	int 	max_wy;	//height (in pixels) of the window
 	mlx_t	*window;	//where we print stuff
 
-	int 	board_x;	//width (in tiles) of the board		(temp) (to move)
-	int 	board_y;	//height (in tiles) of the board	(temp) (to move)
+	int 	max_bx;	//width (in tiles) of the board		(temp) (to move)
+	int 	max_by;	//height (in tiles) of the board	(temp) (to move)
 	t_board	*board;		//where we put stuff
-
-	int		x_offset;	//allows moving the window horizontally (useless?)
-	int		y_offset;	//allows moving the window horizontally (useless?)
 	
 	int 	asset_size;	//size (in pixels) of assets used	(32 pixels)
 
