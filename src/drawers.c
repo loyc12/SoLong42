@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/10 15:30:13 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/12 16:58:26 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//draws an image
 void	put_image(t_coords *bc, t_data *d, char *path)
 {
 	mlx_image_t *image;
@@ -23,6 +24,7 @@ void	put_image(t_coords *bc, t_data *d, char *path)
 	mlx_image_to_window(d->window, image, wc.x, wc.y);
 }
 
+//draws the end
 void	put_end(int bx, int by, t_data *d)
 {
 	mlx_image_t *image;
@@ -48,6 +50,7 @@ void	put_entity(t_data *d, t_entity *e)
 	mlx_image_to_window(d->window, e->image, wx, wy);
 }
 
+// draws a static board
 void	draw_static_board(t_data *d)
 {
 	t_coords	bc;	//board coordinates

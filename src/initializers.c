@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/10 15:30:15 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/17 08:34:24 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//puts harcoded data into the d struct (prints the board)
 void	initiate_data(t_data *d)
 {
 	d->window_x = 2048;	//window width				ALL HARDCODED FOR NOW
@@ -19,22 +20,26 @@ void	initiate_data(t_data *d)
 	d->window = mlx_init(d->window_x, d->window_y, "Test Window", true);	//the window itself
 
 	d->board_x = 16;	//board width
-	d->board_y = 24;	//board height
+	d->board_y = 32;	//board height
 	//d->board ...
 
 	d->x_offset = 0;	//allow screen movement
 	d->y_offset = 0;	//allow screen movement
 
 	d->asset_size = 64;	//asset resolution (static)
+}
 
+void	initiate_window(t_data *d)
+{
 	mlx_image_t	*image;
 		
 	image = mlx_new_image(d->window, d->window_x, d->window_y);
 	memset(image->pixels, 128, image->width * image->height * sizeof(int32_t));
 	mlx_image_to_window(d->window, image, 0, 0);
-	mlx_image_to_window(d->window, mlx_texture_to_image(d->window, mlx_load_png("./Assets/Misc/Tittle.png")), 0, 0);
+	mlx_image_to_window(d->window, mlx_texture_to_image(d->window, mlx_load_png("./Assets/Misc/Tittle.png")), 0, 0); //MOVE ME
 }
 
+//puts the player on the board
 void	initiate_player(t_data *d, t_entity *p)
 {
 
