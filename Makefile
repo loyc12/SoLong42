@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/10/11 15:09:47 by llord            ###   ########.fr        #
+#    Updated: 2022/10/20 15:53:16 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 RM		=	rm -rf
 INCLUDE =	-I include
-LIBS	=	libs/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+LIBS	=	libs/libmlx42.a -lglfw -L "/Users/llord/.brew/opt/glfw/lib/"
 
 # Dir and file names
 NAME	=	so_long
@@ -71,7 +71,7 @@ $(NAME): $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) -o $@ $^ $(INCLUDE) $(LIBS)
 	@echo "$(GREEN)Files compiled$(DEF_COLOR)"
 
-$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c $(OBJDIR)
+$(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
 	$(HIDE)$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
@@ -96,4 +96,9 @@ re: fclean all
 run: re
 	@echo "$(BLUE)Starting the program...$(DEF_COLOR)"
 	./$(NAME)
+
+lldb: re
+	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
+	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include libs/libmlx42.a -lglfw -L "/Users/llord/.brew/opt/glfw/lib/"
+	lldb a.out
 
