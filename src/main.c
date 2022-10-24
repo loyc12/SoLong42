@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 13:42:44 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 14:46:43 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	main(void)
 	
 	initiate_data(&d);
 	initiate_window(&d);
+	
 	draw_board(&d);
-
+	//mlx_loop_hook(d.window, hook, d.window);
 	mlx_loop(d.window);
     mlx_terminate(d.window);
 
