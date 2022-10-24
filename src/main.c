@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 10:13:36 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 13:42:44 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	main(void)
 {
-	t_data		d;
+	t_data		d;	//CHANGER LES CALLOC EN FT_CALLOC
 	
 	initiate_data(&d);
 	initiate_window(&d);

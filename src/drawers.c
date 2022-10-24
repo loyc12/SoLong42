@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 10:18:02 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 13:35:07 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,47 @@ void	put_image(t_coords *bc, t_data *d, char *path)
 	mlx_image_to_window(d->window, image, wc.x, wc.y);
 }
 
+static void	render_floor(t_data *d)
+{
+	t_tile	*tile;
+	int		i;
+
+	i = -1;
+	while (++i < d->board_s)
+	{
+		tile = d->tiles[i];
+		put_image(tile->bc, d, "./Assets/Misc/TileFloor.png");
+	}
+}
+
+static void	render_object(t_data *d, int i)
+{
+	t_tile	*tile;
+
+	tile = d->tiles[i];
+	if (tile->type == 0)
+		return ;
+	else if (tile->type == 1)
+		put_image(tile->bc, d, "./Assets/Slabs/Slab.png");
+	else if (tile->type == 2)
+		put_image(tile->bc, d, "./Assets/Doors&Keys/FlagWhite.png");
+	else if (tile->type == 3)
+		put_image(tile->bc, d, "./Assets/Misc/Hole.png");
+	else if (tile->type == 4)
+		put_image(tile->bc, d, "./Assets/Misc/Ball.png");
+}
+
 // draws a dynamic board
 void	draw_board(t_data *d)
 {
 	t_tile	*tile;
 	int		i;
 
+	render_floor(d);
 	i = -1;
-	while (++i != d->board_s)
+	while (++i < d->board_s)
 	{
 		tile = d->tiles[i];
-		printf("image #%i\n", i);
-		printf("type = %i\n\n", tile->type);
-		if (tile->type == 1)
-			put_image(tile->bc, d, "./Assets/Slabs/Slab.png");
-		else
-			put_image(tile->bc, d, "./Assets/Misc/TileFloor.png");
-
-		if (tile->type == 2)
-			put_image(tile->bc, d, "./Assets/Doors&Keys/FlagWhite.png");
-		else if (tile->type == 3)
-			put_image(tile->bc, d, "./Assets/Misc/Hole.png");
+		render_object(d, i);
 	}
-	put_image(d->p->bc, d, "./Assets/Misc/Ball.png");
-
 }

@@ -1,41 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coordinaters.c                                     :+:      :+:    :+:   */
+/*   tiler.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 14:32:41 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 14:22:24 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	find_wx(t_coords *bc, t_data *d)
+static void	connect_tile(t_data *d, t_tile *tile, int i)
 {
-	int wx;	//window x position
-	int	center_offset;
-	int	window_offset;
+	t_tile	*north_tile;
+	t_tile	*west_tile;
 
-	window_offset = (d->max_wx - d->asset_s) / 2;
-	center_offset = d->asset_s * (d->max_bx - d->max_by) / 4;
-
-	wx = ((bc->x - bc->y) * d->asset_s / 2) + window_offset - center_offset;
-
-	return (wx);
+	north_tile = d->tiles[i - d->max_by];
+	west_tile = d->tiles[i - 1];
+	if (north_tile->type != 0)
+	{
+		tile->north = north_tile;
+		north_tile->south = tile;
+	}
+	if (west_tile->type != 0)
+	{
+		tile->west = west_tile;
+		west_tile->east = tile;
+	}
 }
 
-int	find_wy(t_coords *bc, t_data *d)
+void	connect_tiles(t_data *d)
 {
-	int wy;	//window y position
-	int	window_offset;
-	int	center_offset;
+	t_tile	*tile;
+	int		i;
 
-	window_offset = d->max_wy / 2;
-	center_offset = d->asset_s * (d->max_bx + d->max_by) / 8;
-
-	wy = ((bc->x + bc->y) * d->asset_s / 4) + window_offset - center_offset;
-
-	return (wy);
+	i = -1;
+	while (++i < d->board_s)
+	{
+		tile = d->tiles[i];
+		if (tile->type != 0 && 0 < tile->bc->x && 0 < tile->bc->y)
+		connect_tile(d, tile, i);
+	}
 }

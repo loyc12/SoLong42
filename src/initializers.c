@@ -6,26 +6,20 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 10:16:30 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 14:27:35 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//puts the player on the board
-t_entity	*initiate_player(t_coords bc)
+t_coords	*clone_coords(t_coords c1)
 {
-	t_entity	*player;
-	t_coords	*pc;
-
-	player = calloc(1, sizeof(t_entity));
-	pc = calloc(1, sizeof(t_coords));
-	pc->x = bc.x;
-	pc->y = bc.y;
-	player->bc = pc;
-	player->info = 0;
-
-	return (player);
+	t_coords	*c2;
+	
+	c2 = calloc(1, sizeof(t_coords));
+	c2->x = c1.x;
+	c2->y = c1.y;
+	return (c2);
 }
 
 //puts harcoded data into the d struct (prints the board)
@@ -35,12 +29,11 @@ void initiate_data(t_data *d)
 	d->max_wy = 512;	//window height				//hardcoded for now
 	d->window = mlx_init(d->max_wx, d->max_wy, "Test Window", true);	//the window itself
 
-	d->max_bx = 0;		//board width
-	d->max_by = 0;		//board height
-	d->tiles = make_board(d, "P0C\n010\n0E0", 9);	//hardcoded for now
+	d->tiles = make_board(d, "1111111\n1P00001\n100C101\n10001C1\n10E0001\n1111111", 42);	//hardcoded for now
+	connect_tiles(d);
 
 	d->asset_s = 64;	//asset resolution (static)
-}
+} 
 
 void	initiate_window(t_data *d)
 {

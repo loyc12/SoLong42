@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 10:14:15 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 14:22:55 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_coords
 	
 	//int 		z;		//elevation (in 1/8 asset_size)
 }				t_coords;
-
+/*
 typedef struct s_entity //aka the flag(s) (for now)
 {
 	t_coords	*bc;
@@ -35,7 +35,7 @@ typedef struct s_entity //aka the flag(s) (for now)
 	//int			type;		//type of entity (0 for end, 1 for player, 2 for key, 3 for doors
 	//int			id;			//key&door ids
 }				t_entity;
-
+*/
 typedef struct s_tile
 {
 	t_coords		*bc;
@@ -56,17 +56,17 @@ typedef struct s_data
 
 	int 		max_bx;		//width (in tiles) of the board
 	int 		max_by;		//height (in tiles) of the board
-	t_tile		**tiles;		//lists all tiles
+	t_tile		**tiles;	//lists all tiles
 	
-	int			board_s;		//number of tiles in the board
+	int			board_s;	//number of tiles in the board
 	int 		asset_s;	//size (in pixels) of assets used	(32 pixels)
-	t_entity	*p;		//player entity
+	t_coords	*p;			//player position
 
 	//int		*inventory;	//IDs of collected keys (to activate doors)
 }			t_data;
 
 //from initializers
-t_entity	*initiate_player(t_coords bc);
+t_coords	*clone_coords(t_coords c1);
 void		initiate_data(t_data *d);
 void		initiate_window(t_data *d);
 
@@ -84,5 +84,8 @@ int		is_in_window(t_data *d, t_coords *wc);
 
 //from boarder
 t_tile	**make_board(t_data *d ,char *input, int size);
+
+//from tiler
+void	connect_tiles(t_data *d);
 
 #endif
