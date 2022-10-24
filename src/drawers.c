@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/20 14:57:46 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 10:18:02 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,22 @@ void	draw_board(t_data *d)
 	t_tile	*tile;
 	int		i;
 
-	i = 0;
-	while (i++ != d->board_s)
+	i = -1;
+	while (++i != d->board_s)
 	{
 		tile = d->tiles[i];
-		if (tile->type == '1')
+		printf("image #%i\n", i);
+		printf("type = %i\n\n", tile->type);
+		if (tile->type == 1)
 			put_image(tile->bc, d, "./Assets/Slabs/Slab.png");
 		else
 			put_image(tile->bc, d, "./Assets/Misc/TileFloor.png");
-		
-		if (tile->type == 'E')
+
+		if (tile->type == 2)
+			put_image(tile->bc, d, "./Assets/Doors&Keys/FlagWhite.png");
+		else if (tile->type == 3)
 			put_image(tile->bc, d, "./Assets/Misc/Hole.png");
-		else if (tile->type == '?')
-			put_image(tile->bc, d, "./Assets/Misc/Ball.png");
-		else if (tile->type == '2')
-			put_image(tile->bc, d, "./Assets/Misc/HalfBall.png");
 	}
+	put_image(d->p->bc, d, "./Assets/Misc/Ball.png");
+
 }

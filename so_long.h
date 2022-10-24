@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/10/20 16:51:10 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/24 10:14:15 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_coords
 
 typedef struct s_entity //aka the flag(s) (for now)
 {
-	mlx_image_t	*image;
 	t_coords	*bc;
 	int			info;
 
@@ -39,7 +38,6 @@ typedef struct s_entity //aka the flag(s) (for now)
 
 typedef struct s_tile
 {
-	mlx_image_t		*image;
 	t_coords		*bc;
 	struct s_tile	*north;
 	struct s_tile	*east;
@@ -68,8 +66,9 @@ typedef struct s_data
 }			t_data;
 
 //from initializers
-void	initiate_data(t_data *d, t_coords *pc);
-void	initiate_window(t_data *d);
+t_entity	*initiate_player(t_coords bc);
+void		initiate_data(t_data *d);
+void		initiate_window(t_data *d);
 
 //from drawers
 void	put_image(t_coords *bc, t_data *d, char *path);
@@ -84,6 +83,6 @@ int		is_in_board(t_data *d, t_coords *bc);
 int		is_in_window(t_data *d, t_coords *wc);
 
 //from boarder
-t_tile	**make_board(char *input, int size);
+t_tile	**make_board(t_data *d ,char *input, int size);
 
 #endif

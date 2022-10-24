@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/10/20 15:53:16 by llord            ###   ########.fr        #
+#    Updated: 2022/10/24 12:25:21 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re run
 
 # Hide calls
-export VERBOSE	=	TRUE
+export VERBOSE	=	FALSE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else
@@ -51,7 +51,7 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 RM		=	rm -rf
 INCLUDE =	-I include
-LIBS	=	libs/libmlx42.a -lglfw -L "/Users/llord/.brew/opt/glfw/lib/"
+LIBS	=	libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 
 # Dir and file names
 NAME	=	so_long
@@ -99,6 +99,6 @@ run: re
 
 lldb: re
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
-	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include libs/libmlx42.a -lglfw -L "/Users/llord/.brew/opt/glfw/lib/"
+	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 	lldb a.out
 
