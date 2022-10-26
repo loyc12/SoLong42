@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 14:23:49 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/25 12:16:08 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 	else if (type == 'P')
 	{
 		tile->type = 4;
-		d->p = clone_coords(bc);
+		d->pc = tile->bc;
 	}
 	return (tile);
 }

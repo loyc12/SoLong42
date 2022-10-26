@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/10/24 12:25:21 by llord            ###   ########.fr        #
+#    Updated: 2022/10/25 12:20:17 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DEFAULT_GOAL: all
 .PHONY: all bonus clean fclean re run
 
 # Hide calls
-export VERBOSE	=	FALSE
+export VERBOSE	=	TRUE
 ifeq ($(VERBOSE),TRUE)
 	HIDE =
 else

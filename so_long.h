@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/10/24 14:22:55 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/26 12:37:49 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ typedef struct s_entity //aka the flag(s) (for now)
 typedef struct s_tile
 {
 	t_coords		*bc;
+	mlx_image_t		*floor;
+	mlx_image_t		*object;
 	struct s_tile	*north;
 	struct s_tile	*east;
 	struct s_tile	*south;
 	struct s_tile	*west;
-	int				type;		//type of tile (0 for normal, 1 for walls, 2 for flag, 3 for end)
-	//int 			z;			//elevation (in 1/8 asset_size) of the center of the tile
+	int				type;	// 0 for empty, 1 for walls, 2 for flag, 3 for end, 4 for player
+	//int 			z;				//elevation (in 1/8 asset_size) of the center of the tile
 	//struct s_entity	*entity;	//the entity present on this tile
 }					t_tile;
 
@@ -60,7 +62,10 @@ typedef struct s_data
 	
 	int			board_s;	//number of tiles in the board
 	int 		asset_s;	//size (in pixels) of assets used	(32 pixels)
-	t_coords	*p;			//player position
+	t_coords	*pc;		//player position
+
+	mlx_image_t	**atlas;	//stores all image template
+	int			updated;
 
 	//int		*inventory;	//IDs of collected keys (to activate doors)
 }			t_data;
@@ -71,12 +76,13 @@ void		initiate_data(t_data *d);
 void		initiate_window(t_data *d);
 
 //from drawers
-void	put_image(t_coords *bc, t_data *d, char *path);
-void	draw_board(t_data *d);
+mlx_image_t	*put_image(t_coords *bc, t_data *d, char *path);
+void		draw_board(t_data *d);
 
 //from coordinaters
 int		find_wx(t_coords *bc, t_data *d);
 int		find_wy(t_coords *bc, t_data *d);
+t_tile	*find_tile(t_coords *bc, t_data *d);
 
 //from checkers
 int		is_in_board(t_data *d, t_coords *bc);
@@ -87,5 +93,8 @@ t_tile	**make_board(t_data *d ,char *input, int size);
 
 //from tiler
 void	connect_tiles(t_data *d);
+
+//from mover
+void move_player(t_data *d, t_tile *tile, char direction);
 
 #endif
