@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/26 12:35:08 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/31 13:46:21 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,28 @@
 
 static void	free_all(t_data *d)
 {
+	t_tile	*tile;
 	int		i;
 
 	i = -1;
 	while (++i < d->board_s)
 	{
-		free(d->tiles[i]->bc);
-		free(d->tiles[i]);
+		tile = d->tiles[i];
+		if (tile->object)
+			mlx_delete_image(d->window, tile->object);
+		if (tile->floor)
+			mlx_delete_image(d->window, tile->floor);
+		free(tile->bc);
+		free(tile);
 	}
 	free(d->tiles);
-	free(d->window);
+	i = -1;
+	while (++i < d->asset_n)
+		if (d->assets[i])
+			mlx_delete_image(d->window, d->assets[i]);
+	free(d->assets);
+	if (d->player)
+		mlx_delete_image(d->window, d->player);
 }
 
 static void	hook(void *param)
@@ -33,28 +45,29 @@ static void	hook(void *param)
 	t_data	*d;
 
 	d = param;
+	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE))
+			mlx_close_window(d->window);
 	if (!d->updated)
 	{
-	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE))
-		mlx_close_window(d->window);
-	if (mlx_is_key_down(d->window, MLX_KEY_W))
-		move_player(d, find_tile(d->pc, d), 'N');
-	if (mlx_is_key_down(d->window, MLX_KEY_D))
-		move_player(d, find_tile(d->pc, d), 'E');
-	if (mlx_is_key_down(d->window, MLX_KEY_S))
-		move_player(d, find_tile(d->pc, d), 'S');
-	if (mlx_is_key_down(d->window, MLX_KEY_A))
-		move_player(d, find_tile(d->pc, d), 'W');
+		if (mlx_is_key_down(d->window, MLX_KEY_W))
+			move_player(d, find_tile(d->pc, d), 'N');
+		if (mlx_is_key_down(d->window, MLX_KEY_D))
+			move_player(d, find_tile(d->pc, d), 'E');
+		if (mlx_is_key_down(d->window, MLX_KEY_S))
+			move_player(d, find_tile(d->pc, d), 'S');
+		if (mlx_is_key_down(d->window, MLX_KEY_A))
+			move_player(d, find_tile(d->pc, d), 'W');
 	}
 	else
+	{
+		usleep(100000);		//forbidden?????
 		draw_board(d);
-	usleep(50000);
+	}
 }
 
 int	main(void)
 {
-	t_data	d;	//CHANGER LES CALLOC EN FT_CALLOC
-				//METTRE LES FICHIERS DANS MAKEFILE
+	t_data	d; //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 	
 	initiate_data(&d);
 	initiate_window(&d);

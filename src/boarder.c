@@ -6,17 +6,18 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/25 12:16:08 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/31 12:19:03 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//initialises a single tile
 static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 {
 	t_tile		*tile;
 
-	tile = calloc(1, sizeof(t_tile));
+	tile = ft_calloc(1, sizeof(t_tile));
 	tile->bc = clone_coords(bc);
 	tile->north = NULL;
 	tile->east = NULL;
@@ -37,14 +38,17 @@ static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 	return (tile);
 }
 
-t_tile	**make_board(t_data *d, char *input, int size)
+//loads all the needed tiles
+t_tile	**load_board(t_data *d, char *input, int size)
 {
 	t_tile		**tiles;
 	t_coords	bc;
 	int			pos;
 	int			i;
 
-	tiles = calloc(size, sizeof(t_tile *));
+	if (is_valid(input))
+		printf("Input has exactly 1 player and 1 end!\n");			// REMOVE ME
+	tiles = ft_calloc(size, sizeof(t_tile *));
 	bc.y = 0;
 	i = 0;
 	pos = 0;

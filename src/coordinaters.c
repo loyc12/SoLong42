@@ -6,11 +6,21 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/25 11:28:51 by llord            ###   ########.fr       */
+/*   Updated: 2022/10/31 12:45:03 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+t_coords	*clone_coords(t_coords c1)
+{
+	t_coords	*c2;
+	
+	c2 = ft_calloc(1, sizeof(t_coords));
+	c2->x = c1.x;
+	c2->y = c1.y;
+	return (c2);
+}
 
 int	find_wx(t_coords *bc, t_data *d)
 {
