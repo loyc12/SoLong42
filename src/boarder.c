@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 12:19:03 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/01 10:46:33 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 	if (type == '1')
 		tile->type = 1;
 	else if (type == 'C')
+	{
 		tile->type = 2;
+		d->flag_n += 1;
+	}
 	else if (type == 'E')
+	{
 		tile->type = 3;
+		d->ec = tile->bc;
+	}
 	else if (type == 'P')
 	{
 		tile->type = 4;

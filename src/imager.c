@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 13:26:14 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/01 10:41:18 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ mlx_image_t **load_assets(t_data *d)
 	assets[0] = make_image(d, "./Assets/XPM/TileFloor.xpm42");
 	assets[1] = make_image(d, "./Assets/XPM/Slab.xpm42");
 	assets[2] = make_image(d, "./Assets/XPM/FlagWhite.xpm42");
-	assets[3] = make_image(d, "./Assets/XPM/Hole.xpm42");
+	assets[3] = make_image(d, "./Assets/XPM/BlockedHole.xpm42");
 	assets[4] = make_image(d, "./Assets/XPM/Ball.xpm42");
 	assets[5] = make_image(d, "./Assets/XPM/Cube.xpm42");
 	assets[6] = make_image(d, "./Assets/XPM/Tittle.xpm42");
-	assets[7] = NULL;
+	assets[7] = make_image(d, "./Assets/XPM/Hole.xpm42");
+	assets[8] = make_image(d, "./Assets/XPM/HalfBall.xpm42");
+	assets[9] = NULL;
 	return (assets);
 }

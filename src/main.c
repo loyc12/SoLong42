@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 13:46:21 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/01 11:11:55 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ static void	hook(void *param)
 			move_player(d, find_tile(d->pc, d), 'W');
 	}
 	else
-	{
-		usleep(100000);		//forbidden?????
 		draw_board(d);
-	}
 }
 
 int	main(void)
@@ -76,7 +73,7 @@ int	main(void)
 	draw_board(&d);
 	mlx_loop_hook(d.window, &hook, &d);
 	mlx_loop(d.window);
-    mlx_terminate(d.window);
 	free_all(&d);
+    mlx_terminate(d.window);
 	return (EXIT_SUCCESS);
 }

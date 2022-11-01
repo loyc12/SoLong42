@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 13:25:52 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/01 11:00:40 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef struct s_tile
 
 typedef struct s_data
 {
+	int			flag_n;		//number of flags left to collect
+	int			updated;	//wether the player has moved or not (wether to render or not)
+	
 	int 		max_wx;		//width (in pixels) of the window
 	int 		max_wy;		//height (in pixels) of the window
 	mlx_t		*window;	//where we print stuff
@@ -51,13 +54,14 @@ typedef struct s_data
 	int			board_s;	//number of tiles in the board
 	t_tile		**tiles;	//lists all tiles
 	
-	int			asset_n;	//number of different assets used	(8 assets)
+	int			asset_n;	//number of different assets used	(10 assets)
 	int 		asset_s;	//size (in pixels) of assets used	(64 pixels)
 	mlx_image_t	**assets;	//
 
+	t_coords	*ec;		//end position
+	mlx_image_t	*end;		//end image
 	t_coords	*pc;		//player position
 	mlx_image_t	*player;	//player image
-	int			updated;	//wether the player has moved or not (wether to render or not)
 
 }			t_data;
 

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 13:35:58 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/01 11:09:35 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ static void	render_floor(t_data *d)
 			tile->floor = put_image(d, tile->bc, 0, 4);
 		tile->floor = put_image(d, tile->bc, 0, 0);
 	}
+	if (d->flag_n)
+		find_tile(d->ec, d)->object = put_image(d, d->ec, 3, 0);
+	else
+		find_tile(d->ec, d)->object = put_image(d, d->ec, 7, 0);
 }
 
 //renders all the tile objects
@@ -40,8 +44,6 @@ static void	render_object(t_data *d, t_tile *tile)
 	}
 	else if (tile->type == 2)
 		tile->object = put_image(d, tile->bc, 2, 0);
-	else if (tile->type == 3)
-		tile->object = put_image(d, tile->bc, 3, 0);
 	else if (tile->type == 4)
 	{
 		tile->object = put_image(d, tile->bc, 4, 0);
@@ -59,10 +61,18 @@ static void	re_render_object(t_data *d, t_tile *tile)
 	wy = find_wy(tile->bc, d);
 	if (tile->type == 4)
 	{
-		tile->object = d->player;
-		move_image(d->player, wx, wy);
+		if (d->pc->x != d->ec->x || d->pc->y != d->ec->y)
+		{
+			move_image(d->player, wx, wy);
+			tile->object = d->player;
+		}
+		else
+		{
+			tile->object = put_image(d, tile->bc, 8, 0);
+			d->updated = -1;								//game end flag
+		}
 	}
-	if (tile->type != 0)
+	if (tile->type != 0 && tile->type != 3)
 		mlx_image_to_window(d->window, tile->object, wx, wy);
 }
 
