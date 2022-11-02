@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/01 11:11:55 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/02 13:44:34 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 //gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
 
+//frees all the leftover data
 static void	free_all(t_data *d)
 {
 	t_tile	*tile;
@@ -40,14 +41,15 @@ static void	free_all(t_data *d)
 		mlx_delete_image(d->window, d->player);
 }
 
-static void	hook(void *param)
+
+static void	hook(void *param)			//change to key_hook?
 {
 	t_data	*d;
 
 	d = param;
 	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE))
 			mlx_close_window(d->window);
-	if (!d->updated)
+	if (!d->flag_r)
 	{
 		if (mlx_is_key_down(d->window, MLX_KEY_W))
 			move_player(d, find_tile(d->pc, d), 'N');
@@ -67,9 +69,6 @@ int	main(void)
 	t_data	d; //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 	
 	initiate_data(&d);
-	initiate_window(&d);
-	if (!(d.window))
-		exit(EXIT_FAILURE);
 	draw_board(&d);
 	mlx_loop_hook(d.window, &hook, &d);
 	mlx_loop(d.window);

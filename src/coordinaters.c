@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 12:45:03 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/02 13:46:07 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//allocates a new t_coord and copies the coordinates from the inputed one inside it
 t_coords	*clone_coords(t_coords c1)
 {
 	t_coords	*c2;
@@ -22,7 +23,8 @@ t_coords	*clone_coords(t_coords c1)
 	return (c2);
 }
 
-int	find_wx(t_coords *bc, t_data *d)
+//convert a board x coord into a window x coord
+static int	find_wx(t_data *d, t_coords *bc)
 {
 	int wx;	//window x position
 	int	center_offset;
@@ -36,7 +38,8 @@ int	find_wx(t_coords *bc, t_data *d)
 	return (wx);
 }
 
-int	find_wy(t_coords *bc, t_data *d)
+//convert a board y coord into a window y coord
+static int	find_wy(t_data *d, t_coords *bc)
 {
 	int wy;	//window y position
 	int	window_offset;
@@ -50,10 +53,12 @@ int	find_wy(t_coords *bc, t_data *d)
 	return (wy);
 }
 
-t_tile	*find_tile(t_coords *bc, t_data *d)
+t_coords	*bc_to_wc(t_data *d, t_coords *bc)
 {
-	int	index;
+	t_coords	*wc;
 
-	index = (bc->y * d->max_by) + bc->x;
-	return (d->tiles[index]);
+	wc = ft_calloc(1, sizeof(t_coords));
+	wc->x = find_wx(d, bc);
+	wc->y = find_wy(d, bc);
+	return (wc);
 }

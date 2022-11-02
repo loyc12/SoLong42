@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/10/31 15:56:51 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/02 14:01:33 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+// checks if given board coordinates are valid
 int	is_in_board(t_data *d, t_coords *bc)
 {
 	if (0 <= bc->x && bc->x <= d->max_bx)
@@ -20,6 +21,7 @@ int	is_in_board(t_data *d, t_coords *bc)
 	return (0);
 }
 
+// checks if given window coordinates are valid
 int	is_in_window(t_data *d, t_coords *wc)
 {
 	if (0 <= wc->x && wc->x <= d->max_wx)
@@ -28,29 +30,28 @@ int	is_in_window(t_data *d, t_coords *wc)
 	return (0);
 }
 
+//checks if 
 int	is_valid(char *input)
 {
-	int	flag;
-	int	i;
+	int		flag;
+	char	c;
+	int		i;
 
 	i = -1;
 	flag = 1;
 	while (input[++i])
 	{
-		if (input[i] == 'P')
+		c = input[i];
+		if (c == 'P')
 			flag *= 2;
-		if (input[i] == 'E')
+		else if (c == 'E')
 			flag *= 3;
+		else if (c == 'C')
+			flag *= 5;
+		else if (c != '0' && c != '1'&& c != '\n')
+			return (0);
 	}
-	if (flag != 6)
+	if (flag % 2 || flag % 3 || flag % 5)
 		return (0);
 	return (1);
-}
-
-int	is_in_range(t_data *d, t_tile *tile)
-{
-	if (d->pc->x - 1 <= tile->bc->x && 0 < tile->bc->x)
-	 	if (d->pc->y - 1 <= tile->bc->y && 0 < tile->bc->y)
-			return (1);
-	return (0);
 }

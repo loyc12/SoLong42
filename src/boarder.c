@@ -6,13 +6,28 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/01 10:46:33 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/02 14:03:04 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//initialises a single tile
+//finds the number of tiles in a given string
+static int	find_tile_number(char *input)
+{
+	int	len;
+	int	i;
+
+	i = -1;
+	len = 0;
+
+	while (input[++i])
+		if (input[i] != '\n')
+			len++;
+	return (len);
+}
+
+//creates a single tile from its given type and coordinates
 static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 {
 	t_tile		*tile;
@@ -44,8 +59,8 @@ static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 	return (tile);
 }
 
-//loads all the needed tiles
-t_tile	**load_board(t_data *d, char *input, int size)
+//converts the inputed string into a tile array if it is valid
+t_tile	**load_board(t_data *d, char *input)
 {
 	t_tile		**tiles;
 	t_coords	bc;
@@ -53,8 +68,8 @@ t_tile	**load_board(t_data *d, char *input, int size)
 	int			i;
 
 	if (is_valid(input))
-		printf("Input has exactly 1 player and 1 end!\n");			// REMOVE ME
-	tiles = ft_calloc(size, sizeof(t_tile *));
+		printf("Input has he require objects!\n\n");			// REMOVE ME
+	tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
 	bc.y = 0;
 	i = 0;
 	pos = 0;
