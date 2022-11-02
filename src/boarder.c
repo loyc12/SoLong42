@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 14:03:04 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/02 15:43:43 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_tile	**load_board(t_data *d, char *input)
 	int			i;
 
 	if (is_valid(input))
-		printf("Input has he require objects!\n\n");			// REMOVE ME
+		printf("input has the require objects!\n\n");			// REMOVE ME
 	tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
 	bc.y = 0;
 	i = 0;
@@ -83,7 +83,7 @@ t_tile	**load_board(t_data *d, char *input)
 			bc.x++;
 		}
 		bc.y++;
-		if (input[i] == '\n')
+		while (input[i] == '\n')
 			i++;
 	}
 	d->max_by = bc.y;
