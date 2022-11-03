@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 13:15:16 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 17:13:00 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,24 @@ void	connect_grid(t_data *d)
 	int		i;
 
 	i = -1;
+	printf("board of size %i!\n", d->board_s);								//REMOVE ME
 	while (++i < d->board_s)
 	{
 		tile = d->tiles[i];
-		if (tile->type != TYPE_WALL && 0 < tile->bc->x && 0 < tile->bc->y)
-		connect_tile(d, tile, i);
+		if (tile->type != TYPE_WALL)
+			connect_tile(d, tile, i);
 	}
 	if (is_map_valid(d))
 		printf("map has been validated!\n\n");								//REMOVE ME
+	load_tile_dist(d);
 }
 
 //moves the player to a neighboring tile if need be
 void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile)
 {
+	int	flag;
+
+	flag = 0;
 	d->flag_m++;
 	d->flag_r++;;
 	d->pc = dst_tile->bc;
@@ -63,6 +68,7 @@ void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile)
 	{	
 		d->flag_n--;
 		printf("flag collected!\n");										//REMOVE ME
+		flag = 1;
 	}
 	if (dst_tile->bc == d->ec)
 	{
@@ -73,4 +79,6 @@ void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile)
 	src_tile->object = NULL;
 	dst_tile->type = TYPE_PLAYER;
 	printf("successfully moved to tile (%i,%i)\n\n", d->pc->x, d->pc->y);	//REMOVE ME
+	if (flag)
+		load_tile_dist(d);
 }

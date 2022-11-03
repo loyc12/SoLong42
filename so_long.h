@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 13:00:17 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 16:02:04 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,14 @@ t_tile	**load_board(t_data *d ,char *input);
 t_tile	*find_tile(t_coords *bc, t_data *d);
 void	connect_grid(t_data *d);
 void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile);
+void	load_tile_dist(t_data *d);
 
 //from mover
 void 	move_player(t_data *d, t_tile *tile, char direction);
 
 //from filler
 void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e);
+void	fill_tile_dist(t_data *d, t_tile *tile, int dist);
 
 //from libft_imports
 void	*ft_calloc(size_t count, size_t	size);

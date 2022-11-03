@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 13:21:53 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 17:19:37 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ t_tile	**load_board(t_data *d, char *input)
 		while (input[i] && input[i] != '\n')
 		{
 			tiles[pos++] = make_tile(d, bc, input[i++]);
-			d->board_s++;
 			bc.x++;
 		}
 		bc.y++;
@@ -89,5 +88,6 @@ t_tile	**load_board(t_data *d, char *input)
 	}
 	d->max_by = bc.y - 1;
 	d->max_bx = bc.x - 1;
+	d->board_s = bc.x * bc.y;
 	return (tiles);
 }
