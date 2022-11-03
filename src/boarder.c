@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 15:43:43 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 13:21:53 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,23 @@ static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 	tile->east = NULL;
 	tile->south = NULL;
 	tile->west = NULL;
-	tile->type = 0;
+	tile->type = TYPE_EMPTY;
+	tile->flag_f = 0;
 	if (type == '1')
-		tile->type = 1;
+		tile->type = TYPE_WALL;
 	else if (type == 'C')
 	{
-		tile->type = 2;
+		tile->type = TYPE_FLAG;
 		d->flag_n += 1;
 	}
 	else if (type == 'E')
 	{
-		tile->type = 3;
+		tile->type = TYPE_END;
 		d->ec = tile->bc;
 	}
 	else if (type == 'P')
 	{
-		tile->type = 4;
+		tile->type = TYPE_PLAYER;
 		d->pc = tile->bc;
 	}
 	return (tile);
@@ -67,8 +68,8 @@ t_tile	**load_board(t_data *d, char *input)
 	int			pos;
 	int			i;
 
-	if (is_valid(input))
-		printf("input has the require objects!\n\n");			// REMOVE ME
+	if (is_input_valid(input))
+		printf("\ninput has been validated!\n");						// REMOVE ME
 	tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
 	bc.y = 0;
 	i = 0;
@@ -86,7 +87,7 @@ t_tile	**load_board(t_data *d, char *input)
 		while (input[i] == '\n')
 			i++;
 	}
-	d->max_by = bc.y;
-	d->max_bx = bc.x;
+	d->max_by = bc.y - 1;
+	d->max_bx = bc.x - 1;
 	return (tiles);
 }

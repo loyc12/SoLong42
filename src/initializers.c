@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 15:45:16 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 13:22:14 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ void initiate_data(t_data *d)
 	connect_grid(d);
 	
 
-	d->max_wx = (d->max_bx + d->max_by + 2) * d->asset_s / 2;		//window width
-	d->max_wy = (d->max_bx + d->max_by + 4) * d->asset_s / 4;		//window height
+	d->max_wx = (d->max_bx + d->max_by + 3) * d->asset_s / 2;		//window width
+	d->max_wy = (d->max_bx + d->max_by + 5) * d->asset_s / 4;		//window height
 	d->window = mlx_init(d->max_wx, d->max_wy, "So Round", true);	//the window itself
 
-	d->assets = load_assets(d);
-	d->old = NULL;				//previous assets (to be cleaned next)
+	printf("(%i,%i)\n", d->max_bx, d->max_by);
 
-	d->end = d->assets[3];		//3 = end asset id
-	d->player = d->assets[4];	//4 = player asset id
+	d->assets = load_assets(d);
+	d->old = NULL;					//previous assets (to be cleaned next)
+
+	d->end = d->assets[ID_HOLE];	//end sprite
+	d->player = d->assets[ID_BALL];	//player sprite
 }
 
 /*

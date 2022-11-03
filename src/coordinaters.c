@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 14:51:32 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 13:12:21 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	find_wy(t_data *d, t_coords *bc)
 	int	window_offset;
 	int	center_offset;
 
-	window_offset = (d->max_wy - (d->asset_s / 2)) / 2;
+	window_offset = (d->max_wy - d->asset_s) / 2;
 	center_offset = d->asset_s * (d->max_bx + d->max_by) / 8;
 
 	wy = ((bc->x + bc->y) * d->asset_s / 4) + window_offset - center_offset;

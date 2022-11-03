@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 13:43:22 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:10:59 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void move_player(t_data *d, t_tile *tile, char goal)
 	else
 		return ;
 
-	if (dst_tile && (dst_tile->type != 3 || d->flag_n <= 0))
+	if (dst_tile && (dst_tile->type != TYPE_END || d->flag_n <= 0))
 		move_to_tile(d, tile, dst_tile);
 	else
 		printf("path blocked!\n");		//REMOVE ME

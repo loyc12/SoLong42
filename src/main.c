@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 15:52:43 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 13:20:07 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	free_all(t_data *d)
 		mlx_delete_image(d->window, d->player);
 }
 
-
+//key hook used during the main loop
 static void	hook(void *param)			//change to key_hook?
 {
 	t_data	*d;

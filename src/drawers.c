@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 15:53:13 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 12:10:34 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,30 @@ static void	render_floor(t_data *d)
 	{
 		tile = d->tiles[i];
 		if (i == 0)
-			tile->floor = put_image(d, tile->bc, 0, 4);
-		tile->floor = put_image(d, tile->bc, 0, 0);
+			tile->floor = put_image(d, tile->bc, ID_FLOOR, 4);
+		tile->floor = put_image(d, tile->bc, ID_FLOOR, 0);
 	}
-	find_tile(d->ec, d)->object = put_image(d, d->ec, 3, 0);
+	find_tile(d->ec, d)->object = put_image(d, d->ec, ID_HOLE , 0);
 }
 
 //renders all the tile objects
 static void	render_object(t_data *d, t_tile *tile)
 {
-	if (tile->type == 1)
+	if (tile->type == TYPE_WALL)
 	{
-		if (tile->bc->x == 0 || tile->bc->y == 0)
-			tile->object = put_image(d, tile->bc, 2, 0);
-
-		else if (tile->bc->x && tile->bc->y)
-			tile->object = put_image(d, tile->bc, 1, 0);
+		if (tile->bc->x != 0 && tile->bc->y != 0)
+			tile->object = put_image(d, tile->bc, ID_SLAB, 0);
+		else
+			tile->object = put_image(d, tile->bc, ID_CUBE , 0);
 	}
-	else if (tile->type == 4)
+	else if (tile->type == TYPE_PLAYER)
 	{
-		tile->object = put_image(d, tile->bc, 4, 0);
+		tile->object = put_image(d, tile->bc, ID_BALL, 0);
 		if (d->pc == d->ec)
 			d->flag_r = -1;										//GAME OVER FLAG
 	}
-	else if (tile->type == 2)
-		tile->object = put_image(d, tile->bc, 5, 0);
+	else if (tile->type == TYPE_FLAG)
+		tile->object = put_image(d, tile->bc, ID_FLAG, 0);
 }
 
 //(re)renders the entire board
@@ -58,7 +57,7 @@ void	draw_board(t_data *d)
 
 	i = -1;
 	clean_assets(d);
-	mlx_image_to_window(d->window, d->assets[6], 0, 0);
+	mlx_image_to_window(d->window, d->assets[ID_TITTLE], 0, 0);
 	if (!(d->window))
 		exit(EXIT_FAILURE);
 	d->old = d->assets;

@@ -6,18 +6,11 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/02 15:52:27 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/03 11:54:23 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-//draws an image on the window
-void	move_image(mlx_image_t *image, int x, int y)
-{
-	image->instances[0].x = x;
-	image->instances[0].y = y;
-}
 
 //draws an imaged on screen based on its coords and id
 mlx_image_t	*put_image(t_data *d, t_coords *bc, int	id, int	z)
@@ -49,21 +42,21 @@ mlx_image_t	**load_assets(t_data *d)
 	mlx_image_t	**assets;
 
 	assets = ft_calloc(d->asset_n, sizeof(mlx_image_t *));
-	assets[0] = make_image(d, "./Assets/XPM/TileFloor.xpm42");
-	assets[1] = make_image(d, "./Assets/XPM/Slab.xpm42");
-	assets[2] = make_image(d, "./Assets/XPM/Cube.xpm42");
+	assets[ID_FLOOR] = make_image(d, "./Assets/XPM/TileFloor.xpm42");
+	assets[ID_SLAB] = make_image(d, "./Assets/XPM/Slab.xpm42");
+	assets[ID_CUBE] = make_image(d, "./Assets/XPM/Cube.xpm42");
 
 	if (d->flag_n > 0)
-		assets[3] = make_image(d, "./Assets/XPM/BlockedHole.xpm42");
+		assets[ID_HOLE] = make_image(d, "./Assets/XPM/BlockedHole.xpm42");
 	else 
-		assets[3] = make_image(d, "./Assets/XPM/Hole.xpm42");
+		assets[ID_HOLE] = make_image(d, "./Assets/XPM/Hole.xpm42");
 	if (d->pc != d->ec)
-		assets[4] = make_image(d, "./Assets/XPM/Ball.xpm42");
+		assets[ID_BALL] = make_image(d, "./Assets/XPM/Ball.xpm42");
 	else
-		assets[4] = make_image(d, "./Assets/XPM/HalfBall.xpm42");
+		assets[ID_BALL] = make_image(d, "./Assets/XPM/HalfBall.xpm42");
 
-	assets[5] = make_image(d, "./Assets/XPM/FlagWhite.xpm42");
-	assets[6] = make_image(d, "./Assets/XPM/Tittle.xpm42");
+	assets[ID_FLAG] = make_image(d, "./Assets/XPM/FlagWhite.xpm42");
+	assets[ID_TITTLE] = make_image(d, "./Assets/XPM/Tittle.xpm42");
 	return (assets);
 }
 
