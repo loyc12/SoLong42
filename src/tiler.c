@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 17:13:00 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 12:25:37 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile)
 	if (dst_tile->type == TYPE_FLAG)
 	{	
 		d->flag_n--;
-		printf("flag collected!\n");										//REMOVE ME
+		printf("\nflag collected!\n");										//REMOVE ME
 		flag = 1;
 	}
-	if (dst_tile->bc == d->ec)
+	if (dst_tile->bc == d->ec && d->flag_n < 1)
 	{
-		printf("game completed in %i moves!\n", d->flag_m);					//REMOVE ME
+		printf("\ngame completed in %i moves!!!\n\n", d->flag_m);			//REMOVE ME
 		d->flag_n--;
 	}
 	src_tile->type = TYPE_EMPTY;
 	src_tile->object = NULL;
 	dst_tile->type = TYPE_PLAYER;
-	printf("successfully moved to tile (%i,%i)\n\n", d->pc->x, d->pc->y);	//REMOVE ME
+	printf("successfully moved to tile (%i,%i)\n", d->pc->x, d->pc->y);		//REMOVE ME
 	if (flag)
 		load_tile_dist(d);
 }

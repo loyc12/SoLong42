@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 16:02:04 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 12:15:49 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ typedef enum e_id
 {
 	ID_FLOOR = 0,
 	ID_SLAB = 1,
-	ID_CUBE = 2,
+	ID_FLAG = 2,
 	ID_HOLE = 3,
 	ID_BALL = 4,
-	ID_FLAG = 5,
+	ID_CUBE = 5,
 	ID_TITTLE = 6
 }			t_id;
 
@@ -38,16 +38,6 @@ typedef enum e_type
 	TYPE_END = 3,
 	TYPE_PLAYER = 4
 }			t_type;
-/*
-typedef enum e_flag
-{
-	FLAG_R = 0,	//wheter to refresh the screen
-	FLAG_C = 1,	//wheter to clean old assets
-	FLAG_O = 2,	//wheter an outer edge was encountered
-	FLAG_E = 3,	//wheter the exit was encountered
-	FLAG_P = 4	//wheter the player was encountered
-}			t_flag;
-*/
 
 typedef struct s_coords
 {
@@ -58,15 +48,16 @@ typedef struct s_coords
 
 typedef struct s_tile
 {
-	t_coords		*bc;
-	mlx_image_t		*floor;
-	mlx_image_t		*object;
+	t_coords		*bc;		//tile coordinates
+	mlx_image_t		*floor;		//floor image instance
+	mlx_image_t		*object;	//object image instance
 	struct s_tile	*north;
 	struct s_tile	*east;
 	struct s_tile	*south;
 	struct s_tile	*west;
-	int				type;	// 0 for empty, 1 for walls, 2 for flag, 3 for end, 4 for player
-	int				flag_f;	//fill check flag (whether the tile has been checked already)
+	int				type;	//see e_type
+	int				flag_f;	//current distance to flags / end
+	int				flag_e;	//current distance to player
 	//int 			z;		//elevation (in 1/8 asset_size) of the center of the tile
 }					t_tile;
 
@@ -88,13 +79,11 @@ typedef struct s_data
 	
 	int			asset_n;	//number of different assets used	(7 assets)
 	int 		asset_s;	//size (in pixels) of assets used	(64 pixels)
-	mlx_image_t	**assets;	//
-	mlx_image_t	**old;		//
+	mlx_image_t	**assets;	//array of currently used assets
+	mlx_image_t	**old;		//array of previously used assets
 
 	t_coords	*ec;		//end position
-	mlx_image_t	*end;		//end image
 	t_coords	*pc;		//player position
-	mlx_image_t	*player;	//player image
 
 }			t_data;
 

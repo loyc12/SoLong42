@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 17:44:32 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 12:16:39 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static void	free_all(t_data *d)
 		if (d->assets[i])
 			mlx_delete_image(d->window, d->assets[i]);
 	free(d->assets);
-	if (d->player)
-		mlx_delete_image(d->window, d->player);
 }
 
 //key hook used during the main loop

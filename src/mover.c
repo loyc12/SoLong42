@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/03 17:37:10 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 12:21:16 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	move_player(t_data *d, t_tile *tile, char goal)
 		dst_tile = find_tile(d->pc, d)->west;
 	else
 		return ;
-	if (dst_tile && (dst_tile->type != TYPE_END || d->flag_n <= 0))
+	if (dst_tile) // && (dst_tile->type != TYPE_END || d->flag_n <= 0))
 		move_to_tile(d, tile, dst_tile);
 	else
 		printf("path blocked!\n");											//REMOVE ME
