@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 12:22:48 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 13:57:35 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ mlx_image_t	*put_image(t_data *d, t_coords *bc, int	id, int	z)
 
 	wc = bc_to_wc(d, bc);
 	wc->y -= (z * d->asset_s / 8);
-	mlx_image_to_window(d->window, d->assets[id], wc->x, wc->y);
+	if (is_in_window(d, wc))
+		mlx_image_to_window(d->window, d->assets[id], wc->x, wc->y);
 	free(wc);
 	return (d->assets[id]);
 }
 
 //initializes a single asset
-static mlx_image_t	*make_image(t_data *d, char *path)
+mlx_image_t	*make_image(t_data *d, char *path)
 {
 	mlx_image_t	*image;
 	xpm_t		*xpm;
@@ -37,7 +38,7 @@ static mlx_image_t	*make_image(t_data *d, char *path)
 }
 
 //loads all the needed assets
-mlx_image_t	**load_assets(t_data *d)
+void	load_assets(t_data *d)
 {
 	mlx_image_t	**assets;
 
@@ -56,8 +57,8 @@ mlx_image_t	**load_assets(t_data *d)
 		assets[ID_BALL] = make_image(d, "./Assets/XPM/HalfBall.xpm42");
 
 	assets[ID_FLAG] = make_image(d, "./Assets/XPM/FlagWhite.xpm42");
-	assets[ID_TITTLE] = make_image(d, "./Assets/XPM/Tittle.xpm42");
-	return (assets);
+
+	d->assets = assets;
 }
 
 //frees the memory allocated to previously used assets

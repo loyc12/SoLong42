@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 12:03:33 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 13:47:37 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	render_object(t_data *d, t_tile *tile)
 	{
 		tile->object = put_image(d, tile->bc, ID_BALL, 0);
 		if (d->pc == d->ec)
-			d->flag_r = -1;										//GAME OVER FLAG
+			d->flag_r = -1;											//GAME OVER FLAG
 	}
 	else if (tile->type == TYPE_FLAG)
 		tile->object = put_image(d, tile->bc, ID_FLAG, 0);
@@ -57,11 +57,10 @@ void	draw_board(t_data *d)
 
 	i = -1;
 	clean_assets(d);
-	mlx_image_to_window(d->window, d->assets[ID_TITTLE], 0, 0);
 	if (!(d->window))
 		exit(EXIT_FAILURE);
 	d->old = d->assets;
-	d->assets = load_assets(d);
+	load_assets(d);
 	render_floor(d);
 	while (++i < d->board_s)
 	{
@@ -71,5 +70,5 @@ void	draw_board(t_data *d)
 	d->flag_r = 0;
 	d->flag_c = 1;
 
-	usleep(50000);											//REMOVE ME (forbidden?)
+	usleep(50000);													//REMOVE ME (forbidden?)
 }

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 12:12:24 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 13:45:57 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_tile	*make_tile(t_data *d, t_coords bc, char type)
 }
 
 //converts the inputed string into a tile array if it is valid
-t_tile	**load_board(t_data *d, char *input)
+void	load_board(t_data *d, char *input)
 {
 	t_tile		**tiles;
 	t_coords	bc;
@@ -89,5 +89,6 @@ t_tile	**load_board(t_data *d, char *input)
 	d->max_by = bc.y - 1;
 	d->max_bx = bc.x - 1;
 	d->board_s = bc.x * bc.y;
-	return (tiles);
+	d->tiles = tiles;
+	connect_grid(d);
 }

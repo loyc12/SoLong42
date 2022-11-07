@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 12:16:39 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 14:06:10 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	free_all(t_data *d)
 		if (d->assets[i])
 			mlx_delete_image(d->window, d->assets[i]);
 	free(d->assets);
+	mlx_delete_image(d->window, d->tittle);
 }
 
 //key hook used during the main loop
@@ -81,9 +82,9 @@ static void	hook(void *param)			//change to key_hook?
 		draw_board(d);
 }
 
-int	main(void)
+int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 {
-	t_data	d; //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
+	t_data	d;
 	
 	initiate_data(&d);
 	draw_board(&d);
