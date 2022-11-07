@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 14:06:10 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 16:30:40 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 static void	solve(t_data *d)
 {
 	t_tile	*tile;
-	
-	tile = find_tile(d->pc, d);
+
+	tile = find_tile(d, d->pc);
 	if (tile->north && tile->north->flag_f < tile->flag_f)
 		move_player(d, tile, 'N');
 	else if (tile->east && tile->east->flag_f < tile->flag_f)
@@ -64,17 +64,17 @@ static void	hook(void *param)			//change to key_hook?
 
 	d = param;
 	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE))
-			mlx_close_window(d->window);
+		mlx_close_window(d->window);
 	if (!d->flag_r)
 	{
 		if (mlx_is_key_down(d->window, MLX_KEY_W))
-			move_player(d, find_tile(d->pc, d), 'N');
+			move_player(d, find_tile(d, d->pc), 'N');
 		if (mlx_is_key_down(d->window, MLX_KEY_D))
-			move_player(d, find_tile(d->pc, d), 'E');
+			move_player(d, find_tile(d, d->pc), 'E');
 		if (mlx_is_key_down(d->window, MLX_KEY_S))
-			move_player(d, find_tile(d->pc, d), 'S');
+			move_player(d, find_tile(d, d->pc), 'S');
 		if (mlx_is_key_down(d->window, MLX_KEY_A))
-			move_player(d, find_tile(d->pc, d), 'W');
+			move_player(d, find_tile(d, d->pc), 'W');
 		if (mlx_is_key_down(d->window, MLX_KEY_Q))
 			solve(d);
 	}

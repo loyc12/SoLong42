@@ -6,14 +6,14 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 13:40:12 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 16:31:14 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //finds a tile in d->tiles from its board coordinates
-t_tile	*find_tile(t_coords *bc, t_data *d)
+t_tile	*find_tile(t_data *d, t_coords *bc)
 {
 	int	index;
 
@@ -62,7 +62,7 @@ void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile)
 
 	flag = 0;
 	d->flag_m++;
-	d->flag_r++;;
+	d->flag_r++;
 	d->pc = dst_tile->bc;
 	if (dst_tile->type == TYPE_FLAG)
 	{	

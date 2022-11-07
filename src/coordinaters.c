@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 14:06:18 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 16:34:45 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_coords	*clone_coords(t_coords c1)
 //convert a board x coord into a window x coord
 static int	find_wx(t_data *d, t_coords *bc)
 {
-	int wx;	//window x position
+	int wx;
 	int	center_offset;
 	int	window_offset;
 
@@ -41,7 +41,7 @@ static int	find_wx(t_data *d, t_coords *bc)
 //convert a board y coord into a window y coord
 static int	find_wy(t_data *d, t_coords *bc)
 {
-	int wy;	//window y position
+	int wy;
 	int	window_offset;
 	int	center_offset;
 

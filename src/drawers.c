@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 13:47:37 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 16:33:59 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	render_floor(t_data *d)
 			tile->floor = put_image(d, tile->bc, ID_FLOOR, 4);
 		tile->floor = put_image(d, tile->bc, ID_FLOOR, 0);
 	}
-	find_tile(d->ec, d)->object = put_image(d, d->ec, ID_HOLE , 0);
+	tile = find_tile(d, d->ec);
+	tile->object = put_image(d, d->ec, ID_HOLE, 0);
 }
 
 //renders all the tile objects
@@ -37,7 +38,7 @@ static void	render_object(t_data *d, t_tile *tile)
 		if (tile->bc->x != 0 && tile->bc->y != 0)
 			tile->object = put_image(d, tile->bc, ID_SLAB, 0);
 		else
-			tile->object = put_image(d, tile->bc, ID_CUBE , 0);
+			tile->object = put_image(d, tile->bc, ID_CUBE, 0);
 	}
 	else if (tile->type == TYPE_PLAYER)
 	{
@@ -58,7 +59,7 @@ void	draw_board(t_data *d)
 	i = -1;
 	clean_assets(d);
 	if (!(d->window))
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);											//useless?????
 	d->old = d->assets;
 	load_assets(d);
 	render_floor(d);

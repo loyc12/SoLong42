@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 14:08:03 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/07 16:21:06 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_coords	*bc_to_wc(t_data *d, t_coords *bc);
 void	load_board(t_data *d ,char *input);
 
 //from tiler
-t_tile	*find_tile(t_coords *bc, t_data *d);
+t_tile	*find_tile(t_data *d, t_coords *bc);
 void	connect_grid(t_data *d);
 void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile);
 
