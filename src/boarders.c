@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   boarder.c                                          :+:      :+:    :+:   */
+/*   boarders.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 16:45:33 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 11:32:05 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ static t_tile	*make_tile(t_data *d, t_coords *bc, char type)
 	set_default_tile_values(tile);
 	if (type == '1')
 		tile->type = TYPE_WALL;
-	else if (type == 'C')
+	else if (type == 'P')
 	{
-		tile->type = TYPE_FLAG;
-		d->flag_n += 1;
+		tile->type = TYPE_PLAYER;
+		d->pc = tile->bc;
 	}
 	else if (type == 'E')
 	{
 		tile->type = TYPE_END;
 		d->ec = tile->bc;
 	}
-	else if (type == 'P')
+	else if (type == 'C')
 	{
-		tile->type = TYPE_PLAYER;
-		d->pc = tile->bc;
+		tile->type = TYPE_FLAG;
+		d->flag_n += 1;
 	}
 	return (tile);
 }
@@ -94,17 +94,16 @@ void	load_board(t_data *d, char *input)
 	t_coords	bc;
 
 	if (is_input_valid(input))
-	{
 		printf("\ninput has been validated!\n");							// REMOVE ME
-
-		tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
-		d->tiles = tiles;
-		loop_on_tiles(d, &bc, input);
-		d->max_by = bc.y - 1;
-		d->max_bx = bc.x - 1;
-		d->board_s = bc.x * bc.y;
-		connect_grid(d);
-	}
 	else
-		printf("\ninput is invalid. cannot proceed\n");						// REMOVE ME
+		printf("\ninput is invalid. shouldn't proceed\n");					// REMOVE ME
+
+	tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
+	d->tiles = tiles;
+	loop_on_tiles(d, &bc, input);
+	d->max_by = bc.y - 1;
+	d->max_bx = bc.x - 1;
+	d->board_s = bc.x * bc.y;
+	connect_grid(d);
+
 }

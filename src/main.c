@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 16:30:40 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 11:14:51 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,36 @@ static void	free_all(t_data *d)
 	mlx_delete_image(d->window, d->tittle);
 }
 
-//key hook used during the main loop
-static void	hook(void *param)			//change to key_hook?
+static void	hook(void *param)
 {
 	t_data	*d;
 
 	d = param;
 	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE))
 		mlx_close_window(d->window);
-	if (!d->flag_r)
-	{
-		if (mlx_is_key_down(d->window, MLX_KEY_W))
-			move_player(d, find_tile(d, d->pc), 'N');
-		if (mlx_is_key_down(d->window, MLX_KEY_D))
-			move_player(d, find_tile(d, d->pc), 'E');
-		if (mlx_is_key_down(d->window, MLX_KEY_S))
-			move_player(d, find_tile(d, d->pc), 'S');
-		if (mlx_is_key_down(d->window, MLX_KEY_A))
-			move_player(d, find_tile(d, d->pc), 'W');
-		if (mlx_is_key_down(d->window, MLX_KEY_Q))
-			solve(d);
-	}
-	else
+	if (d->flag_r)
 		draw_board(d);
+	if (mlx_is_key_down(d->window, MLX_KEY_Q))
+		solve(d);
+}
+
+//key hook used during the main loop
+static void	key_hook(mlx_key_data_t keydata, void *param)
+{
+	t_data	*d;
+
+	d = param;
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+	{
+		if (keydata.key == MLX_KEY_W)
+			move_player(d, find_tile(d, d->pc), 'N');
+		if (keydata.key == MLX_KEY_D)
+			move_player(d, find_tile(d, d->pc), 'E');
+		if (keydata.key == MLX_KEY_S)
+			move_player(d, find_tile(d, d->pc), 'S');
+		if (keydata.key == MLX_KEY_A)
+			move_player(d, find_tile(d, d->pc), 'W');
+	}
 }
 
 int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
@@ -88,6 +95,7 @@ int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 	
 	initiate_data(&d);
 	draw_board(&d);
+	mlx_key_hook(d.window, &key_hook, &d);
 	mlx_loop_hook(d.window, &hook, &d);
 	mlx_loop(d.window);
 	free_all(&d);

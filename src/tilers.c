@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tiler.c                                            :+:      :+:    :+:   */
+/*   tilers.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 16:31:14 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 11:27:29 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ t_tile	*find_tile(t_data *d, t_coords *bc)
 {
 	int	index;
 
-	index = (bc->y * (d->max_by + 1)) + bc->x;
+	index = (bc->y * (d->max_bx + 1)) + bc->x;
 	return (d->tiles[index]);
 }
 
 //connects a tile to its north and west neighbor if need be
 static void	connect_tile(t_data *d, t_tile *tile, int i)
 {
-	if (d->tiles[i - (d->max_by + 1)]->type != TYPE_WALL)
+	if (d->tiles[i - (d->max_bx + 1)]->type != TYPE_WALL)
 	{
-		tile->north = d->tiles[i - (d->max_by + 1)];
+		tile->north = d->tiles[i - (d->max_bx + 1)];
 		tile->north->south = tile;
 	}
 	if (d->tiles[i - 1]->type != TYPE_WALL)

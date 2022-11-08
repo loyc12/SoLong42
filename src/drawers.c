@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 16:33:59 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 11:32:11 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	draw_board(t_data *d)
 
 	i = -1;
 	clean_assets(d);
-	if (!(d->window))
-		exit(EXIT_FAILURE);											//useless?????
 	d->old = d->assets;
 	load_assets(d);
 	render_floor(d);
@@ -70,6 +68,4 @@ void	draw_board(t_data *d)
 	}
 	d->flag_r = 0;
 	d->flag_c = 1;
-
-	usleep(50000);													//REMOVE ME (forbidden?)
 }
