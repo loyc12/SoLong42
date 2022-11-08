@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 11:24:28 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 13:36:40 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	load_assets(t_data *d)
 		assets[ID_BALL] = make_image(d, "./Assets/XPM/HalfBall.xpm42");
 
 	assets[ID_FLAG] = make_image(d, "./Assets/XPM/FlagWhite.xpm42");
+	assets[ID_CONE] = make_image(d, "./Assets/XPM/CONE.xpm42");
 
 	d->assets = assets;
 }

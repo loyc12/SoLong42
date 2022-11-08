@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 11:27:29 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 13:17:16 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	connect_grid(t_data *d)
 	int		i;
 
 	i = -1;
-	printf("board of size %i!\n", d->board_s);								//REMOVE ME
+	printf("board size is %i\n", d->board_s);								//REMOVE ME
 	while (++i < d->board_s)
 	{
 		tile = d->tiles[i];
@@ -51,8 +51,9 @@ void	connect_grid(t_data *d)
 			connect_tile(d, tile, i);
 	}
 	if (is_map_valid(d))
-		printf("map has been validated!\n\n");								//REMOVE ME
-	load_tile_dist(d);
+		printf("map has been validated!\n");								//REMOVE ME
+	load_flag_dist(d);
+	load_player_dist(d);
 }
 
 //moves the player to a neighboring tile if need be
@@ -80,5 +81,5 @@ void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile)
 	dst_tile->type = TYPE_PLAYER;
 	printf("successfully moved to tile (%i,%i)\n", d->pc->x, d->pc->y);		//REMOVE ME
 	if (flag)
-		load_tile_dist(d);
+		load_flag_dist(d);
 }

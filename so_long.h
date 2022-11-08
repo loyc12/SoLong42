@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 16:50:26 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 13:38:17 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef enum e_id
 	ID_FLAG = 2,
 	ID_HOLE = 3,
 	ID_BALL = 4,
-	ID_CUBE = 5
+	ID_CUBE = 5,
+	ID_CONE = 6
 }			t_id;
 
 typedef enum e_type
@@ -35,7 +36,8 @@ typedef enum e_type
 	TYPE_WALL = 1,
 	TYPE_FLAG = 2,
 	TYPE_END = 3,
-	TYPE_PLAYER = 4
+	TYPE_PLAYER = 4,
+	TYPE_ENEMY = 5
 }			t_type;
 
 typedef struct s_coords
@@ -57,16 +59,10 @@ typedef struct s_tile
 	int				type;	//see e_type
 	int				flag_f;	//current distance to flags / end
 	int				flag_e;	//current distance to player
-	//int 			z;		//elevation (in 1/8 asset_size) of the center of the tile
 }					t_tile;
 
 typedef struct s_data
 {
-	int			flag_n;		//number of flags left to collect
-	int			flag_r;		//whether the player has moved or not (wether to render or not)
-	int			flag_c;		//whether to clean old assets
-	int			flag_m;		//number of moves done
-
 	int 		max_wx;		//width (in pixels) of the window
 	int 		max_wy;		//height (in pixels) of the window
 	mlx_t		*window;	//where we print stuff
@@ -76,15 +72,21 @@ typedef struct s_data
 	int			board_s;	//number of tiles in the board
 	t_tile		**tiles;	//lists all tiles
 	
-	int			asset_n;	//number of distinct assets used	(6 assets)
+	int			asset_n;	//number of distinct assets used	(7 assets)
 	int 		asset_s;	//size (in pixels) of assets used	(64 pixels)
 	mlx_image_t	**assets;	//array of currently used assets
 	mlx_image_t	**old;		//array of previously used assets
 	mlx_image_t	*tittle;	//tittle image (never reloaded)
 
-	t_coords	*ec;		//end position
+	t_coords	**enemies;	//enemy positions
 	t_coords	*pc;		//player position
+	t_coords	*ec;		//end position
 
+	int			flag_n;		//number of flags left to collect
+	int			flag_r;		//whether the player has moved or not (wether to render or not)
+	int			flag_c;		//whether to clean old assets
+	int			flag_m;		//number of moves done
+	int			difficulty;	//odds over 8 that the enemies won't take a random move
 }			t_data;
 
 //from libft_imports
@@ -94,6 +96,7 @@ void	*ft_calloc(size_t count, size_t	size);
 int		is_on_edge(t_data *d, t_coords *bc);
 int		is_in_window(t_data *d, t_coords *wc);
 int		is_input_valid(char *input);
+int		is_grid_valid(char *input);
 int		is_map_valid(t_data *d);
 
 //from initializers
@@ -113,7 +116,8 @@ void	move_to_tile(t_data *d, t_tile *src_tile, t_tile *dst_tile);
 
 //from filler
 void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e);
-void	load_tile_dist(t_data *d);
+void	load_flag_dist(t_data *d);
+void	load_player_dist(t_data *d);
 
 //from imager
 mlx_image_t	*make_image(t_data *d, char *path);

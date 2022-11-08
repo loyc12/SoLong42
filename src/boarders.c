@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 11:32:05 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 13:06:50 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ static void	set_default_tile_values(t_tile *tile)
 	tile->east = NULL;
 	tile->south = NULL;
 	tile->west = NULL;
-	tile->flag_f = 0;
 	tile->type = TYPE_EMPTY;
+	tile->flag_f = 0;
+	tile->flag_e = 0;
 }
 
 //creates a single tile from its given type and coordinates
@@ -93,10 +94,8 @@ void	load_board(t_data *d, char *input)
 	t_tile		**tiles;
 	t_coords	bc;
 
-	if (is_input_valid(input))
-		printf("\ninput has been validated!\n");							// REMOVE ME
-	else
-		printf("\ninput is invalid. shouldn't proceed\n");					// REMOVE ME
+	if (is_input_valid(input) && is_grid_valid(input))
+		printf("input has been validated!\n");							// REMOVE ME
 
 	tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
 	d->tiles = tiles;

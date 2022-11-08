@@ -6,20 +6,11 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/07 16:35:27 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/08 12:46:23 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-// checks if given board coordinates are valid
-int	is_in_board(t_data *d, t_coords *bc)				//unused rn
-{
-	if (0 <= bc->x && bc->x <= d->max_bx)
-		if (0 <= bc->y && bc->y <= d->max_by)
-			return (1);
-	return (0);
-}
 
 // checks if given window coordinates are valid
 int	is_in_window(t_data *d, t_coords *wc)
@@ -62,6 +53,31 @@ int	is_input_valid(char *input)
 	}
 	if (flag % 2 || flag % 3 || flag % 5)
 		return (0);
+	return (1);
+}
+
+int	is_grid_valid(char *input)
+{
+	int	linelen;
+	int	len;
+	int	i;
+
+	linelen = 0;
+	len = 0;
+	i = -1;
+	while (input[i])
+	{
+		while (input[i] && input[i] != '\n')
+		{
+			i++;
+			len++;
+		}
+		if (!linelen)
+			linelen = len;
+		if (len != linelen)
+			return 0;
+		len = 0;
+	}
 	return (1);
 }
 
