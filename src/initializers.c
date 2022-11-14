@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 13:34:29 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 13:48:41 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,33 @@ char	*make_level(char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	level = ft_calloc(i, sizeof(char));
+	level = ft_calloc(i + 1, sizeof(char));
 	i = -1;
 	while (str[++i])
 		level[i] = str[i];
-	level[i] = '\0';
+	printf("\n%s\n", level);
 	return (level);
 }
 
-char	**initiate_levels(int *n)	//used ARGV as list of level paths instead
+//loads the level input strings from a given string
+void	initiate_levels(t_meta *md)		//Use ARGV as list of .ber paths instead, and load from those files
 {
 	char **levels;
 
-	*n = 6;	//number of levels
-	levels = ft_calloc(*n, sizeof(char *));
+	md->no_checks = 0;		//wether to ignore the initial parsing checks or not
+	md->difficulty = 2;		//from 1 to 8
+
+	md->lvl = 4;			//default value (starting level)
+	md->max_lvl = 6;		//number of levels
+
+	levels = ft_calloc(md->max_lvl, sizeof(char *));
 	levels[0] = make_level("1111111\n1P0C0E1\n1111111\n");
 	levels[1] = make_level("111\n1P1\n101\n1C1\n101\n1E1\n111\n");
 	levels[2] = make_level("111111\n1P00E1\n101111\n101000\n1C1000\n111000\n");
 	levels[3] = make_level("111111\n1P00E1\n100001\n100001\n1C00A1\n111111\n");
 	levels[4] = make_level("1111111111111111\n1000000000000001\n10P0000000000001\n10000000000C0001\n1000000011000001\n100000001C000001\n1000000000000001\n10000000000A0001\n10000C1000000001\n1101001100000001\n100000001000C001\n100000001000CC01\n1000000000111001\n10E0000000000001\n1000000000000001\n1111111111111111\n");
 	levels[5] = make_level("1111111111111111111111111111111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100C00100000000000000000000C001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1110111111111110111110111111111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100A00000000000000100C00100C001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1111111110111111111111111110111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100000000000000P001000000000001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1110111110111110111110111110111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100C001000001000000000001000001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1111111110111111111110111110111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100C00000000100E00000000100C001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1111111111111111111111111111111\n");
-	return (levels);
+	md->levels = levels;
 }
 
 //initialises the data struct used throughout the program

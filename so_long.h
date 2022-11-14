@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 11:54:49 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 13:48:00 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int		is_grid_valid(char *input);
 int		is_map_valid(t_data *d);
 
 //from initializers
-char	**initiate_levels(int *n);
+void	initiate_levels(t_meta *md);
 void	initiate_data(t_data *d, t_meta *md);
 
 //from coordinaters

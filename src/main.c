@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 13:26:11 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 14:01:18 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,10 @@ int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 
 	t_meta	md;
 
-	md.lvl = 0;				//default value (starting level)
 	md.state = 1;			//default value
-	md.no_checks = 0;		//wether to ignore the initial parsing checks or not
-	md.difficulty = 2;		//from 1 to 8
+	
 	srand(time(&md.time));
-	md.levels = initiate_levels(&md.max_lvl);
+	initiate_levels(&md);
 	while (0 < md.state && md.lvl < md.max_lvl)
 	{
 		play_map(&md);
