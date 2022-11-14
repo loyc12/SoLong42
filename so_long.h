@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 13:48:00 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:18:15 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@ typedef struct s_tile
 typedef struct s_meta
 {
 	char	**levels;		//list of levels (TO BECOME PATHS NOT DATA)
-	int		state;			//-2 = unconnected board, -1 = unloaded board, 0 = closing game, 1 = retry level, 2 = next level, 3 = died)
+	int		state;			//-2 = input error, -1 = map error, 0 = closing game, 1 = retry level, 2 = next level, 3 = died)
 	time_t	time;			//used to seed srand()
 
 	int		mv;				//current amount of movement
-	int		max_mv;			//shortest possible amount of movement (UNUSED)
-
 	int		lvl;			//current level
 	int		max_lvl;		//total amount of levels
 	
@@ -112,11 +110,11 @@ typedef struct s_data
 void	*ft_calloc(size_t count, size_t	size);
 
 //from checkers
-int		is_on_edge(t_data *d, t_coords *bc);
-int		is_in_window(t_data *d, t_coords *wc);
-int		is_input_valid(char *input);
-int		is_grid_valid(char *input);
-int		is_map_valid(t_data *d);
+int	is_on_edge(t_data *d, t_coords *bc);
+int	is_in_window(t_data *d, t_coords *wc);
+int	is_input_valid(char *input);
+int	is_grid_valid(char *input);
+int	is_map_valid(t_data *d);
 
 //from initializers
 void	initiate_levels(t_meta *md);
@@ -130,10 +128,7 @@ t_coords	*bc_to_wc(t_data *d, t_coords *bc);
 void	load_board(t_data *d ,char *input);
 
 //from tiler
-t_tile	*find_tile(t_data *d, t_coords *bc);
 void	connect_grid(t_data *d);
-void	move_player_to(t_data *d, t_tile *dst_tile);
-void	move_enemy_to(t_data *d, t_tile *dst_tile, int id);
 
 //from filler
 void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e);
@@ -150,7 +145,28 @@ void		clean_assets(t_data *d);
 void	draw_board(t_data *d);
 
 //from mover
+int		can_move_to(t_tile *tile, char type);
 void 	move_player(t_data *d, t_tile *src_tile, char direction);
+
+//from printers
+void	print_level_end(t_data *d);
+void	print_game_end(t_meta *md);
+
+//from hookers
+void	hook(void *param);
+void	key_hook(mlx_key_data_t keydata, void *param);
+
+//from freeers
+void	free_level(t_data *d);
+void	free_game(t_meta *md);
+
+//from finders
+t_tile	*find_tile(t_data *d, t_coords *bc);
+int		find_tile_number(char *input);
+int		find_enemy_number(char *input);
+
+//from bonusers
+void	move_enemies(t_data *d);
 void	solve(t_data *d);
 
 #endif

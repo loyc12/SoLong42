@@ -6,41 +6,11 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 13:42:01 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 16:17:35 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-//finds the number of tiles in a given input
-static int	find_tile_number(char *input)
-{
-	int	n;
-	int	i;
-
-	i = -1;
-	n = 0;
-
-	while (input[++i])
-		if (input[i] != '\n')
-			n++;
-	return (n);
-}
-
-//finds the number of enemies in a given input
-static int	find_enemy_number(char *input)
-{
-	int	n;
-	int	i;
-
-	i = -1;
-	n = 0;
-
-	while (input[++i])
-		if (input[i] == 'A')
-			n++;
-	return (n);
-}
 
 static void	set_default_tile_values(t_tile *tile)
 {
@@ -116,7 +86,7 @@ void	load_board(t_data *d, char *input)
 {
 	t_coords	*bc;
 
-	printf("\n%s\n", input);														//REMOVE ME
+	printf("Chosen board :\n\n%s\n", input);														//REMOVE ME
 	bc = ft_calloc(1, sizeof(t_coords));
 	if ((is_input_valid(input) && is_grid_valid(input)) || d->md->no_checks)
 	{
