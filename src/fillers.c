@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 13:10:34 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/09 15:26:33 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	load_flag_dist(t_data *d)
 	}
 	else
 		fill_flag_dist(d, find_tile(d, d->ec), 0);
-	printf("flag distance map reloaded!\n");							//REMOVE ME
+
+	//printf("flag distance map reloaded!\n");							//REMOVE ME
 }
 
 //calculates the distance of each tile to the player
@@ -89,5 +90,6 @@ void	load_player_dist(t_data *d)
 		d->tiles[i]->flag_e = d->board_s;
 	}
 	fill_player_dist(d, find_tile(d, d->pc), 0);
-	printf("player distance map reloaded!\n");							//REMOVE ME
+
+	//printf("player distance map reloaded!\n");							//REMOVE ME
 }

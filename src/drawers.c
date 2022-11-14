@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 11:32:11 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 12:13:17 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static void	render_object(t_data *d, t_tile *tile)
 	}
 	else if (tile->type == TYPE_FLAG)
 		tile->object = put_image(d, tile->bc, ID_FLAG, 0);
+	else if (tile->type == TYPE_ENEMY)
+		tile->object = put_image(d, tile->bc, ID_CONE, 0);
 }
 
 //(re)renders the entire board

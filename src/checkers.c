@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 12:46:23 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 13:26:30 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ int	is_input_valid(char *input)
 			flag *= 3;
 		else if (c == 'C')
 			flag *= 5;
-		else if (c != '0' && c != '1' && c != '\n')
+		else if (c != '0' && c != '1' && c != 'A' && c != '\n')
 			return (0);
 	}
-	if (flag % 2 || flag % 3 || flag % 5)
+	if (i < 16 || flag % 2 || flag % 3 || flag % 5)
 		return (0);
 	return (1);
 }
@@ -65,8 +65,10 @@ int	is_grid_valid(char *input)
 	linelen = 0;
 	len = 0;
 	i = -1;
-	while (input[i])
+	while (input[++i])
 	{
+		while (input[i] == '\n')
+			i++;
 		while (input[i] && input[i] != '\n')
 		{
 			i++;
@@ -77,6 +79,10 @@ int	is_grid_valid(char *input)
 		if (len != linelen)
 			return 0;
 		len = 0;
+	}
+	if (linelen < 3)
+	{
+		return (0);
 	}
 	return (1);
 }

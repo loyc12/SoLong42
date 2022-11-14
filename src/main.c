@@ -6,30 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 13:20:32 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/14 13:26:11 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
-
-static void	solve(t_data *d)
-{
-	t_tile	*tile;
-
-	tile = find_tile(d, d->pc);
-	if (tile->north && tile->north->flag_f < tile->flag_f)
-		move_player(d, tile, 'N');
-	else if (tile->east && tile->east->flag_f < tile->flag_f)
-		move_player(d, tile, 'E');
-	else if (tile->south && tile->south->flag_f < tile->flag_f)
-		move_player(d, tile, 'S');
-	else if (tile->west && tile->west->flag_f < tile->flag_f)
-		move_player(d, tile, 'W');
-	else
-		printf("ai doesn't know where to move...\n");
-}
 
 //frees all the leftover data
 static void	free_all(t_data *d)
@@ -48,13 +31,21 @@ static void	free_all(t_data *d)
 		free(tile->bc);
 		free(tile);
 	}
-	free(d->tiles);
-	i = -1;
-	while (++i < d->asset_n)
-		if (d->assets[i])
-			mlx_delete_image(d->window, d->assets[i]);
-	free(d->assets);
-	mlx_delete_image(d->window, d->tittle);
+	if (-1 < d->md->state)
+	{
+		i = -1;
+		while (++i < d->asset_n)
+			if (d->assets[i])
+				mlx_delete_image(d->window, d->assets[i]);
+		mlx_delete_image(d->window, d->tittle);
+		mlx_terminate(d->window);
+	}
+	if (-2 < d->md->state)
+	{
+		free(d->tiles);
+		free(d->assets);
+		free(d->enemies);
+	}
 }
 
 static void	hook(void *param)
@@ -62,7 +53,7 @@ static void	hook(void *param)
 	t_data	*d;
 
 	d = param;
-	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE))
+	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE) || d->md->state != 0)
 		mlx_close_window(d->window);
 	if (d->flag_r)
 		draw_board(d);
@@ -89,16 +80,75 @@ static void	key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
+static void	print_level_end(t_data *d)
+{
+	if (d->md->state < 0)
+		printf("\n  Unable to properly load the game board. State = %i \n\n", d->md->state);
+	if (d->md->state == 0)
+		printf("\n  I played this shitty game and all I got was this lousy message...\n\n");
+	else if (d->md->state == 1)
+		printf("\n  Save-scumming I see...\n\n");
+	else if (d->md->state == 2)
+		printf("\n  Finished level %i in %i moves!\n\n", d->md->lvl + 1, d->flag_m);
+	else if (d->md->state == 3)
+		printf("\n  You got got sonny... Better luck next time!\n\n");
+}
+
+static void	play_map(t_meta *md)
 {
 	t_data	d;
-	
-	initiate_data(&d);
-	draw_board(&d);
-	mlx_key_hook(d.window, &key_hook, &d);
-	mlx_loop_hook(d.window, &hook, &d);
-	mlx_loop(d.window);
+
+	printf("\n  Launching level %i\n", md->lvl + 1);
+	initiate_data(&d, md);
+	printf("\n  State : %i\n\n", md->state);
+	if (0 <= md->state)
+	{
+		draw_board(&d);
+		mlx_key_hook(d.window, &key_hook, &d);
+		mlx_loop_hook(d.window, &hook, &d);
+		mlx_loop(d.window);
+		md->mv += d.flag_m;
+	}
+	print_level_end(&d);
 	free_all(&d);
-    mlx_terminate(d.window);
+}
+
+static void	print_game_end(t_meta *md)
+{
+	if (md->state < 0)
+		printf("\n  Your map is bad and you should FEEL bad...\n\n");
+	else if (md->state == 0)
+		printf("\n  Didn't think you'd be a quitter...\n\n");
+	else if (md->state == 2 && md->mv <= md->max_mv)
+		printf("\n  Gotta go fast to earn those chillidogs!!!\n\n");
+	else if (md->state == 2)
+		printf("\n  CONGRATULATION! You won in %i total moves\n\n", md->mv);
+	else if (md->state == 3)
+		printf("\n  R.I.P. Next time maybe try avoiding those...\n\n");
+}
+
+int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
+{
+
+	t_meta	md;
+
+	md.lvl = 0;				//default value (starting level)
+	md.state = 1;			//default value
+	md.no_checks = 0;		//wether to ignore the initial parsing checks or not
+	md.difficulty = 2;		//from 1 to 8
+	srand(time(&md.time));
+	md.levels = initiate_levels(&md.max_lvl);
+	while (0 < md.state && md.lvl < md.max_lvl)
+	{
+		play_map(&md);
+		if (md.state == 2)
+			md.lvl++;
+	}
+	print_game_end(&md);
+	md.lvl = -1;
+	while (++(md.lvl) < md.state)
+		free(md.levels[md.lvl]);
+	free(md.levels);
+
 	return (EXIT_SUCCESS);
 }
