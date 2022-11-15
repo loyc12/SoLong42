@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 16:18:15 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 12:01:11 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>		//?? for open()?
 # include <string.h>	//??? (memory.h initially)
 # include <time.h>		//for srand()
 # include "libs/MLX42/include/MLX42/MLX42.h"
@@ -65,13 +66,14 @@ typedef struct s_tile
 typedef struct s_meta
 {
 	char	**levels;		//list of levels (TO BECOME PATHS NOT DATA)
-	int		state;			//-2 = input error, -1 = map error, 0 = closing game, 1 = retry level, 2 = next level, 3 = died)
 	time_t	time;			//used to seed srand()
-
+	int		state;			//-3 = file error, -2 = input error, -1 = map error, 0 = closing game, 1 = retry level, 2 = next level, 3 = died//
 	int		mv;				//current amount of movement
+	int		tries;			//current amount of level (re)started
 	int		lvl;			//current level
 	int		max_lvl;		//total amount of levels
 	
+	int		char_limit;		//maximum nb of chars in a .ber file
 	int		no_checks;		//whether or not to do the initial checks on the input
 	int		difficulty;		//odds over 8 that the enemies won't take a random move
 }			t_meta;
@@ -117,7 +119,7 @@ int	is_grid_valid(char *input);
 int	is_map_valid(t_data *d);
 
 //from initializers
-void	initiate_levels(t_meta *md);
+void	initiate_levels(t_meta *md, int	max_lvl, char **paths);
 void	initiate_data(t_data *d, t_meta *md);
 
 //from coordinaters
@@ -164,6 +166,9 @@ void	free_game(t_meta *md);
 t_tile	*find_tile(t_data *d, t_coords *bc);
 int		find_tile_number(char *input);
 int		find_enemy_number(char *input);
+
+//from readers
+int	get_level(t_meta *md, char *path);
 
 //from bonusers
 void	move_enemies(t_data *d);

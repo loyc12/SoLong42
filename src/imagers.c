@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/08 13:47:36 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:13:58 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,21 @@ void	load_assets(t_data *d)
 	mlx_image_t	**assets;
 
 	assets = ft_calloc(d->asset_n, sizeof(mlx_image_t *));
-	assets[ID_FLOOR] = make_image(d, "./Assets/XPM/TileFloor.xpm42");
-	assets[ID_SLAB] = make_image(d, "./Assets/XPM/Slab.xpm42");
-	assets[ID_CUBE] = make_image(d, "./Assets/XPM/Cube.xpm42");
+	assets[ID_FLOOR] = make_image(d, "./assets/XPM/TileFloor.xpm42");
+	assets[ID_SLAB] = make_image(d, "./assets/XPM/Slab.xpm42");
+	assets[ID_CUBE] = make_image(d, "./assets/XPM/Cube.xpm42");
 
 	if (d->flag_n > 0)
-		assets[ID_HOLE] = make_image(d, "./Assets/XPM/BlockedHole.xpm42");
+		assets[ID_HOLE] = make_image(d, "./assets/XPM/BlockedHole.xpm42");
 	else 
-		assets[ID_HOLE] = make_image(d, "./Assets/XPM/Hole.xpm42");
+		assets[ID_HOLE] = make_image(d, "./assets/XPM/Hole.xpm42");
 	if (0 < d->flag_n || d->pc != d->ec)
-		assets[ID_BALL] = make_image(d, "./Assets/XPM/Ball.xpm42");
+		assets[ID_BALL] = make_image(d, "./assets/XPM/Ball.xpm42");
 	else
-		assets[ID_BALL] = make_image(d, "./Assets/XPM/HalfBall.xpm42");
+		assets[ID_BALL] = make_image(d, "./assets/XPM/HalfBall.xpm42");
 
-	assets[ID_FLAG] = make_image(d, "./Assets/XPM/FlagWhite.xpm42");
-	assets[ID_CONE] = make_image(d, "./Assets/XPM/CONE.xpm42");
+	assets[ID_FLAG] = make_image(d, "./assets/XPM/FlagWhite.xpm42");
+	assets[ID_CONE] = make_image(d, "./assets/XPM/CONE.xpm42");
 
 	d->assets = assets;
 }

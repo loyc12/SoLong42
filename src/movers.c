@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 16:18:05 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 12:00:00 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	move_player(t_data *d, t_tile *src_tile, char goal)
 			move_enemies(d);
 		printf("Move #%i\n", d->flag_m);
 	}
+	else if (dst_tile && dst_tile->type == TYPE_ENEMY)
+		d->md->state = 3;
 	else
 		printf("Path blocked!\n");											//REMOVE ME
 }

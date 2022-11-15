@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 16:11:01 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:53:19 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,13 @@ static void	play_map(t_meta *md)
 	free_level(&d);
 }
 
-int	main(void) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
+int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 {
 
 	t_meta	md;
-
-	md.state = 1;			//default value
 	
 	srand(time(&md.time));
-	initiate_levels(&md);
+	initiate_levels(&md, --argc, ++argv);
 	while (0 < md.state && md.lvl < md.max_lvl)
 	{
 		play_map(&md);

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/09 15:26:33 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 11:49:41 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ static void	fill_flag_dist(t_data *d, t_tile *tile, int dist)
 {
 	if (tile == NULL || tile->flag_f <= dist)
 		return ;
-	tile->flag_f = dist;
 
-	fill_flag_dist(d, tile->north, dist + 1);
-	fill_flag_dist(d, tile->east, dist + 1);
-	fill_flag_dist(d, tile->south, dist + 1);
-	fill_flag_dist(d, tile->west, dist + 1);
+	//if (can_move_to(tile, 'P'))
+	//{
+		tile->flag_f = dist;
+
+		fill_flag_dist(d, tile->north, dist + 1);
+		fill_flag_dist(d, tile->east, dist + 1);
+		fill_flag_dist(d, tile->south, dist + 1);
+		fill_flag_dist(d, tile->west, dist + 1);
+	//}
 }
 
 //calculates the distance to the nearest objective (flag / end) for each tile
@@ -71,12 +75,17 @@ void	fill_player_dist(t_data *d, t_tile *tile, int dist)
 {
 	if (tile == NULL || tile->flag_e <= dist)
 		return ;
-	tile->flag_e = dist;
 
-	fill_player_dist(d, tile->north, dist + 1);
-	fill_player_dist(d, tile->east, dist + 1);
-	fill_player_dist(d, tile->south, dist + 1);
-	fill_player_dist(d, tile->west, dist + 1);
+	//if (can_move_to(tile, 'A'))
+	//{
+		tile->flag_e = dist;
+
+		fill_player_dist(d, tile->north, dist + 1);
+		fill_player_dist(d, tile->east, dist + 1);
+		fill_player_dist(d, tile->south, dist + 1);
+		fill_player_dist(d, tile->west, dist + 1);
+	//}
+
 }
 
 //calculates the distance to the nearest objective (flag / end) for each tile
