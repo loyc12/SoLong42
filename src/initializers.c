@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 12:02:49 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 13:35:46 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	initiate_levels(t_meta *md, int	max_lvl, char **paths)
 		md->lvl = -1;
 		while (++md->lvl < max_lvl && 0 < md->state)
 			md->state = get_level(md, paths[md->lvl]);
-		md->lvl = 0;			//level to begin at
+		md->lvl = 5;			//level to begin at
 	}
 	else
 		md->state = -3;

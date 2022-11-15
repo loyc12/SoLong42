@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 11:49:41 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 13:25:47 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,30 @@ void	fill_test(t_data *d, t_tile *tile, int *flag_n, int *flag_e)
 //calculates the distance of each tile to a specific tile
 static void	fill_flag_dist(t_data *d, t_tile *tile, int dist)
 {
-	if (tile == NULL || tile->flag_f <= dist)
+	if (tile == NULL || tile->flag_f <= dist)	// || !can_move_to(tile, 'P'))
 		return ;
-
-	//if (can_move_to(tile, 'P'))
-	//{
-		tile->flag_f = dist;
-
-		fill_flag_dist(d, tile->north, dist + 1);
-		fill_flag_dist(d, tile->east, dist + 1);
-		fill_flag_dist(d, tile->south, dist + 1);
-		fill_flag_dist(d, tile->west, dist + 1);
-	//}
+	
+	tile->flag_f = dist;
+	fill_flag_dist(d, tile->north, dist + 1);
+	fill_flag_dist(d, tile->east, dist + 1);
+	fill_flag_dist(d, tile->south, dist + 1);
+	fill_flag_dist(d, tile->west, dist + 1);
 }
 
-//calculates the distance to the nearest objective (flag / end) for each tile
+//calculates the distance of each tile to the player
+void	fill_player_dist(t_data *d, t_tile *tile, int dist)
+{
+	if (tile == NULL || tile->flag_e <= dist)	// || !can_move_to(tile, 'A'))
+		return ;
+
+	tile->flag_e = dist;
+	fill_player_dist(d, tile->north, dist + 1);
+	fill_player_dist(d, tile->east, dist + 1);
+	fill_player_dist(d, tile->south, dist + 1);
+	fill_player_dist(d, tile->west, dist + 1);
+}
+
+//calculates the distance to the nearest objective (flag || end) for each tile
 void	load_flag_dist(t_data *d)
 {
 	int	i;
@@ -68,24 +77,6 @@ void	load_flag_dist(t_data *d)
 		fill_flag_dist(d, find_tile(d, d->ec), 0);
 
 	//printf("flag distance map reloaded!\n");							//REMOVE ME
-}
-
-//calculates the distance of each tile to the player
-void	fill_player_dist(t_data *d, t_tile *tile, int dist)
-{
-	if (tile == NULL || tile->flag_e <= dist)
-		return ;
-
-	//if (can_move_to(tile, 'A'))
-	//{
-		tile->flag_e = dist;
-
-		fill_player_dist(d, tile->north, dist + 1);
-		fill_player_dist(d, tile->east, dist + 1);
-		fill_player_dist(d, tile->south, dist + 1);
-		fill_player_dist(d, tile->west, dist + 1);
-	//}
-
 }
 
 //calculates the distance to the nearest objective (flag / end) for each tile

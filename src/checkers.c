@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 11:16:53 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 13:48:31 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,29 @@ int	is_on_edge(t_data *d, t_coords *bc)
 //checks if 
 int	is_input_valid(char *input)
 {
-	int		flag;
+	int		flag_p;
+	int		flag_e;
+	int		flag_c;
 	char	c;
 	int		i;
 
 	i = -1;
-	flag = 1;
+	flag_p = 0;
+	flag_e = 0;
+	flag_c = 0;
 	while (input[++i])
 	{
 		c = input[i];
 		if (c == 'P')
-			flag *= 2;
+			flag_p = 1;
 		else if (c == 'E')
-			flag *= 3;
+			flag_e = 1;
 		else if (c == 'C')
-			flag *= 5;
+			flag_c = 1;
 		else if (c != '0' && c != '1' && c != 'A' && c != '\n')
 			return (0);
 	}
-	if (i < 16 || flag % 2 || flag % 3 || flag % 5)
+	if (i < 16 || !flag_p || !flag_e || !flag_c)
 		return (0);
 	return (1);
 }
