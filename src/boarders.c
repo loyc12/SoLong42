@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 16:17:35 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:32:14 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//sets the default values of a tile (used during tile initialization)
 static void	set_default_tile_values(t_tile *tile)
 {
 	tile->north = NULL;
@@ -19,7 +20,7 @@ static void	set_default_tile_values(t_tile *tile)
 	tile->south = NULL;
 	tile->west = NULL;
 	tile->type = TYPE_EMPTY;
-	tile->flag_f = 0;
+	tile->flag_p = 0;
 	tile->flag_e = 0;
 }
 
@@ -86,7 +87,6 @@ void	load_board(t_data *d, char *input)
 {
 	t_coords	*bc;
 
-	printf("Chosen board :\n\n%s\n", input);														//REMOVE ME
 	bc = ft_calloc(1, sizeof(t_coords));
 	if ((is_input_valid(input) && is_grid_valid(input)) || d->md->no_checks)
 	{

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 13:35:46 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:53:48 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //puts values in fields used later one to prevent garbage affecting the program
 static void	set_default_values(t_data *d)
 {
-	d->md->state = 0;	//prevents constant restarting
+	d->md->state = 0;	//prevents constant restarting	(default)
 
 	d->flag_n = 0;		//flags left flag				(default)
 	d->flag_r = 0;		//re_rendering flag				(default)
@@ -64,22 +64,23 @@ void	initiate_levels(t_meta *md, int	max_lvl, char **paths)
 {
 	char	**levels;
 
-	md->tries = 0;				//default value for starting first level
-	md->state = 1;				//default value for starting first level
+	md->difficulty = 6;			//from 1 to 8
 	md->no_checks = 0;			//wether to ignore the initial parsing checks or not
-	md->difficulty = 7;			//from 1 to 8
+
 	md->char_limit = 2048;		//how many char a .ber can have
+	md->try_c = 0;				//default value for starting first level
+	md->try_n = 0;				//default value for starting first level
+	md->state = 1;				//default value for starting first level
 
 	if (1 < max_lvl)
 	{
-		levels = ft_calloc(md->max_lvl, sizeof(char *));
+		levels = ft_calloc(md->lvl_n, sizeof(char *));
 		md->levels = levels;
-		md->max_lvl = max_lvl;
-		printf("Lvl_no = %i\n", max_lvl);			//REMOVE ME
-		md->lvl = -1;
-		while (++md->lvl < max_lvl && 0 < md->state)
-			md->state = get_level(md, paths[md->lvl]);
-		md->lvl = 5;			//level to begin at
+		md->lvl_n = max_lvl;
+		md->lvl_c = -1;
+		while (++md->lvl_c < max_lvl && 0 < md->state)
+			md->state = get_level(md, paths[md->lvl_c]);
+		md->lvl_c = 0;										//level # to begin at
 	}
 	else
 		md->state = -3;
@@ -90,19 +91,10 @@ void	initiate_data(t_data *d, t_meta *md)
 { 
 	d->md = md;
 	set_default_values(d);
-	load_board(d, md->levels[d->md->lvl]);
+	load_board(d, md->levels[d->md->lvl_c]);
 	if (0 <= md->state)
 	{
 		initiate_window(d);
 		load_assets(d);
 	}
 }
-
-/*
-levels[0] = make_level("1111111\n1P0C0E1\n1111111\n");
-levels[1] = make_level("111\n1P1\n101\n1C1\n101\n1E1\n111\n");
-levels[2] = make_level("111111\n1P00E1\n101111\n101000\n1C1000\n111000\n");
-levels[3] = make_level("111111\n1P00E1\n100001\n100001\n1C00A1\n111111\n");
-levels[4] = make_level("1111111111111111\n1000000000000001\n10P0000000000001\n10000000000C0001\n1000000011000001\n100000001C000001\n1000000000000001\n10000000000A0001\n10000C1000000001\n1101001100000001\n100000001000C001\n100000001000CC01\n1000000000111001\n10E0000000000001\n1000000000000001\n1111111111111111\n");
-levels[5] = make_level("1111111111111111111111111111111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100C00100000000000000000000C001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1110111111111110111110111111111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100A00000000000000100C00100C001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1111111110111111111111111110111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100000000000000P001000000000001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1110111110111110111110111110111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100C001000001000000000001000001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1111111110111111111110111110111\n1000001000001000001000001000001\n1000001000001000001000001000001\n100C00000000100E00000000100C001\n1000001000001000001000001000001\n1000001000001000001000001000001\n1111111111111111111111111111111\n");
-*/

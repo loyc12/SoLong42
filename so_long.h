@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 12:01:11 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:46:41 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_tile
 	struct s_tile	*south;
 	struct s_tile	*west;
 	int				type;		//see e_type
-	int				flag_f;		//current distance to flags / end
+	int				flag_p;		//current distance to flags / end
 	int				flag_e;		//current distance to player
 }					t_tile;
 
@@ -68,10 +68,11 @@ typedef struct s_meta
 	char	**levels;		//list of levels (TO BECOME PATHS NOT DATA)
 	time_t	time;			//used to seed srand()
 	int		state;			//-3 = file error, -2 = input error, -1 = map error, 0 = closing game, 1 = retry level, 2 = next level, 3 = died//
-	int		mv;				//current amount of movement
-	int		tries;			//current amount of level (re)started
-	int		lvl;			//current level
-	int		max_lvl;		//total amount of levels
+	int		mv_c;			//current amount of movement
+	int		try_c;			//current amount of level (re)started
+	int		try_n;			//total amount of attempted levels
+	int		lvl_c;			//current level
+	int		lvl_n;			//total amount of levels
 	
 	int		char_limit;		//maximum nb of chars in a .ber file
 	int		no_checks;		//whether or not to do the initial checks on the input

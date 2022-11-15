@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 12:00:00 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:20:02 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	move_player_to(t_data *d, t_tile *dst_tile)
 	if (dst_tile->type == TYPE_FLAG)
 	{	
 		d->flag_n--;
-		//printf("flag collected!\n");													//REMOVE ME
+		//printf("    Flag collected! %i flags left\n", d->flag_n);		//REMOVE ME
 	}
 	if (dst_tile->bc == d->ec && d->flag_n < 1)
 	{
@@ -56,9 +56,6 @@ static void	move_player_to(t_data *d, t_tile *dst_tile)
 	src_tile->type = TYPE_EMPTY;
 	src_tile->object = NULL;
 	dst_tile->type = TYPE_PLAYER;
-
-	//printf("player moved to tile (%i,%i)\n", d->pc->x, d->pc->y);						//REMOVE ME
-	
 	if (old_n != d->flag_n)
 		load_flag_dist(d);
 }
@@ -88,5 +85,5 @@ void	move_player(t_data *d, t_tile *src_tile, char goal)
 	else if (dst_tile && dst_tile->type == TYPE_ENEMY)
 		d->md->state = 3;
 	else
-		printf("Path blocked!\n");											//REMOVE ME
+		printf("Path blocked!\n");										//REMOVE ME
 }

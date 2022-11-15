@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 12:19:37 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:38:44 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	move_enemy_to(t_data *d, t_tile *dst_tile, int id)
 	src_tile->object = NULL;
 	dst_tile->type = TYPE_ENEMY;
 
-	//printf("enemy moved to tile (%i,%i)\n", dst_tile->bc->x, dst_tile->bc->y);			//REMOVE ME
+	//printf("Enemy #%i moved to tile (%i,%i)\n", id, dst_tile->bc->x, dst_tile->bc->y);	//REMOVE ME
 }
 
 static void	move_random(t_data *d, t_tile *src_tile, int id)
@@ -94,15 +94,15 @@ void	solve(t_data *d)
 	t_tile	*tile;
 
 	tile = find_tile(d, d->pc);
-	if (can_move_to(tile->north, 'P') && tile->north->flag_f < tile->flag_f)
+	if (can_move_to(tile->north, 'P') && tile->north->flag_p < tile->flag_p)
 		move_player(d, tile, 'N');
-	else if (can_move_to(tile->east, 'P') && tile->east->flag_f < tile->flag_f)
+	else if (can_move_to(tile->east, 'P') && tile->east->flag_p < tile->flag_p)
 		move_player(d, tile, 'E');
-	else if (can_move_to(tile->south, 'P') && tile->south->flag_f < tile->flag_f)
+	else if (can_move_to(tile->south, 'P') && tile->south->flag_p < tile->flag_p)
 		move_player(d, tile, 'S');
-	else if (can_move_to(tile->west, 'P') && tile->west->flag_f < tile->flag_f)
+	else if (can_move_to(tile->west, 'P') && tile->west->flag_p < tile->flag_p)
 		move_player(d, tile, 'W');
 	else if (d->pc != d->ec)
-		printf("Player bot is lost bruh...\n");
-	usleep(30000);
+		printf("Player bot is lost bruh...\n");												//REMOVE ME
+	usleep(40000);
 }

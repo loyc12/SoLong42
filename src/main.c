@@ -6,32 +6,35 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 11:53:19 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:05:00 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
-
+//game loop for a given level
 static void	play_map(t_meta *md)
 {
 	t_data	d;
 
-	printf("\n  Launching level %i\n", md->lvl + 1);
+	printf("\n  LAUNCHING LEVEL %i\n\n  Difficulty : %i/8\n  Attempt : %i\n\n", md->lvl_c + 1, md->difficulty, md->try_c + 1);	//REMOVE ME
+	//printf("Board : \n\n%s\n", md->levels[md->lvl_c]);																		//REMOVE ME
 	initiate_data(&d, md);
-	printf("\n  State : %i\n  Difficulty : %i/8\n\n", md->state, md->difficulty);
+	draw_board(&d);
+	md->try_c++;
 	if (0 <= md->state)
 	{
-		draw_board(&d);
 		mlx_key_hook(d.window, &key_hook, &d);
 		mlx_loop_hook(d.window, &hook, &d);
 		mlx_loop(d.window);
-		md->mv += d.flag_m;
+		draw_board(&d);
+		md->mv_c += d.flag_m;
 	}
 	print_level_end(&d);
 	free_level(&d);
 }
+
+//gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"				//REMOVE ME
 
 int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 {
@@ -40,11 +43,15 @@ int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 	
 	srand(time(&md.time));
 	initiate_levels(&md, --argc, ++argv);
-	while (0 < md.state && md.lvl < md.max_lvl)
+	while (0 < md.state && md.lvl_c < md.lvl_n)
 	{
 		play_map(&md);
 		if (md.state == 2)
-			md.lvl++;
+		{
+			md.lvl_c++;
+			md.try_n += md.try_c;
+			md.try_c = 0;
+		}
 	}
 	print_game_end(&md);
 	free_game(&md);

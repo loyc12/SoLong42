@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 12:13:17 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 14:18:17 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,7 @@ static void	render_object(t_data *d, t_tile *tile)
 			tile->object = put_image(d, tile->bc, ID_CUBE, 0);
 	}
 	else if (tile->type == TYPE_PLAYER)
-	{
 		tile->object = put_image(d, tile->bc, ID_BALL, 0);
-		if (d->pc == d->ec)
-			d->flag_r = -1;											//GAME OVER FLAG
-	}
 	else if (tile->type == TYPE_FLAG)
 		tile->object = put_image(d, tile->bc, ID_FLAG, 0);
 	else if (tile->type == TYPE_ENEMY)
