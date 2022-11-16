@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 14:18:17 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:14:54 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	draw_board(t_data *d)
 		tile = d->tiles[i];
 		render_object(d, tile);
 	}
-	d->flag_r = 0;
-	d->flag_c = 1;
+	d->m_flag = 0;
+	d->c_flag = 1;
 }

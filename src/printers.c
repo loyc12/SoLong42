@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 15:03:12 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 12:57:34 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_level_end(t_data *d)
 	else if (d->md->state == 1)
 		printf("\n  How did you get here anyways?\n");
 	else if (d->md->state == 2)
-		printf("\n  Finished level %i in %i moves after %i tries!\n", d->md->lvl_c + 1, d->flag_m, d->md->try_c);
+		printf("\n  Finished level %i in %i moves after %i tries!\n", d->md->lvl_c + 1, d->mv_c, d->md->try_c);
 	else if (d->md->state == 3)
 		printf("\n  You got got sonny... Better luck next time!\n");
 }
@@ -37,7 +37,7 @@ void	print_game_end(t_meta *md)
 	else if (md->state == 1)
 		printf("\n  Save-scumming I see...\n\n");
 	else if (md->state == 2)
-		printf("\n  CONGRATULATIONS!!! You completed the %i levels in %i moves and %i total attempts!\n\n", md->lvl_n, md->mv_c, md->try_n);
+		printf("\n  CONGRATULATIONS!!! You completed the %i levels in %i moves and %i retries!\n\n", md->lvl_n, md->mv_c, md->try_n - md->lvl_n);
 	else if (md->state == 3)
 		printf("\n  R.I.P. Next time maybe try avoiding those...\n\n");
 }

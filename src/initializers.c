@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 14:53:48 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 16:06:25 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	set_default_values(t_data *d)
 {
 	d->md->state = 0;	//prevents constant restarting	(default)
 
-	d->flag_n = 0;		//flags left flag				(default)
-	d->flag_r = 0;		//re_rendering flag				(default)
-	d->flag_c = 0;		//asset cleaning flag			(default)
-	d->flag_m = 0;		//move number flag				(default)
+	d->m_flag = 0;		//re_rendering flag				(default)
+	d->c_flag = 0;		//asset cleaning flag			(default)
+	d->flg_c = 0;		//flags left flag				(default)
+	d->mv_c = 0;		//move number flag				(default)
 
 	d->max_bx = 0;		//board width					(uninitialized)
 	d->max_by = 0;		//board height					(uninitialized)
@@ -60,7 +60,7 @@ char	*make_level(char *str)
 }
 
 //loads the level input strings from a given string
-void	initiate_levels(t_meta *md, int	max_lvl, char **paths)
+void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 {
 	char	**levels;
 
@@ -72,13 +72,13 @@ void	initiate_levels(t_meta *md, int	max_lvl, char **paths)
 	md->try_n = 0;				//default value for starting first level
 	md->state = 1;				//default value for starting first level
 
-	if (1 < max_lvl)
+	if (1 <= lvl_n)
 	{
 		levels = ft_calloc(md->lvl_n, sizeof(char *));
 		md->levels = levels;
-		md->lvl_n = max_lvl;
+		md->lvl_n = lvl_n;
 		md->lvl_c = -1;
-		while (++md->lvl_c < max_lvl && 0 < md->state)
+		while (++md->lvl_c < lvl_n && 0 < md->state)
 			md->state = get_level(md, paths[md->lvl_c]);
 		md->lvl_c = 0;										//level # to begin at
 	}

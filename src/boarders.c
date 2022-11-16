@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 14:32:14 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:44:24 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 //sets the default values of a tile (used during tile initialization)
 static void	set_default_tile_values(t_tile *tile)
 {
+	tile->type = TYPE_EMPTY;
 	tile->north = NULL;
 	tile->east = NULL;
 	tile->south = NULL;
 	tile->west = NULL;
-	tile->type = TYPE_EMPTY;
-	tile->flag_p = 0;
-	tile->flag_e = 0;
+	tile->dst_f = 0;
+	tile->dst_p = 0;
 }
 
 //creates a single tile from its given type and coordinates
@@ -47,7 +47,7 @@ static t_tile	*make_tile(t_data *d, t_coords *bc, char type, int *id)
 	else if (type == 'C')
 	{
 		tile->type = TYPE_FLAG;
-		d->flag_n += 1;
+		d->flg_c += 1;
 	}
 	else if (type == 'A')
 	{
@@ -91,8 +91,8 @@ void	load_board(t_data *d, char *input)
 	if ((is_input_valid(input) && is_grid_valid(input)) || d->md->no_checks)
 	{
 		d->tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
-		d->flag_a = find_enemy_number(input);
-		d->enemies = ft_calloc(d->flag_a, sizeof(t_coords *));
+		d->nm_n = find_enemy_number(input);
+		d->enemies = ft_calloc(d->nm_n, sizeof(t_coords *));
 		load_tiles(d, bc, input);
 		d->max_by = bc->y - 1;
 		d->max_bx = bc->x - 1;

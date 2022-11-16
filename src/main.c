@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 15:05:00 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 16:02:26 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	play_map(t_meta *md)
 		mlx_loop_hook(d.window, &hook, &d);
 		mlx_loop(d.window);
 		draw_board(&d);
-		md->mv_c += d.flag_m;
+		md->mv_c += d.mv_c;
 	}
 	print_level_end(&d);
 	free_level(&d);
@@ -38,7 +38,6 @@ static void	play_map(t_meta *md)
 
 int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 {
-
 	t_meta	md;
 	
 	srand(time(&md.time));
@@ -58,3 +57,9 @@ int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 
 	return (EXIT_SUCCESS);
 }
+
+/*
+IDEAS :
+
+have the direction order be randomized so the AI isn't as predictable
+*/

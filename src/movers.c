@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 14:20:02 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:33:50 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,25 @@ int	can_move_to(t_tile *tile, char type)
 static void	move_player_to(t_data *d, t_tile *dst_tile)
 {
 	t_tile *src_tile;
-	int	old_n;
+	int	flag_r;
 
-	old_n = d->flag_n;
+	flag_r = 0;
 	src_tile = find_tile(d, d->pc);
-	d->flag_m++;
-	d->flag_r++;
+	d->mv_c++;
+	d->m_flag++;
 	d->pc = dst_tile->bc;
 	if (dst_tile->type == TYPE_FLAG)
 	{	
-		d->flag_n--;
-		//printf("    Flag collected! %i flags left\n", d->flag_n);		//REMOVE ME
+		d->flg_c--;
+		flag_r++;
+		//printf("    Flag collected! %i flags left\n", d->flg_c);		//REMOVE ME
 	}
-	if (dst_tile->bc == d->ec && d->flag_n < 1)
-	{
-		d->flag_n--;
+	if (dst_tile->bc == d->ec && d->flg_c < 1)
 		d->md->state = 2;
-	}
 	src_tile->type = TYPE_EMPTY;
 	src_tile->object = NULL;
 	dst_tile->type = TYPE_PLAYER;
-	if (old_n != d->flag_n)
+	if (flag_r)
 		load_flag_dist(d);
 }
 
@@ -78,9 +76,9 @@ void	move_player(t_data *d, t_tile *src_tile, char goal)
 	{
 		move_player_to(d, dst_tile);
 		load_player_dist(d);
-		if (0 < d->flag_a && d->pc != d->ec)
+		if (0 < d->nm_n && d->pc != d->ec)
 			move_enemies(d);
-		printf("Move #%i\n", d->flag_m);
+		printf("Move #%i\n", d->mv_c);
 	}
 	else if (dst_tile && dst_tile->type == TYPE_ENEMY)
 		d->md->state = 3;

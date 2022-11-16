@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 11:13:58 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:35:52 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	load_assets(t_data *d)
 	assets[ID_SLAB] = make_image(d, "./assets/XPM/Slab.xpm42");
 	assets[ID_CUBE] = make_image(d, "./assets/XPM/Cube.xpm42");
 
-	if (d->flag_n > 0)
+	if (0 < d->flg_c)
 		assets[ID_HOLE] = make_image(d, "./assets/XPM/BlockedHole.xpm42");
 	else 
 		assets[ID_HOLE] = make_image(d, "./assets/XPM/Hole.xpm42");
-	if (0 < d->flag_n || d->pc != d->ec)
+	if (0 < d->flg_c || d->pc != d->ec)
 		assets[ID_BALL] = make_image(d, "./assets/XPM/Ball.xpm42");
 	else
 		assets[ID_BALL] = make_image(d, "./assets/XPM/HalfBall.xpm42");
@@ -68,10 +68,10 @@ void	clean_assets(t_data *d)
 	int	i;
 
 	i = -1;
-	if (d->flag_c)
+	if (d->c_flag)
 		while (++i < d->asset_n)
 			mlx_delete_image(d->window, d->old[i]);
-	d->flag_c = 0;
+	d->c_flag = 0;
 	free(d->old);
 	d->old = NULL;
 }

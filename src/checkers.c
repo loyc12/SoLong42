@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 13:48:31 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:29:52 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ int	is_grid_valid(char *input)
 
 int	is_map_valid(t_data *d)
 {
-	int	flag_n;
+	int	flag_c;
 	int	flag_e;
 
-	flag_n = 0;
+	flag_c = 0;
 	flag_e = 0;
-	fill_test(d, find_tile(d, d->pc), &flag_n, &flag_e);
-	if (flag_n != d->flag_n || flag_e != 1)
+	fill_test(d, find_tile(d, d->pc), &flag_c, &flag_e);
+	if (flag_c != d->flg_c || flag_e != 1)
 		return (0);
 	return (1);
 }

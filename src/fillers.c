@@ -6,36 +6,36 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 14:10:47 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:42:44 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //uses a floodfill algo to see if every object is reachable
-void	fill_test(t_data *d, t_tile *tile, int *flag_n, int *flag_e)
+void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e)
 {
-	if (tile == NULL || tile->flag_p != 0)
+	if (tile == NULL || tile->dst_f != 0)
 		return ;
 
-	tile->flag_p = 1;
+	tile->dst_f = 1;
 	if (tile->type == TYPE_FLAG)
-		*flag_n += 1;
+		*flag_c += 1;
 	if (tile->type == TYPE_END || is_on_edge(d, tile->bc))
 		*flag_e += 1;
 
-	fill_test(d, tile->north, flag_n, flag_e);
-	fill_test(d, tile->east, flag_n, flag_e);
-	fill_test(d, tile->south, flag_n, flag_e);
-	fill_test(d, tile->west, flag_n, flag_e);
+	fill_test(d, tile->north, flag_c, flag_e);
+	fill_test(d, tile->east, flag_c, flag_e);
+	fill_test(d, tile->south, flag_c, flag_e);
+	fill_test(d, tile->west, flag_c, flag_e);
 }
 
 //calculates the distance of each tile to a specific tile
 static void	fill_flag_dist(t_data *d, t_tile *tile, int dist)
 {
-	if (tile == NULL || tile->flag_p <= dist || tile->type == TYPE_ENEMY)
+	if (tile == NULL || tile->dst_f <= dist || tile->type == TYPE_ENEMY)
 		return ;
-	tile->flag_p = dist;
+	tile->dst_f = dist;
 	fill_flag_dist(d, tile->north, dist + 1);
 	fill_flag_dist(d, tile->east, dist + 1);
 	fill_flag_dist(d, tile->south, dist + 1);
@@ -45,9 +45,9 @@ static void	fill_flag_dist(t_data *d, t_tile *tile, int dist)
 //calculates the distance of each tile to the player
 void	fill_player_dist(t_data *d, t_tile *tile, int dist)
 {
-	if (tile == NULL || tile->flag_e <= dist || tile->type == TYPE_FLAG || tile->type == TYPE_END)
+	if (tile == NULL || tile->dst_p <= dist || tile->type == TYPE_FLAG || tile->type == TYPE_END)
 		return ;
-	tile->flag_e = dist;
+	tile->dst_p = dist;
 	fill_player_dist(d, tile->north, dist + 1);
 	fill_player_dist(d, tile->east, dist + 1);
 	fill_player_dist(d, tile->south, dist + 1);
@@ -61,9 +61,9 @@ void	load_flag_dist(t_data *d)
 
 	i = -1;
 	while (++i < d->board_s)
-		d->tiles[i]->flag_p = d->board_s;
+		d->tiles[i]->dst_f = d->board_s;
 	i = -1;
-	if (0 < d->flag_n)
+	if (0 < d->flg_c)
 	{
 		while (++i < d->board_s)
 			if (d->tiles[i]->type == TYPE_FLAG)
@@ -82,7 +82,7 @@ void	load_player_dist(t_data *d)
 
 	i = -1;
 	while (++i < d->board_s)
-		d->tiles[i]->flag_e = d->board_s;
+		d->tiles[i]->dst_p = d->board_s;
 	fill_player_dist(d, find_tile(d, d->pc), 0);
 
 	//printf("    Player distance map reloaded!\n");						//REMOVE ME

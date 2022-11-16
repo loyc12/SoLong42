@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 16:08:18 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/15 15:14:55 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	hook(void *param)
 	t_data	*d;
 
 	d = param;
-	if (d->flag_r)
+	if (d->m_flag)
 		draw_board(d);
 	if (mlx_is_key_down(d->window, MLX_KEY_Q))
 		solve(d);
