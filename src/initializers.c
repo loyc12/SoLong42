@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 16:06:25 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 15:32:01 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 {
 	char	**levels;
 
-	md->difficulty = 6;			//from 1 to 8
+	md->difficulty = 6;			//from 0 to 8
+	md->stability = 2;			//from 0 to 4
 	md->no_checks = 0;			//wether to ignore the initial parsing checks or not
 
 	md->char_limit = 2048;		//how many char a .ber can have

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 13:21:08 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 15:52:54 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_meta		//for the entire game (aka over multiple boards/levels)
 	int		char_limit;		//maximum nb of chars in a .ber file
 	int		no_checks;		//whether or not to do the initial checks on the input
 	int		difficulty;		//odds over 8 that the enemies won't take a random move
+	int		stability;		//chances over n+4 that a random move will no do anything
 
 	int		mv_c;			//current amount of movement
 	int		try_c;			//current amount of level (re)started
@@ -151,7 +152,7 @@ void	draw_board(t_data *d);
 
 //from mover
 int		can_move_to(t_tile *tile, char type);
-void 	move_player(t_data *d, t_tile *src_tile, char direction);
+void	move_player(t_data *d, t_tile *dst_tile);
 
 //from printers
 void	print_level_end(t_data *d);
@@ -166,6 +167,7 @@ void	free_level(t_data *d);
 void	free_game(t_meta *md);
 
 //from finders
+t_tile *find_neighbor(t_tile *tile, char goal);
 t_tile	*find_tile(t_data *d, t_coords *bc);
 int		find_tile_number(char *input);
 int		find_enemy_number(char *input);
@@ -175,10 +177,12 @@ int		get_level(t_meta *md, char *path);
 
 //from bonusers
 void	move_enemy_to(t_data *d, t_tile *dst_tile, int id);
+//void	move_enemy(t_data *d, t_tile *src_tile, char goal, int id);
 void	move_enemies(t_data *d);
 void	solve(t_data *d);
 
 //from randomers
+char	*random_comb(void);
 void	move_random(t_data *d, t_tile *src_tile, int id);
 
 #endif

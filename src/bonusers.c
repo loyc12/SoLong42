@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomers.c                                        :+:      :+:    :+:   */
+/*   Bonusers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 13:05:27 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 15:56:10 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,62 +28,61 @@ void	move_enemy_to(t_data *d, t_tile *dst_tile, int id)
 	//printf("Enemy #%i moved to tile (%i,%i)\n", id, dst_tile->bc->x, dst_tile->bc->y);	//REMOVE ME
 }
 
-//checks if the enemy can move in the goal direction, and if so, applies the movement
-static void	move_enemy(t_data *d, t_tile *src_tile, char goal, int id)
-{
-	t_tile	*dst_tile;
-
-	dst_tile = NULL;
-	if (goal == 'N')
-		dst_tile = find_tile(d, src_tile->bc)->north;
-	else if (goal == 'E')
-		dst_tile = find_tile(d, src_tile->bc)->east;
-	else if (goal == 'S')
-		dst_tile = find_tile(d, src_tile->bc)->south;
-	else if (goal == 'W')
-		dst_tile = find_tile(d, src_tile->bc)->west;
-	move_enemy_to(d, dst_tile, id);
-}
-
+//makes the enemies move
 void	move_enemies(t_data *d)
 {
-	t_tile	*tile;
+	t_tile	*dst_tile;
+	t_tile	*src_tile;
+	char	*order;
+	int		id;
 	int		i;
 
-	i = -1;
-	while (++i < d->nm_n)
+	id = -1;
+	while (++id < d->nm_n)
 	{
-		tile = find_tile(d, d->enemies[i]);
 		if (d->md->difficulty <= (rand() % 8))
-			move_random(d, tile, i);
-		else if (can_move_to(tile->north, 'A') && tile->north->dst_p < tile->dst_p)
-			move_enemy(d, tile, 'N', i);
-		else if (can_move_to(tile->east, 'A') && tile->east->dst_p < tile->dst_p)
-			move_enemy(d, tile, 'E', i);
-		else if (can_move_to(tile->south, 'A') && tile->south->dst_p < tile->dst_p)
-			move_enemy(d, tile, 'S', i);
-		else if (can_move_to(tile->west, 'A') && tile->west->dst_p < tile->dst_p)
-			move_enemy(d, tile, 'W', i);
+			move_random(d, src_tile, id);
 		else
-			move_random(d, tile, i);
+		{
+			i = -1;
+			order = random_comb();
+			src_tile = find_tile(d, d->enemies[id]);
+			while (++i < 4)
+			{
+				dst_tile = find_neighbor(src_tile, order[i]);
+				if (can_move_to(dst_tile, 'A') && dst_tile->dst_p < src_tile->dst_p)
+				{
+					move_enemy_to(d, dst_tile, id);
+					break ;
+				}
+			}
+			free(order);
+		}
 	}
 }
 
 //makes the player move automatically
 void	solve(t_data *d)
 {
-	t_tile	*tile;
+	t_tile	*dst_tile;
+	t_tile	*src_tile;
+	char	*order;
+	int		i;
 
-	tile = find_tile(d, d->pc);
-	if (can_move_to(tile->north, 'P') && tile->north->dst_f < tile->dst_f)
-		move_player(d, tile, 'N');
-	else if (can_move_to(tile->east, 'P') && tile->east->dst_f < tile->dst_f)
-		move_player(d, tile, 'E');
-	else if (can_move_to(tile->south, 'P') && tile->south->dst_f < tile->dst_f)
-		move_player(d, tile, 'S');
-	else if (can_move_to(tile->west, 'P') && tile->west->dst_f < tile->dst_f)
-		move_player(d, tile, 'W');
-	else if (d->pc != d->ec)
-		printf("Player bot is lost bruh...\n");												//REMOVE ME
+	i = -1;
+	order = random_comb();
+	src_tile = find_tile(d, d->pc);
+	while (++i < 4)
+	{
+		dst_tile = find_neighbor(src_tile, order[i]);
+		if (can_move_to(dst_tile, 'P') && dst_tile->dst_f < src_tile->dst_f)
+		{
+			move_player(d, dst_tile);
+			break ;
+		}
+	}
+	free(order);
+	if (i == 4 && d->pc != d->ec)
+		move_random(d, src_tile, -1);
 	usleep(40000);
 }

@@ -6,11 +6,28 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/14 16:15:05 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 15:52:17 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+//finds a neighboring from a given direction
+t_tile *find_neighbor(t_tile *tile, char goal)
+{
+	t_tile	*neighbor;
+
+	neighbor = NULL;
+	if (goal == 'N')
+		neighbor = tile->north;
+	else if (goal == 'E')
+		neighbor = tile->east;
+	else if (goal == 'S')
+		neighbor = tile->south;
+	else if (goal == 'W')
+		neighbor = tile->west;
+	return (neighbor);
+}
 
 //finds a tile in d->tiles from its board coordinates
 t_tile	*find_tile(t_data *d, t_coords *bc)

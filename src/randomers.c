@@ -6,27 +6,61 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 13:28:40 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 15:57:45 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//returns a random 4-combination of 'N' 'E' 'S' 'W'
+char	*random_comb(void)
+{
+	char	*all_comb;
+	char	*output;
+	int		pos;
+	int		i;
+
+	i = -1;
+	pos = (rand() % 4);
+	pos *= 6;
+	pos += (rand() % 4);
+	output = ft_calloc(5, sizeof(char));
+	all_comb = "ESNWESNESWNESENWSENSEWNSE";
+	while (++i < 4)
+		output[i] = all_comb[pos + i];
+	return (output);
+}
+//tries to move the entity to a random tile 4/n times, and stays put otherwise
 void	move_random(t_data *d, t_tile *src_tile, int id)
 {
 	t_tile	*dst_tile;
+	char	*order;
+	int		n;
 	int		i;
 
-	dst_tile = NULL;
-	i = rand() % 6;
-	if (i == 0)
-		dst_tile = find_tile(d, src_tile->bc)->north;
-	else if (i == 1)
-		dst_tile = find_tile(d, src_tile->bc)->east;
-	else if (i == 2)
-		dst_tile = find_tile(d, src_tile->bc)->south;
-	else if (i == 3)
-		dst_tile = find_tile(d, src_tile->bc)->west;
-	if (can_move_to(dst_tile, 'A'))
-		move_enemy_to(d, dst_tile, id);
+	n = 4;
+	if (0 <= id)
+		n += d->md->stability;			//implement like difficulty(?)
+	i = rand() % n;
+	if (i < 4)
+	{
+		order = random_comb();
+		dst_tile = NULL;
+		i = -1;
+		while (++i < 4)
+		{
+			dst_tile = find_neighbor(src_tile, order[i]);
+			if (id < 0 && can_move_to(dst_tile, 'P'))
+			{
+				move_player(d, dst_tile);
+				break ;
+			}
+			else
+			{
+				move_enemy_to(d, dst_tile, id);
+				break ;
+			}
+		}
+		free(order);
+	}
 }

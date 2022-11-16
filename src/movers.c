@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 15:33:50 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/16 15:51:36 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,8 @@ static void	move_player_to(t_data *d, t_tile *dst_tile)
 }
 
 //checks if the player can move in the goal direction, and if so, applies the movement
-void	move_player(t_data *d, t_tile *src_tile, char goal)
+void	move_player(t_data *d, t_tile *dst_tile)
 {
-	t_tile	*dst_tile;
-
-	dst_tile = NULL;
-	if (goal == 'N')
-		dst_tile = find_tile(d, src_tile->bc)->north;
-	else if (goal == 'E')
-		dst_tile = find_tile(d, src_tile->bc)->east;
-	else if (goal == 'S')
-		dst_tile = find_tile(d, src_tile->bc)->south;
-	else if (goal == 'W')
-		dst_tile = find_tile(d, src_tile->bc)->west;
 	if (can_move_to(dst_tile, 'P'))
 	{
 		move_player_to(d, dst_tile);
