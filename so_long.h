@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:31:41 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:09:08 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	load_board(t_data *d ,char *input);
 void	connect_grid(t_data *d);
 
 //from filler
-void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e);
+void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e, int *flag_b);
 void	load_flag_dist(t_data *d);
 void	load_player_dist(t_data *d);
 

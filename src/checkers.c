@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 15:29:52 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:20:32 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,13 @@ int	is_map_valid(t_data *d)
 {
 	int	flag_c;
 	int	flag_e;
+	int	flag_b;
 
 	flag_c = 0;
 	flag_e = 0;
-	fill_test(d, find_tile(d, d->pc), &flag_c, &flag_e);
-	if (flag_c != d->flg_c || flag_e != 1)
+	flag_b = 0;
+	fill_test(d, find_tile(d, d->pc), &flag_c, &flag_e, &flag_b);
+	if (flag_c != d->flg_c || flag_e != 1 || flag_b != 0)
 		return (0);
 	return (1);
 }

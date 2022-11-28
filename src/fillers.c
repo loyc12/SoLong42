@@ -6,14 +6,14 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:44:50 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:21:12 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //uses a floodfill algo to see if every object is reachable
-void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e)
+void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e, int *flag_b)
 {
 	if (tile == NULL || tile->dst_f != 0)
 		return ;
@@ -21,13 +21,15 @@ void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e)
 	tile->dst_f = 1;
 	if (tile->type == TYPE_FLAG)
 		*flag_c += 1;
-	if (tile->type == TYPE_END || is_on_edge(d, tile->bc))
+	if (tile->type == TYPE_END)
 		*flag_e += 1;
+	if (is_on_edge(d, tile->bc))
+		*flag_b += 1;
 
-	fill_test(d, tile->north, flag_c, flag_e);
-	fill_test(d, tile->east, flag_c, flag_e);
-	fill_test(d, tile->south, flag_c, flag_e);
-	fill_test(d, tile->west, flag_c, flag_e);
+	fill_test(d, tile->north, flag_c, flag_e, flag_b);
+	fill_test(d, tile->east, flag_c, flag_e, flag_b);
+	fill_test(d, tile->south, flag_c, flag_e, flag_b);
+	fill_test(d, tile->west, flag_c, flag_e, flag_b);
 }
 
 //calculates the distance of each tile to a specific tile
