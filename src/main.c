@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:42:39 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 13:30:47 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 
 	srand(time(&md.time));
 	initiate_levels(&md, --argc, ++argv);
-	while (0 < md.state && md.lvl_c < md.lvl_n)
+	while (STATE_CLOSING < md.state && md.lvl_c < md.lvl_n)
 	{
 		play_map(&md);
-		if (md.state == 2)
+		if (md.state == STATE_SUCCEEDING)
 		{
 			md.lvl_c++;
 			md.try_n += md.try_c;

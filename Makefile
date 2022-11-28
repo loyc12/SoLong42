@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/11/15 15:12:06 by llord            ###   ########.fr        #
+#    Updated: 2022/11/28 12:54:17 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ re: fclean all
 # Runs the resulting file
 run: re
 	@echo "$(BLUE)Starting the program...$(DEF_COLOR)"
-	./$(NAME) ./levels/map1.ber ./levels/map2.ber ./levels/map3.ber ./levels/map4.ber ./levels/map5.ber ./levels/map6.ber
+	./$(NAME) ./levels/map1.ber ./levels/map2.ber ./levels/map3.ber ./levels/map4.ber ./levels/map5.ber ./levels/map6.ber ./levels/map7.ber
 
 lldb: re
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"

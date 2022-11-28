@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:30:45 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 13:31:43 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_meta		//data for the entire game (aka over multiple boards/leve
 	int		char_limit;		//maximum nb of chars in a .ber file
 	int		no_checks;		//whether or not to do the initial checks on the input
 	int		difficulty;		//odds over 8 that the enemies won't take a random move
-	int		stability;		//chances over n+4 that a random move will no do anything
+	int		instability;	//chances over n that a random move won't leave enemy put
 
 	int		mv_c;			//current amount of movement
 	int		try_c;			//current amount of level (re)started

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 12:11:18 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 13:37:36 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,13 @@ void	move_player(t_data *d, t_tile *dst_tile)
 		if (0 < d->nm_n && d->pc != d->ec)
 			move_enemies(d);
 		printf("Move #%i\n", d->mv_c);
+		//mlx_put_string(d->window, "Moved", 4, 4);						//ehhhhh
 	}
 	else if (dst_tile && dst_tile->type == TYPE_ENEMY)
 		d->md->state = STATE_DYING;
 	else
+	{
 		printf("Path blocked!\n");										//REMOVE ME
+		//mlx_put_string(d->window, "Blocked", 4, 4);					//ehhhhh
+	}
 }

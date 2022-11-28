@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 12:19:03 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 13:24:33 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ t_tile	*find_neighbor(t_tile *tile, char goal)
 //finds a tile in d->tiles from its board coordinates
 t_tile	*find_tile(t_data *d, t_coords *bc)
 {
-	int	index;
+	int		index;
 
+	if (bc->x < 0 || d->max_bx < bc->x)
+		return (NULL);
+	if (bc->y < 0 || d->max_by < bc->y)
+		return (NULL);
 	index = (bc->y * (d->max_bx + 1)) + bc->x;
 	return (d->tiles[index]);
 }
