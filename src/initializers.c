@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/17 15:28:26 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:55:57 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //puts values in fields used later one to prevent garbage affecting the program
 static void	set_default_values(t_data *d)
 {
-	d->md->state = 0;	//prevents constant restarting	(default)
+	d->md->state = STATE_CLOSING;	//prevents constant restarting	(default)
 
 	d->m_flag = 0;		//re_rendering flag				(default)
 	d->c_flag = 0;		//asset cleaning flag			(default)
@@ -71,7 +71,7 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 	md->char_limit = 2048;		//how many char a .ber can have
 	md->try_c = 0;				//default value for starting first level
 	md->try_n = 0;				//default value for starting first level
-	md->state = 1;				//default value for starting first level
+	md->state = STATE_RETRYING;	//default value for starting first level
 
 	if (1 <= lvl_n)
 	{
@@ -79,12 +79,12 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 		md->levels = levels;
 		md->lvl_n = lvl_n;
 		md->lvl_c = -1;
-		while (++md->lvl_c < lvl_n && 0 < md->state)
+		while (++md->lvl_c < lvl_n && STATE_CLOSING < md->state)
 			md->state = get_level(md, paths[md->lvl_c]);
 		md->lvl_c = 0;										//level # to begin at
 	}
 	else
-		md->state = -3;
+		md->state = STATE_ERR_FILE;
 }
 
 //initialises the data struct used throughout the program
@@ -93,7 +93,7 @@ void	initiate_data(t_data *d, t_meta *md)
 	d->md = md;
 	set_default_values(d);
 	load_board(d, md->levels[d->md->lvl_c]);
-	if (0 <= md->state)
+	if (STATE_CLOSING <= md->state)
 	{
 		initiate_window(d);
 		load_assets(d);

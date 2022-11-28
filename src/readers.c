@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:42:12 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 09:02:34 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:56:55 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_level(t_meta *md, char *path)
 	}
 	free(c);
 	if (md->char_limit <= i)
-		return (-3);
+		return (STATE_ERR_FILE);
 	//printf("  Extracted level #%i as :\n\n%s\n", md->lvl_c, md->levels[md->lvl_c]);			//REMOVE ME
-	return (1);
+	return (STATE_RETRYING);
 }

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 15:25:12 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:52:43 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	hook(void *param)
 	if (mlx_is_key_down(d->window, MLX_KEY_Q))
 		solve(d);
 	if (mlx_is_key_down(d->window, MLX_KEY_E))
-		d->md->state = 1;
-	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE) || d->md->state != 0)
+		d->md->state = STATE_RETRYING;
+	if (mlx_is_key_down(d->window, MLX_KEY_ESCAPE) || d->md->state != STATE_CLOSING)
 		mlx_close_window(d->window);
 }
 

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:26:06 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:57:26 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	play_map(t_meta *md)
 	//printf("Board : \n\n%s\n", md->levels[md->lvl_c]);																		//REMOVE ME
 	initiate_data(&d, md);
 	md->try_c++;
-	if (0 <= md->state)
+	if (STATE_CLOSING <= md->state)
 	{
 		draw_board(&d);
 		mlx_key_hook(d.window, &key_hook, &d);

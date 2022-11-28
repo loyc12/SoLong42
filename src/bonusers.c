@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 15:56:10 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:53:17 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	move_enemy_to(t_data *d, t_tile *dst_tile, int id)
 	src_tile = find_tile(d, d->enemies[id]);
 	d->enemies[id] = dst_tile->bc;
 	if (dst_tile->bc == d->pc)
-		d->md->state = 3;
+		d->md->state = STATE_DYING;
 	src_tile->type = TYPE_EMPTY;
 	src_tile->object = NULL;
 	dst_tile->type = TYPE_ENEMY;
