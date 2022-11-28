@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 11:56:04 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 08:53:09 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	free_game(t_meta *md)
 {
 	int i;
 	
+	printf("\nlol\n\n");
+	
 	i = -1;
-	while (++i < md->state)
+	while (++i < md->lvl_c)
 		free(md->levels[i]);
 	free(md->levels);
 }

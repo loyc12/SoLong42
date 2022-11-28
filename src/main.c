@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 16:02:26 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 08:46:02 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,3 @@ int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 
 	return (EXIT_SUCCESS);
 }
-
-/*
-IDEAS :
-
-have the direction order be randomized so the AI isn't as predictable
-*/

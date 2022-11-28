@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 15:52:54 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:31:37 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,6 @@ int		get_level(t_meta *md, char *path);
 
 //from bonusers
 void	move_enemy_to(t_data *d, t_tile *dst_tile, int id);
-//void	move_enemy(t_data *d, t_tile *src_tile, char goal, int id);
 void	move_enemies(t_data *d);
 void	solve(t_data *d);
 

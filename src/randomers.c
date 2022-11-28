@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/16 15:57:45 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/17 15:30:15 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,9 @@ void	move_random(t_data *d, t_tile *src_tile, int id)
 {
 	t_tile	*dst_tile;
 	char	*order;
-	int		n;
 	int		i;
 
-	n = 4;
-	if (0 <= id)
-		n += d->md->stability;			//implement like difficulty(?)
-	i = rand() % n;
-	if (i < 4)
+	if (id < 0 || (4 + d->md->stability) <= (rand() % 8))
 	{
 		order = random_comb();
 		dst_tile = NULL;
