@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:09:08 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:30:45 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	load_player_dist(t_data *d);
 mlx_image_t	*make_image(t_data *d, char *path);
 mlx_image_t	*put_image(t_data *d, t_coords *bc, int	id, int z);
 void		load_assets(t_data *d);
-void		clean_assets(t_data *d);
+void		clean_old_assets(t_data *d);
 
 //from drawers
 void	draw_board(t_data *d);

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:19:55 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:31:08 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_board(t_data *d)
 	int		i;
 
 	i = -1;
-	clean_assets(d);
+	clean_old_assets(d);
 	d->old = d->assets;
 	load_assets(d);
 	render_floor(d);

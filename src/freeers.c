@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:27:47 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:36:13 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ void	free_level(t_data *d)
 		while (++i < d->asset_n)
 			if (d->assets[i])
 				mlx_delete_image(d->window, d->assets[i]);
+		if (d->assets)
+			free(d->assets);
+		clean_old_assets(d);
 		mlx_delete_image(d->window, d->tittle);
 		mlx_terminate(d->window);
-		free(d->assets);
-		clean_assets(d);
 	}
 	if (STATE_ERR_INPUT < d->md->state)
 	{

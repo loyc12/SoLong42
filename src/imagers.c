@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:38:06 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 11:32:47 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	load_assets(t_data *d)
 }
 
 //frees the memory allocated to previously used assets
-void	clean_assets(t_data *d)
+void	clean_old_assets(t_data *d)
 {
 	int	i;
 
