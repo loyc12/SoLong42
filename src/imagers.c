@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:32:47 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:12:02 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	load_assets(t_data *d)
 
 	if (0 < d->flg_c)
 		assets[ID_HOLE] = make_image(d, "./assets/XPM/BlockedHole.xpm42");
-	else 
+	else
 		assets[ID_HOLE] = make_image(d, "./assets/XPM/Hole.xpm42");
 	if (0 < d->flg_c || d->pc != d->ec)
 		assets[ID_BALL] = make_image(d, "./assets/XPM/Ball.xpm42");

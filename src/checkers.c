@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:20:32 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:13:51 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	is_grid_valid(char *input)
 		if (!linelen)
 			linelen = len;
 		if (len != linelen)
-			return 0;
+			return (0);
 		len = 0;
 	}
 	if (linelen < 3)

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:36:13 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:12:50 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ void	free_level(t_data *d)
 	t_tile	*tile;
 	int		i;
 
-		i = -1;
-		while (++i < d->board_s)
-		{
-			tile = d->tiles[i];
-			if (tile->object)
-				mlx_delete_image(d->window, tile->object);
-			if (tile->floor)
-				mlx_delete_image(d->window, tile->floor);
-			free(tile->bc);
-			free(tile);
-		}
+	i = -1;
+	while (++i < d->board_s)
+	{
+		tile = d->tiles[i];
+		if (tile->object)
+			mlx_delete_image(d->window, tile->object);
+		if (tile->floor)
+			mlx_delete_image(d->window, tile->floor);
+		free(tile->bc);
+		free(tile);
+	}
 	if (STATE_ERR_MAP < d->md->state)
 	{
 		i = -1;
@@ -52,7 +52,7 @@ void	free_level(t_data *d)
 
 void	free_game(t_meta *md)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < md->lvl_n)

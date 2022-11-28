@@ -6,14 +6,14 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:44:34 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:19:03 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //finds a neighboring from a given direction
-t_tile *find_neighbor(t_tile *tile, char goal)
+t_tile	*find_neighbor(t_tile *tile, char goal)
 {
 	t_tile	*neighbor;
 

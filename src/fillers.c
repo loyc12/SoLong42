@@ -6,14 +6,14 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 11:21:12 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:13:33 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //uses a floodfill algo to see if every object is reachable
-void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e, int *flag_b)
+void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e, int *flag_b)	//TOO MANY ARGS !!!
 {
 	if (tile == NULL || tile->dst_f != 0)
 		return ;

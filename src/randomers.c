@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:48:20 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:10:52 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*random_comb(void)
 		output[i] = all_comb[pos + i];
 	return (output);
 }
+
 //tries to move the entity to a random tile 4/n times, and stays put otherwise
 void	move_random(t_data *d, t_tile *src_tile, int id)
 {
@@ -50,7 +51,7 @@ void	move_random(t_data *d, t_tile *src_tile, int id)
 				move_player(d, dst_tile);
 				break ;
 			}
-			else if (0 <= id && can_move_to(dst_tile, 'E'))
+			else if (0 <= id && can_move_to(dst_tile, 'A'))
 			{
 				move_enemy_to(d, dst_tile, id);
 				break ;

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:55:57 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:18:08 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 
 //initialises the data struct used throughout the program
 void	initiate_data(t_data *d, t_meta *md)
-{ 
+{
 	d->md = md;
 	set_default_values(d);
 	load_board(d, md->levels[d->md->lvl_c]);

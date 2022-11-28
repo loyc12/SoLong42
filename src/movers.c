@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:57:57 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 12:11:18 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	can_move_to(t_tile *tile, char type)
 //moves the player to a neighboring tile if need be
 static void	move_player_to(t_data *d, t_tile *dst_tile)
 {
-	t_tile *src_tile;
-	int	flag_r;
+	t_tile	*src_tile;
+	int		flag_r;
 
 	flag_r = 0;
 	src_tile = find_tile(d, d->pc);
