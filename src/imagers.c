@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 15:35:52 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:38:06 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ mlx_image_t	*make_image(t_data *d, char *path)
 	xpm_t		*xpm;
 
 	xpm = mlx_load_xpm42(path);
-	image = ft_calloc(1, sizeof(mlx_image_t));
 	image = mlx_texture_to_image(d->window, &xpm->texture);
 	return (image);
 }

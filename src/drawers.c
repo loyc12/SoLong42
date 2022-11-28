@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 15:14:54 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:19:55 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	render_floor(t_data *d)
 	{
 		tile = d->tiles[i];
 		if (i == 0)
-			tile->floor = put_image(d, tile->bc, ID_FLOOR, 4);
+			tile->floor = put_image(d, tile->bc, ID_FLOOR, 4);	//avoids visual glitch
 		tile->floor = put_image(d, tile->bc, ID_FLOOR, 0);
 	}
 	tile = find_tile(d, d->ec);

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 08:55:44 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:21:07 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void	load_board(t_data *d, char *input)
 	bc = ft_calloc(1, sizeof(t_coords));
 	if ((is_input_valid(input) && is_grid_valid(input)) || d->md->no_checks)
 	{
-		d->tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
 		d->nm_n = find_enemy_number(input);
 		d->enemies = ft_calloc(d->nm_n, sizeof(t_coords *));
+		d->tiles = ft_calloc(find_tile_number(input), sizeof(t_tile *));
 		load_tiles(d, bc, input);
 		d->max_by = bc->y - 1;
 		d->max_bx = bc->x - 1;
@@ -101,7 +101,7 @@ void	load_board(t_data *d, char *input)
 	}
 	else
 	{
-		d->md->state = -2;
+		d->md->state = STATE_ERR_INPUT;
 		d->board_s = 0;
 	}
 	free(bc);

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/17 15:30:15 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:48:20 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	move_random(t_data *d, t_tile *src_tile, int id)
 				move_player(d, dst_tile);
 				break ;
 			}
-			else
+			else if (0 <= id && can_move_to(dst_tile, 'E'))
 			{
 				move_enemy_to(d, dst_tile, id);
 				break ;

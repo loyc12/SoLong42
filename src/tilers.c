@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/15 14:33:25 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:24:22 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	connect_grid(t_data *d)
 		load_player_dist(d);
 	}
 	else
-		d->md->state = -1;
+		d->md->state = STATE_ERR_MAP;
 }

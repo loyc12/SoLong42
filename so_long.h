@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/17 15:31:37 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/28 10:31:41 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@
 # include <string.h>	//??? (memory.h initially)
 # include <time.h>		//for srand()
 # include "libs/MLX42/include/MLX42/MLX42.h"
+
+typedef enum e_state
+{
+	STATE_ERR_FILE = -3,
+	STATE_ERR_INPUT = -2,
+	STATE_ERR_MAP = -1,
+	STATE_CLOSING = 0,
+	STATE_RETRYING = 1,
+	STATE_SUCCEEDING = 2,
+	STATE_DYING = 3
+}			t_state;
 
 typedef enum e_id
 {
@@ -54,20 +65,20 @@ typedef struct s_tile
 	t_coords		*bc;		//tile coordinates
 	mlx_image_t		*floor;		//floor image instance
 	mlx_image_t		*object;	//object image instance
-	struct s_tile	*north;
-	struct s_tile	*east;
-	struct s_tile	*south;
-	struct s_tile	*west;
+	struct s_tile	*north;		//northern neighbor
+	struct s_tile	*east;		//eastern neighbor
+	struct s_tile	*south;		//southern neighbor
+	struct s_tile	*west;		//western neighbor
 	int				type;		//see e_type TYPES
 	int				dst_f;		//current distance to flags / end
 	int				dst_p;		//current distance to player
 }					t_tile;
 
-typedef struct s_meta		//for the entire game (aka over multiple boards/levels)
+typedef struct s_meta		//data for the entire game (aka over multiple boards/levels)
 {
 	char	**levels;		//list of levels (TO BECOME PATHS NOT DATA)
 	time_t	time;			//used to seed srand()
-	int		state;			//-3 = file error, -2 = input error, -1 = map error, 0 = closing game, 1 = retry level, 2 = next level, 3 = died
+	int		state;			//see e_state STATES
 
 	int		char_limit;		//maximum nb of chars in a .ber file
 	int		no_checks;		//whether or not to do the initial checks on the input
@@ -81,7 +92,7 @@ typedef struct s_meta		//for the entire game (aka over multiple boards/levels)
 	int		lvl_n;			//total amount of levels
 }			t_meta;
 
-typedef struct s_data		//for the current board only
+typedef struct s_data		//data for the current board only
 {
 	int 		max_wx;		//width (in pixels) of the window
 	int 		max_wy;		//height (in pixels) of the window
