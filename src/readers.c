@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:42:12 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 12:17:37 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 12:58:55 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_level(t_meta *md, char *path)
 	i = -1;
 	c = ft_calloc(1, sizeof(char *));
 	fd = open(path, O_RDONLY);
-	while (++i < md->char_limit)
+	while (++i < md->char_limit && fd)
 	{
 		if (0 < read(fd, c, 1))
 			md->levels[md->lvl_c][i] = c[0];
@@ -30,7 +30,7 @@ int	get_level(t_meta *md, char *path)
 			break ;
 	}
 	free(c);
-	if (md->char_limit <= i)
+	if (fd < 0 || md->char_limit <= i)
 		return (STATE_ERR_FILE);
 	//printf("  Extracted level #%i as :\n\n%s\n", md->lvl_c, md->levels[md->lvl_c]);			//REMOVE ME
 	return (STATE_RETRYING);

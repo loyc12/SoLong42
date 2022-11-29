@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 12:39:45 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 12:47:57 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	print_level_end(t_data *d)
 {
 	if (d->md->state < STATE_CLOSING)
-		printf("\n  Unable to properly load the game board (ERR : %i)\n", d->md->state);
+		printf("\n  Unable to properly load the game board\n");
 	if (d->md->state == STATE_CLOSING)
 		printf("\n  I played this shitty game and all I got was this lousy message...\n");
 	else if (d->md->state == STATE_RETRYING)
@@ -31,7 +31,7 @@ void	print_level_end(t_data *d)
 void	print_game_end(t_meta *md)
 {
 	if (md->state < STATE_CLOSING)
-		printf("\n  Your map is bad and you should FEEL bad...\n\n");
+		printf("\n  Your map is bad and you should FEEL bad... (ERR : %i)\n\n", md->state);
 	else if (md->state == STATE_CLOSING)
 		printf("\n  Didn't think you'd be a such a quitter...\n\n");
 	else if (md->state == STATE_RETRYING)
