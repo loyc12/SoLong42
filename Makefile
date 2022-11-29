@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/11/28 12:54:17 by llord            ###   ########.fr        #
+#    Updated: 2022/11/29 12:40:30 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ WHITE = \033[0;97m
 # Special variables
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all bonus clean fclean re run
+.PHONY: all bonus clean fclean re run lldb leaks
 
 # Hide calls
 export VERBOSE	=	TRUE
@@ -97,8 +97,13 @@ run: re
 	@echo "$(BLUE)Starting the program...$(DEF_COLOR)"
 	./$(NAME) ./levels/map1.ber ./levels/map2.ber ./levels/map3.ber ./levels/map4.ber ./levels/map5.ber ./levels/map6.ber ./levels/map7.ber
 
-lldb: re
+lldb:
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
 	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
-	lldb a.out
+	lldb ./a.out ./levels/map7.ber
 
+
+leaks:
+	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
+	gcc -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+	leaks --atExit -- ./a.out ./levels/bug7.ber

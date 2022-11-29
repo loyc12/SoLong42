@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 13:27:12 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 12:37:19 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 {
 	char	**levels;
 
-	md->difficulty = 7;			//from 0 to 8	(higher = enemies move smarter)
-	md->instability = 4;		//from 0 to 8	(higher = enemies move more often)
+	md->difficulty = 0;			//from 0 to 8	(higher = enemies move smarter)
+	md->instability = 8;		//from 0 to 8	(higher = enemies move more often)
 	md->no_checks = 0;			//wether to ignore the initial parsing checks or not
 
 	md->char_limit = 2048;		//how many char a .ber can have

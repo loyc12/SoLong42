@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:58:56 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 12:39:45 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	print_level_end(t_data *d)
 {
 	if (d->md->state < STATE_CLOSING)
-		printf("\n  Unable to properly load the game board\n");
+		printf("\n  Unable to properly load the game board (ERR : %i)\n", d->md->state);
 	if (d->md->state == STATE_CLOSING)
 		printf("\n  I played this shitty game and all I got was this lousy message...\n");
 	else if (d->md->state == STATE_RETRYING)

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 10:24:22 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 12:35:35 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	connect_grid(t_data *d)
 	while (++i < d->board_s)
 	{
 		tile = d->tiles[i];
-		if (tile->type != TYPE_WALL)
+		if (tile->type != TYPE_WALL && 0 < tile->bc->x && 0 < tile->bc->y)
 			connect_tile(d, tile, i);
 	}
 	if (is_map_valid(d))
