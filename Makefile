@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/11/29 13:15:13 by llord            ###   ########.fr        #
+#    Updated: 2022/11/29 17:02:09 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,11 @@ LIBS	=	libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 NAME	=	so_long
 SRCDIR	=	src/
 OBJDIR	=	bin/
-SRCS	=	$(wildcard $(SRCDIR)*.c)
-OBJS	=	$(patsubst $(SRCDIR)%.c,$(OBJDIR)%.o,$(SRCS))
+FILES	=	boarders bonusers checkers coordinaters drawers fillers finders freeers hookers \
+			imagers initializers libft_imports main movers printers randomers readers tilers
+
+SRCS	=	$(addprefix $(SRCDIR), $(addsuffix .c, $(FILES)))
+OBJS	=	$(addprefix $(OBJDIR), $(addsuffix .o, $(FILES)))
 
 
 #------------------------------------------------------------------------------#
@@ -100,10 +103,10 @@ run: re
 lldb:
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
 	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
-	lldb ./a.out ./levels/map1.ber ./levels/map2.ber ./levels/map3.ber ./levels/map4.ber ./levels/map5.ber ./levels/map6.ber ./levels/map7.ber
+	lldb ./a.out
 
 
 leaks:
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
 	gcc -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
-	leaks --atExit -- ./a.out ./levels/bug7.ber
+	leaks --atExit -- ./a.out ./levels/map8.ber

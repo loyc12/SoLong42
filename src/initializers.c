@@ -6,43 +6,42 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 13:29:13 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:40:54 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//puts values in fields used later on to prevent garbage affecting the program
+static void	set_board_data(t_data *d)
+{
+	d->m_flag = 0;
+	d->c_flag = 0;
+	d->flg_c = 0;
+	d->mv_c = 0;
+	d->max_bx = 0;
+	d->max_by = 0;
+	d->board_s = 0;
+	d->asset_n = 7;
+	d->asset_s = 64;
+	d->old = NULL;
+	d->md->state = STATE_CLOSING;
+}
+
 //puts values in fields used later one to prevent garbage affecting the program
-static void	set_default_values(t_data *d)
+static void	set_game_data(t_meta *md)
 {
-	d->md->state = STATE_CLOSING;	//prevents constant restarting	(default)
-
-	d->m_flag = 0;		//re_rendering flag				(default)
-	d->c_flag = 0;		//asset cleaning flag			(default)
-	d->flg_c = 0;		//flags left flag				(default)
-	d->mv_c = 0;		//move number flag				(default)
-
-	d->max_bx = 0;		//board width					(uninitialized)
-	d->max_by = 0;		//board height					(uninitialized)
-	d->board_s = 0;		//tile amount					(uninitialized)
-
-	d->asset_n = 7;		//number of assets				(constant)
-	d->asset_s = 64;	//asset resolution				(constant)
-
-	d->old = NULL;		//previously used assets		(uninitialized)
+	md->difficulty = 6;
+	md->instability = 4;
+	md->char_limit = 1560;
+	md->max_size = 75;
+	md->no_checks = 0;
+	md->try_c = 0;
+	md->try_n = 0;
+	md->state = STATE_RETRYING;
 }
 
-//initiate the window and window related fields
-static void	initiate_window(t_data *d)
-{
-	d->max_wx = (d->max_bx + d->max_by + 3) * d->asset_s / 2;
-	d->max_wy = (d->max_bx + d->max_by + 5) * d->asset_s / 4;
-	d->window = mlx_init(d->max_wx, d->max_wy, "So Round", true);
-
-	d->tittle = make_image(d, "./assets/XPM/Tittle.xpm42");
-	mlx_image_to_window(d->window, d->tittle, 0, 0);
-}
-
+//converts a string to a malloced level string
 char	*make_level(char *str)
 {
 	char	*level;
@@ -51,7 +50,7 @@ char	*make_level(char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	level = ft_calloc(i + 1, sizeof(char));
+	level = ft_calloc(i, sizeof(char));
 	i = -1;
 	while (str[++i])
 		level[i] = str[i];
@@ -60,18 +59,9 @@ char	*make_level(char *str)
 }
 
 //loads the level input strings from a given string
-void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
+void	initiate_levels(t_meta *md, int lvl_n, char **paths)
 {
-	md->difficulty = 0;			//from 0 to 8	(higher = enemies move smarter)
-	md->instability = 8;		//from 0 to 8	(higher = enemies move more)
-	md->no_checks = 0;			//wether to ignore the initial parsing checks or not
-
-	md->char_limit = 1560;		//how many char a .ber can have (1560 = 39x39 + \n)
-	md->try_c = 0;				//default value for starting first level
-	md->try_n = 0;				//default value for starting first level
-	md->state = STATE_RETRYING;	//default value for starting first level
-
-	printf("%i\n", lvl_n);
+	set_game_data(md);
 	if (1 <= lvl_n)
 	{
 		md->levels = ft_calloc(md->lvl_n, sizeof(char *));
@@ -79,7 +69,7 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 		md->lvl_c = -1;
 		while (++md->lvl_c < lvl_n && STATE_CLOSING < md->state)
 			md->state = get_level(md, paths[md->lvl_c]);
-		md->lvl_c = 0;										//level # to begin at
+		md->lvl_c = 0;
 	}
 	else
 		md->state = STATE_ERR_FILE;
@@ -89,11 +79,15 @@ void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 void	initiate_data(t_data *d, t_meta *md)
 {
 	d->md = md;
-	set_default_values(d);
+	set_board_data(d);
 	load_board(d, md->levels[d->md->lvl_c]);
 	if (STATE_CLOSING <= md->state)
 	{
-		initiate_window(d);
+		d->max_wx = (d->max_bx + d->max_by + 3) * d->asset_s / 2;
+		d->max_wy = (d->max_bx + d->max_by + 5) * d->asset_s / 4;
+		d->window = mlx_init(d->max_wx, d->max_wy, "So Round", true);
+		d->tittle = make_image(d, "./assets/XPM/Tittle.xpm42");
+		mlx_image_to_window(d->window, d->tittle, 0, 0);
 		load_assets(d);
 	}
 }

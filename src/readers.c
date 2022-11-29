@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:42:12 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 12:58:55 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:21:14 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//extracts the a level from a given file
 int	get_level(t_meta *md, char *path)
 {
 	char	*c;
@@ -32,6 +33,5 @@ int	get_level(t_meta *md, char *path)
 	free(c);
 	if (fd < 0 || md->char_limit <= i)
 		return (STATE_ERR_FILE);
-	//printf("  Extracted level #%i as :\n\n%s\n", md->lvl_c, md->levels[md->lvl_c]);			//REMOVE ME
 	return (STATE_RETRYING);
 }

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 12:13:51 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:42:27 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_on_edge(t_data *d, t_coords *bc)
 	return (1);
 }
 
-//checks if 
+//checks if given input is made of valid characters
 int	is_input_valid(char *input)
 {
 	int		flag_p;
@@ -60,6 +60,7 @@ int	is_input_valid(char *input)
 	return (1);
 }
 
+//checks if given input has a regular shape
 int	is_grid_valid(char *input)
 {
 	int	linelen;
@@ -85,23 +86,22 @@ int	is_grid_valid(char *input)
 		len = 0;
 	}
 	if (linelen < 3)
-	{
 		return (0);
-	}
 	return (1);
 }
 
+//check if the connected board is valid and playable
 int	is_map_valid(t_data *d)
 {
-	int	flag_c;
-	int	flag_e;
-	int	flag_b;
+	int	*flags;
 
-	flag_c = 0;
-	flag_e = 0;
-	flag_b = 0;
-	fill_test(d, find_tile(d, d->pc), &flag_c, &flag_e, &flag_b);
-	if (flag_c != d->flg_c || flag_e != 1 || flag_b != 0)
+	flags = ft_calloc(4, sizeof(int));
+	fill_test(d, find_tile(d, d->pc), flags);
+	if (flags[0] != d->flg_c || flags[1] != 1 || flags[2] != 0)
+	{
+		free(flags);
 		return (0);
+	}
+	free(flags);
 	return (1);
 }

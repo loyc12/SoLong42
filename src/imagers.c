@@ -6,14 +6,14 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 12:12:02 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:34:57 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //draws an imaged on screen based on its coords and id
-mlx_image_t	*put_image(t_data *d, t_coords *bc, int	id, int	z)
+mlx_image_t	*put_image(t_data *d, t_coords *bc, int id, int z)
 {
 	t_coords	*wc;
 
@@ -45,7 +45,6 @@ void	load_assets(t_data *d)
 	assets[ID_FLOOR] = make_image(d, "./assets/XPM/TileFloor.xpm42");
 	assets[ID_SLAB] = make_image(d, "./assets/XPM/Slab.xpm42");
 	assets[ID_CUBE] = make_image(d, "./assets/XPM/Cube.xpm42");
-
 	if (0 < d->flg_c)
 		assets[ID_HOLE] = make_image(d, "./assets/XPM/BlockedHole.xpm42");
 	else
@@ -54,10 +53,8 @@ void	load_assets(t_data *d)
 		assets[ID_BALL] = make_image(d, "./assets/XPM/Ball.xpm42");
 	else
 		assets[ID_BALL] = make_image(d, "./assets/XPM/HalfBall.xpm42");
-
 	assets[ID_FLAG] = make_image(d, "./assets/XPM/FlagWhite.xpm42");
 	assets[ID_CONE] = make_image(d, "./assets/XPM/CONE.xpm42");
-
 	d->assets = assets;
 }
 

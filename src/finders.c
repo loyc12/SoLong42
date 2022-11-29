@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 13:24:33 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 15:59:50 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	find_tile_number(char *input)
 
 	i = -1;
 	n = 0;
-
 	while (input[++i])
 		if (input[i] != '\n')
 			n++;
@@ -65,7 +64,6 @@ int	find_enemy_number(char *input)
 
 	i = -1;
 	n = 0;
-
 	while (input[++i])
 		if (input[i] == 'A')
 			n++;

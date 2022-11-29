@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 13:37:36 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:15:10 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	move_player_to(t_data *d, t_tile *dst_tile)
 	{	
 		d->flg_c--;
 		flag_r++;
-		//printf("    Flag collected! %i flags left\n", d->flg_c);		//REMOVE ME
 	}
 	if (dst_tile->bc == d->ec && d->flg_c < 1)
 		d->md->state = STATE_SUCCEEDING;
@@ -58,7 +57,7 @@ static void	move_player_to(t_data *d, t_tile *dst_tile)
 		load_flag_dist(d);
 }
 
-//checks if the player can move in the goal direction, and if so, applies the movement
+//checks if the player can move, and if so moves them
 void	move_player(t_data *d, t_tile *dst_tile)
 {
 	if (can_move_to(dst_tile, 'P'))
@@ -68,13 +67,9 @@ void	move_player(t_data *d, t_tile *dst_tile)
 		if (0 < d->nm_n && d->pc != d->ec)
 			move_enemies(d);
 		printf("Move #%i\n", d->mv_c);
-		//mlx_put_string(d->window, "Moved", 4, 4);						//ehhhhh
 	}
 	else if (dst_tile && dst_tile->type == TYPE_ENEMY)
 		d->md->state = STATE_DYING;
 	else
-	{
-		printf("Path blocked!\n");										//REMOVE ME
-		//mlx_put_string(d->window, "Blocked", 4, 4);					//ehhhhh
-	}
+		printf("Path blocked!\n");
 }

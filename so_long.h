@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 13:31:43 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:28:37 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,11 @@ typedef struct s_meta		//data for the entire game (aka over multiple boards/leve
 	time_t	time;			//used to seed srand()
 	int		state;			//see e_state STATES
 
-	int		char_limit;		//maximum nb of chars in a .ber file
-	int		no_checks;		//whether or not to do the initial checks on the input
 	int		difficulty;		//odds over 8 that the enemies won't take a random move
 	int		instability;	//chances over n that a random move won't leave enemy put
+	int		char_limit;		//maximum nb of chars in a .ber file
+	int		max_size;		//maximum lenght or width of the map
+	int		no_checks;		//whether or not to do the initial checks on the input
 
 	int		mv_c;			//current amount of movement
 	int		try_c;			//current amount of level (re)started
@@ -148,7 +149,7 @@ void	load_board(t_data *d ,char *input);
 void	connect_grid(t_data *d);
 
 //from filler
-void	fill_test(t_data *d, t_tile *tile, int *flag_c, int *flag_e, int *flag_b);
+void	fill_test(t_data *d, t_tile *tile, int *flags);
 void	load_flag_dist(t_data *d);
 void	load_player_dist(t_data *d);
 

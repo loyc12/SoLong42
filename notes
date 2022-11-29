@@ -1,0 +1,63 @@
+
+
+	//gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
+
+	//printf("  Extracted level #%i as :\n\n%s\n", md->lvl_c, md->levels[md->lvl_c]);												//REMOVE ME
+	//printf("  Level : \n\n%s\n", md->levels[md->lvl_c]);																			//REMOVE ME
+	//printf("  Board size is %i (%ix%i)\n", d->board_s, d->max_bx + 1, d->max_by + 1);												//REMOVE ME
+	//printf("  Map has been validated!\n");																						//REMOVE ME
+
+	//printf("  Flag collected! %i flags left\n", d->flg_c);																		//REMOVE ME
+	//printf("  Enemy #%i moved to tile (%i,%i)\n", id, dst_tile->bc->x, dst_tile->bc->y);											//REMOVE ME
+
+	//printf("  Flags distance map reloaded!\n");																					//REMOVE ME
+	//printf("  Player distance map reloaded!\n");																					//REMOVE ME
+
+	//mlx_put_string(d->window, "Moved", 4, 4);																						//REMOVE ME
+	//mlx_put_string(d->window, "Blocked", 4, 4);																					//REMOVE ME
+
+/*
+//puts values in fields used later on to prevent garbage affecting the program
+static void	set_board_data(t_data *d)
+{
+
+	d->m_flag = 0;		//re_rendering flag				(default)
+	d->c_flag = 0;		//asset cleaning flag			(default)
+	d->flg_c = 0;		//flags left flag				(default)
+	d->mv_c = 0;		//move number flag				(default)
+
+	d->max_bx = 0;		//board width					(uninitialized)
+	d->max_by = 0;		//board height					(uninitialized)
+	d->board_s = 0;		//tile amount					(uninitialized)
+
+	d->asset_n = 7;		//number of assets				(constant)
+	d->asset_s = 64;	//asset resolution				(constant)
+
+	d->old = NULL;		//previously used assets		(uninitialized)
+	d->md->state = STATE_CLOSING;	//prevents constant restarting	(default)
+}
+
+//puts values in fields used later one to prevent garbage affecting the program
+static void	set_game_data(t_meta *md)
+{
+	md->difficulty = 6;			//from 0 to 8	(higher = enemies move smarter)
+	md->instability = 4;		//from 0 to 8	(higher = enemies move more)
+	md->char_limit = 1560;		//how many char a .ber can have		(1560 = 39x(39 + \n))
+	md->max_size = 75;			//maximum dimensions of the board	(bx + by) (38x38 - 1)
+	md->no_checks = 0;			//wether to ignore the initial parsing checks or not
+
+	md->try_c = 0;				//default value for starting first level
+	md->try_n = 0;				//default value for starting first level
+	md->state = STATE_RETRYING;	//default value for starting first level
+}
+
+//initiate the window and window related fields		REMOVED
+static void	initiate_window(t_data *d)
+{
+	d->max_wx = (d->max_bx + d->max_by + 3) * d->asset_s / 2;
+	d->max_wy = (d->max_bx + d->max_by + 5) * d->asset_s / 4;
+	d->window = mlx_init(d->max_wx, d->max_wy, "So Round", true);
+	d->tittle = make_image(d, "./assets/XPM/Tittle.xpm42");
+	mlx_image_to_window(d->window, d->tittle, 0, 0);
+}
+*/

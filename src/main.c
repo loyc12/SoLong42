@@ -6,19 +6,19 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 13:30:47 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 17:03:01 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//game loop for a given level
+//game loop for a given attempt
 static void	play_map(t_meta *md)
 {
 	t_data	d;
 
-	printf("\n  LAUNCHING LEVEL %i\n\n  Difficulty : %i/8\n  Attempt : %i\n\n", md->lvl_c + 1, md->difficulty, md->try_c + 1);	//REMOVE ME
-	//printf("Board : \n\n%s\n", md->levels[md->lvl_c]);																		//REMOVE ME
+	printf("\n  LAUNCHING LEVEL %i\n\n  Difficulty : %i/8\n  Attempt : %i\
+	\n\n", md->lvl_c + 1, md->difficulty, md->try_c + 1);
 	initiate_data(&d, md);
 	md->try_c++;
 	if (STATE_CLOSING <= md->state)
@@ -33,9 +33,9 @@ static void	play_map(t_meta *md)
 	free_level(&d);
 }
 
-//gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"				//REMOVE ME
 
-int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
+//starting point of this program
+int	main(int argc, char **argv) 							//FIX HEADER NORM
 {
 	t_meta	md;
 
@@ -53,6 +53,5 @@ int	main(int argc, char **argv) //METTRE LES NOMS DES FICHIERS DANS MAKEFILE
 	}
 	print_game_end(&md);
 	free_game(&md);
-
 	return (EXIT_SUCCESS);
 }

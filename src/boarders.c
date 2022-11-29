@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 11:41:31 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:36:39 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,10 @@ static void	set_default_tile_values(t_tile *tile)
 	tile->dst_p = 0;
 }
 
-//creates a single tile from its given type and coordinates
-static t_tile	*make_tile(t_data *d, t_coords *bc, char type, int *id)
+//extension to make_tile
+static void	set_tile_type(t_data *d, t_tile *tile, char type)
 {
-	t_tile		*tile;
-
-	tile = ft_calloc(1, sizeof(t_tile));
-	tile->bc = clone_coords(*bc);
-	set_default_tile_values(tile);
-	if (type == '1')
-		tile->type = TYPE_WALL;
-	else if (type == 'P')
+	if (type == 'P')
 	{
 		tile->type = TYPE_PLAYER;
 		d->pc = tile->bc;
@@ -49,11 +42,25 @@ static t_tile	*make_tile(t_data *d, t_coords *bc, char type, int *id)
 		tile->type = TYPE_FLAG;
 		d->flg_c += 1;
 	}
+}
+
+//creates a single tile from its given type and coordinates
+static t_tile	*make_tile(t_data *d, t_coords *bc, char type, int *id)
+{
+	t_tile		*tile;
+
+	tile = ft_calloc(1, sizeof(t_tile));
+	tile->bc = clone_coords(*bc);
+	set_default_tile_values(tile);
+	if (type == '1')
+		tile->type = TYPE_WALL;
 	else if (type == 'A')
 	{
 		tile->type = TYPE_ENEMY;
 		d->enemies[(*id)++] = tile->bc;
 	}
+	else
+		set_tile_type(d, tile, type);
 	return (tile);
 }
 
@@ -105,4 +112,6 @@ void	load_board(t_data *d, char *input)
 		d->board_s = 0;
 	}
 	free(bc);
+	if (d->md->max_size < d->max_bx + d->max_by)
+		d->md->state = STATE_ERR_MAP;
 }

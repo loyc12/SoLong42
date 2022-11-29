@@ -6,12 +6,13 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:42:12 by llord             #+#    #+#             */
-/*   Updated: 2022/11/28 12:07:09 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 16:05:57 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+//fills a region in memory with zeros
 static void	*ft_bzero(void *s, size_t n)
 {
 	char	*ptr;
@@ -22,6 +23,7 @@ static void	*ft_bzero(void *s, size_t n)
 	return (s);
 }
 
+//calloc substitute
 void	*ft_calloc(size_t count, size_t	size)
 {
 	void	*ptr;
