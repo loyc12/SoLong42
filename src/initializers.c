@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 12:55:31 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/29 13:29:13 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,19 @@ char	*make_level(char *str)
 //loads the level input strings from a given string
 void	initiate_levels(t_meta *md, int	lvl_n, char **paths)
 {
-	char	**levels;
-
 	md->difficulty = 0;			//from 0 to 8	(higher = enemies move smarter)
-	md->instability = 8;		//from 0 to 8	(higher = enemies move more often)
+	md->instability = 8;		//from 0 to 8	(higher = enemies move more)
 	md->no_checks = 0;			//wether to ignore the initial parsing checks or not
 
-	md->char_limit = 2048;		//how many char a .ber can have
+	md->char_limit = 1560;		//how many char a .ber can have (1560 = 39x39 + \n)
 	md->try_c = 0;				//default value for starting first level
 	md->try_n = 0;				//default value for starting first level
 	md->state = STATE_RETRYING;	//default value for starting first level
 
+	printf("%i\n", lvl_n);
 	if (1 <= lvl_n)
 	{
-		levels = ft_calloc(md->lvl_n, sizeof(char *));
-		md->levels = levels;
+		md->levels = ft_calloc(md->lvl_n, sizeof(char *));
 		md->lvl_n = lvl_n;
 		md->lvl_c = -1;
 		while (++md->lvl_c < lvl_n && STATE_CLOSING < md->state)
