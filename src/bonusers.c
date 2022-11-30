@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bonusers.c                                         :+:      :+:    :+:   */
+/*   bonusers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 16:34:14 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 14:22:27 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,18 @@ void	move_enemies(t_data *d)
 	id = -1;
 	while (++id < d->nm_n)
 	{
-		src_tile = find_tile(d, d->enemies[id]);
-		if (d->md->difficulty <= (rand() % 8))
-			move_random(d, src_tile, id);
+		if (d->enemies[id] == d->pc)
+			d->md->state = STATE_DYING;
 		else
-			move_enemies_loop(d, src_tile, id);
+		{
+			src_tile = find_tile(d, d->enemies[id]);
+			if (d->md->difficulty <= (rand() % 8))
+				move_random(d, src_tile, id);
+			else
+				move_enemies_loop(d, src_tile, id);
+			if (d->enemies[id] == d->pc)
+				d->md->state = STATE_DYING;
+		}
 	}
 }
 

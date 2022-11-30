@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 16:17:59 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 10:41:10 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*random_comb(void)
 	return (output);
 }
 
-//sometimes tries to move the entity to a random tile, and stays put otherwise
+//either tries to move the entity to a random tile or stays put
 void	move_random(t_data *d, t_tile *src_tile, int id)
 {
 	t_tile	*dst_tile;

@@ -1,3 +1,58 @@
+/*
+
+Ideas :
+
+	- add a proper death screen
+
+
+
+
+
+### Installation of MLX42
+
+In the very end a library is generated, compile your program with this library!
+
+
+
+1. Install Homebrew42
+
+	(https://github.com/kube/42homebrew)
+
+
+
+2. Install GLFW
+
+- brew update
+- 1
+
+
+
+3. [Download and build MLX42]
+
+- git clone https://github.com/codam-coding-college/MLX42.git
+- cd MLX42
+- make
+
+The output library file is called `libmlx42.a`.
+
+
+
+4. Compile Program
+
+	With Homebrew42 you have additionally specify the location of the library like here:
+
+- gcc <SRC_FILES> libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
+
+
+
+5. Run!
+
+
+
+
+
+	======= COMENTED CODE =======
+
 
 
 	//gcc -Werror -Wextra -Wall ./src/* ./libs/MLX42/libmlx42.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/"
@@ -16,7 +71,9 @@
 	//mlx_put_string(d->window, "Moved", 4, 4);																						//REMOVE ME
 	//mlx_put_string(d->window, "Blocked", 4, 4);																					//REMOVE ME
 
-/*
+
+
+
 //puts values in fields used later on to prevent garbage affecting the program
 static void	set_board_data(t_data *d)
 {
@@ -60,4 +117,72 @@ static void	initiate_window(t_data *d)
 	d->tittle = make_image(d, "./assets/XPM/Tittle.xpm42");
 	mlx_image_to_window(d->window, d->tittle, 0, 0);
 }
+
+
+
+
+
+typedef struct s_tile
+{
+	t_coords		*bc;		//tile coordinates
+	mlx_image_t		*floor;		//floor image instance
+	mlx_image_t		*object;	//object image instance
+	struct s_tile	*north;		//northern neighbor
+	struct s_tile	*east;		//eastern neighbor
+	struct s_tile	*south;		//southern neighbor
+	struct s_tile	*west;		//western neighbor
+	int				type;		//see e_type TYPES
+	int				dst_f;		//current distance to flags / end
+	int				dst_p;		//current distance to player
+}					t_tile;
+
+typedef struct s_meta		//data for the entire game (aka over multiple boards/levels)
+{
+	char	**levels;		//list of all levels
+	time_t	time;			//used to seed srand()
+	int		state;			//see e_state STATES
+
+	int		difficulty;		//odds over 8 that the enemies won't take a random move
+	int		instability;	//chances over n that a random move won't leave enemy put
+	int		char_limit;		//maximum nb of chars in a .ber file
+	int		max_size;		//maximum lenght or width of the map
+	int		no_checks;		//whether or not to do the initial checks on the input
+
+	int		mv_c;			//current amount of movement
+	int		try_c;			//current amount of level (re)started
+	int		try_n;			//total amount of attempted levels
+	int		lvl_c;			//current level
+	int		lvl_n;			//total amount of levels
+}			t_meta;
+
+typedef struct s_data		//data for the current board only
+{
+	int 		max_wx;		//width (in pixels) of the window
+	int 		max_wy;		//height (in pixels) of the window
+	mlx_t		*window;	//where we print stuff
+
+	int 		max_bx;		//width (in tiles) of the board
+	int 		max_by;		//height (in tiles) of the board
+	int			board_s;	//number of tiles in the board
+	t_tile		**tiles;	//lists all tiles
+	
+	int 		asset_s;	//size (in pixels) of assets used	(64 pixels)
+	int			asset_n;	//number of distinct assets used	(7 assets)
+	mlx_image_t	**assets;	//array of currently used assets
+	mlx_image_t	**old;		//array of previously used assets
+	mlx_image_t	*tittle;	//tittle image (never reloaded)
+
+	t_coords	**enemies;	//enemy positions
+	t_coords	*pc;		//player position
+	t_coords	*ec;		//end position
+
+	int			m_flag;		//whether the player has moved or not (wether to render or not)
+	int			c_flag;		//whether to clean old assets
+
+	int			flg_c;		//number of flags left to collect on this board
+	int			mv_c;		//number of moves done on this board
+	int			nm_n;		//number of enemies on this board
+
+	t_meta		*md;		//game metadata
+}				t_data;
 */

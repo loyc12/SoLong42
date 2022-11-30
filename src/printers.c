@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 16:08:18 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 14:34:56 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,40 @@
 //prints messages at the end of a level
 void	print_level_end(t_data *d)
 {
-	if (d->md->state < STATE_CLOSING)
-		printf("\n  Unable to properly load the game board\n");
-	if (d->md->state == STATE_CLOSING)
-		printf("\n  I played this shitty game and all I got was this lousy \
-		message...\n");
+	if (d->md->state <= STATE_NULL)
+		printf("\n   Unable to properly load the game board\n");
 	else if (d->md->state == STATE_RETRYING)
-		printf("\n  How did you get here anyways?\n");
+		printf("\n   Save-scumming I see...\n");
 	else if (d->md->state == STATE_SUCCEEDING)
-		printf("\n  Finished level %i in %i moves after %i tries!\n", \
-		d->md->lvl_c + 1, d->mv_c, d->md->try_c);
+	{
+		printf("\n   Finished level %i in", d->md->lvl_c + 1);
+		printf(" %i  moves after %i attempt!\n", d->mv_c, d->md->try_c);
+	}
 	else if (d->md->state == STATE_DYING)
-		printf("\n  You got got sonny... Better luck next time!\n");
+		printf("\n   You got got sonny... Better luck next time!\n");
+	else if (d->md->state == STATE_CLOSING)
+		printf("\n   Leaving so early...\n");
 }
 
 //prints messages a the end of the game
 void	print_game_end(t_meta *md)
 {
-	if (md->state < STATE_CLOSING)
-		printf("\n  Your map is bad and you should FEEL bad... (ERR : %i)\
-		\n\n", md->state);
-	else if (md->state == STATE_CLOSING)
-		printf("\n  Didn't think you'd be a such a quitter...\n\n");
+	if (md->state <= STATE_NULL)
+	{
+		printf("\n   Your map is bad and you should FEEL bad...");
+		printf("\n   (ERR : %i)\n\n", md->state);
+	}
 	else if (md->state == STATE_RETRYING)
-		printf("\n  Save-scumming I see...\n\n");
+		printf("\n   How did you get here anyways?\n\n");
 	else if (md->state == STATE_SUCCEEDING)
-		printf("\n  CONGRATULATIONS!!! You completed the %i levels in %i \
-		moves and %i \retries!\n\n", md->lvl_n, md->mv_c, \
-		md->try_n - md->lvl_n);
+	{
+		printf("\n\n   CONGRATULATIONS!!! You completed the");
+		printf(" %i levels in %i moves!", md->lvl_n, md->mv_c);
+		printf("\n   It took you %i retries", md->try_n - md->lvl_n);
+		printf(" and left you with %i lives!\n\n", md->lives);
+	}
 	else if (md->state == STATE_DYING)
-		printf("\n  R.I.P. Next time maybe try avoiding those...\n\n");
+		printf("\n   R.I.P. Next time maybe try avoiding those...\n\n");
+	else if (md->state == STATE_CLOSING)
+		printf("\n   Didn't think you'd be a such a quitter...\n\n");
 }

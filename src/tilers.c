@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 16:31:54 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 10:41:30 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	connect_tile(t_data *d, t_tile *tile, int i)
 	}
 }
 
-//connects ALL valid tiles together (aka links their "direction pointers")
+//connects ALL valid tiles together (aka links their structpointers)
 void	connect_grid(t_data *d)
 {
 	t_tile	*tile;

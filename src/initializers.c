@@ -6,16 +6,16 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/29 16:40:54 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 13:35:09 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //puts values in fields used later on to prevent garbage affecting the program
-static void	set_board_data(t_data *d)
+static void	set_level_data(t_data *d)
 {
-	d->m_flag = 0;
+	d->m_flag = 1;
 	d->c_flag = 0;
 	d->flg_c = 0;
 	d->mv_c = 0;
@@ -25,12 +25,13 @@ static void	set_board_data(t_data *d)
 	d->asset_n = 7;
 	d->asset_s = 64;
 	d->old = NULL;
-	d->md->state = STATE_CLOSING;
+	d->md->state = STATE_NULL;
 }
 
 //puts values in fields used later one to prevent garbage affecting the program
 static void	set_game_data(t_meta *md)
 {
+	md->lives = 4;
 	md->difficulty = 6;
 	md->instability = 4;
 	md->char_limit = 1560;
@@ -59,7 +60,7 @@ char	*make_level(char *str)
 }
 
 //loads the level input strings from a given string
-void	initiate_levels(t_meta *md, int lvl_n, char **paths)
+void	initiate_game(t_meta *md, int lvl_n, char **paths)
 {
 	set_game_data(md);
 	if (1 <= lvl_n)
@@ -67,7 +68,7 @@ void	initiate_levels(t_meta *md, int lvl_n, char **paths)
 		md->levels = ft_calloc(md->lvl_n, sizeof(char *));
 		md->lvl_n = lvl_n;
 		md->lvl_c = -1;
-		while (++md->lvl_c < lvl_n && STATE_CLOSING < md->state)
+		while (++md->lvl_c < lvl_n && STATE_NULL < md->state)
 			md->state = get_level(md, paths[md->lvl_c]);
 		md->lvl_c = 0;
 	}
@@ -76,12 +77,12 @@ void	initiate_levels(t_meta *md, int lvl_n, char **paths)
 }
 
 //initialises the data struct used throughout the program
-void	initiate_data(t_data *d, t_meta *md)
+void	initiate_level(t_data *d, t_meta *md)
 {
 	d->md = md;
-	set_board_data(d);
+	set_level_data(d);
 	load_board(d, md->levels[d->md->lvl_c]);
-	if (STATE_CLOSING <= md->state)
+	if (STATE_NULL <= md->state)
 	{
 		d->max_wx = (d->max_bx + d->max_by + 3) * d->asset_s / 2;
 		d->max_wy = (d->max_bx + d->max_by + 5) * d->asset_s / 4;
