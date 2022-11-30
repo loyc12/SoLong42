@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/30 13:35:09 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 16:04:58 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static void	set_level_data(t_data *d)
 //puts values in fields used later one to prevent garbage affecting the program
 static void	set_game_data(t_meta *md)
 {
-	md->lives = 4;
-	md->difficulty = 6;
+	md->lives = 42;
+	md->difficulty = 4;
 	md->instability = 4;
 	md->char_limit = 1560;
-	md->max_size = 75;
+	md->max_size = 76;
 	md->no_checks = 0;
 	md->try_c = 0;
 	md->try_n = 0;

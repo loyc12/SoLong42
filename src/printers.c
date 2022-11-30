@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/30 14:34:56 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 15:57:23 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	print_level_end(t_data *d)
 {
 	if (d->md->state <= STATE_NULL)
-		printf("\n   Unable to properly load the game board\n");
+		printf("\n   ERROR\n\n   Unable to properly load the game board\n");
 	else if (d->md->state == STATE_RETRYING)
 		printf("\n   Save-scumming I see...\n");
 	else if (d->md->state == STATE_SUCCEEDING)
@@ -36,7 +36,7 @@ void	print_game_end(t_meta *md)
 	if (md->state <= STATE_NULL)
 	{
 		printf("\n   Your map is bad and you should FEEL bad...");
-		printf("\n   (ERR : %i)\n\n", md->state);
+		printf("\n   (State : %i)\n\n", md->state);
 	}
 	else if (md->state == STATE_RETRYING)
 		printf("\n   How did you get here anyways?\n\n");

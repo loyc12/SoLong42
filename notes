@@ -23,15 +23,19 @@ In the very end a library is generated, compile your program with this library!
 2. Install GLFW
 
 - brew update
-- 1
+* brew upgrade
 
 
 
 3. [Download and build MLX42]
 
-- git clone https://github.com/codam-coding-college/MLX42.git
+- cd libs
+* git clone https://github.com/codam-coding-college/MLX42.git
 - cd MLX42
 - make
+- cd ../..
+
+
 
 The output library file is called `libmlx42.a`.
 
