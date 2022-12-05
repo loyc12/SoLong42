@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/30 14:42:40 by llord            ###   ########.fr       */
+/*   Updated: 2022/11/30 17:54:46 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	render_object(t_data *d, t_tile *tile)
 	{
 		if (tile->bc->x != 0 && tile->bc->y != 0)
 			tile->object = put_image(d, tile->bc, ID_SLAB, 0);
-		else
+		else 
 			tile->object = put_image(d, tile->bc, ID_CUBE, 0);
 	}
 	else if (tile->type == TYPE_PLAYER)

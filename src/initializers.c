@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/30 16:04:58 by llord            ###   ########.fr       */
+/*   Updated: 2022/12/05 16:08:38 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	set_level_data(t_data *d)
 static void	set_game_data(t_meta *md)
 {
 	md->lives = 42;
-	md->difficulty = 4;
-	md->instability = 4;
+	md->difficulty = 7;
+	md->instability = 1;
 	md->char_limit = 1560;
 	md->max_size = 76;
 	md->no_checks = 0;
