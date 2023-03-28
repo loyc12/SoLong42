@@ -6,7 +6,7 @@
 #    By: llord <llord@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 15:09:46 by llord             #+#    #+#              #
-#    Updated: 2022/11/30 16:20:39 by llord            ###   ########.fr        #
+#    Updated: 2023/03/28 12:09:11 by llord            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ WHITE = \033[0;97m
 # Special variables
 DEFAULT_GOAL: all
 .DELETE_ON_ERROR: $(NAME)
-.PHONY: all bonus clean fclean re run lldb leaks example
+.PHONY: all bonus clean fclean re run lldb leaks example deps cmake glfw
 
 # Hide calls
 export VERBOSE	=	TRUE
@@ -51,7 +51,7 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 RM		=	rm -rf
 INCLUDE =	-I include
-LIBS	=	MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+LIBS	=	MLX42/build/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 
 # Dir and file names
 NAME	=	so_long
@@ -70,15 +70,13 @@ OBJS	=	$(addprefix $(OBJDIR), $(addsuffix .o, $(FILES)))
 
 all: $(NAME)
 
-$(NAME): deps $(OBJS)
-	$(HIDE)$(CC) $(CFLAGS) -o $@ $^ $(INCLUDE) $(LIBS)
-	@echo "$(GREEN)Files compiled$(DEF_COLOR)"
-
-deps: cmake glfw
+$(NAME): $(OBJS)
 	$(HIDE) git submodule init --quiet
 	$(HIDE) git submodule update --quiet
 	$(HIDE) cd MLX42 && cmake -B build && cmake --build build -j4
 	@echo "$(BLUE)Submodules set up$(DEF_COLOR)"
+	$(HIDE)$(CC) $(CFLAGS) -o $@ $^ $(INCLUDE) $(LIBS)
+	@echo "$(GREEN)Files compiled$(DEF_COLOR)"
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
