@@ -51,7 +51,7 @@ CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
 RM		=	rm -rf
 INCLUDE =	-I include
-LIBS	=	libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+LIBS	=	MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 
 # Dir and file names
 NAME	=	so_long
@@ -70,9 +70,15 @@ OBJS	=	$(addprefix $(OBJDIR), $(addsuffix .o, $(FILES)))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): deps $(OBJS)
 	$(HIDE)$(CC) $(CFLAGS) -o $@ $^ $(INCLUDE) $(LIBS)
 	@echo "$(GREEN)Files compiled$(DEF_COLOR)"
+
+deps: cmake glfw
+	$(HIDE) git submodule init --quiet
+	$(HIDE) git submodule update --quiet
+	$(HIDE) cd MLX42 && cmake -B build && cmake --build build -j4
+	@echo "$(BLUE)Submodules set up$(DEF_COLOR)"
 
 $(OBJS): $(OBJDIR)%.o : $(SRCDIR)%.c
 	@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
@@ -102,15 +108,23 @@ run: re
 
 lldb:
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
-	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+	gcc -g -Wall -Werror -Wextra *.h src/*.c -I include MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 	lldb ./a.out ./levels/map5.ber
 
 leaks:
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
-	gcc -Wall -Werror -Wextra *.h src/*.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+	gcc -Wall -Werror -Wextra *.h src/*.c -I include MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 	leaks --atExit -- ./a.out ./levels/map5.ber
 
 example:
 	@echo "$(RED)Starting the debugging...$(DEF_COLOR)"
-	gcc -Wall -Werror -Wextra libs/example.c -I include libs/MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
+	gcc -Wall -Werror -Wextra libs/example.c -I include MLX42/libmlx42.a -lglfw -L "/Users/$$USER/.brew/opt/glfw/lib/"
 	leaks --atExit -- ./a.out
+
+cmake:
+	$(HIDE) brew install cmake
+	@echo "$(BLUE)Cmake set up$(DEF_COLOR)"
+
+glfw:
+	$(HIDE) brew install glfw
+	@echo "$(BLUE)GLFW set up$(DEF_COLOR)"
