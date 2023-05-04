@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2023/05/04 10:22:07 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 12:08:51 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //prints messages at the end of a level
 void	print_level_end(t_data *d)
 {
-	if (d->md->state <= STATE_NULL)
+	if (d->md->state < STATE_NULL)
 		printf("\n   ERROR\n\n   Unable to properly load the game board\n");
 	else if (d->md->state == STATE_RETRYING)
 		printf("\n   Save-scumming I see...\n");
@@ -26,14 +26,14 @@ void	print_level_end(t_data *d)
 	}
 	else if (d->md->state == STATE_DYING)
 		printf("\n   You got got sonny... Better luck next time!\n");
-	else if (d->md->state == STATE_CLOSING)
+	else
 		printf("\n   Leaving so early...\n");
 }
 
 //prints messages a the end of the game
 void	print_game_end(t_meta *md)
 {
-	if (md->state <= STATE_NULL)
+	if (md->state < STATE_NULL)
 	{
 		printf("\n   Your map is bad and you should FEEL bad...");
 		printf("\n   (State : %i)\n\n", md->state);
@@ -49,6 +49,6 @@ void	print_game_end(t_meta *md)
 	}
 	else if (md->state == STATE_DYING)
 		printf("\n   R.I.P. Next time maybe try avoiding those...\n\n");
-	else if (md->state == STATE_CLOSING)
+	else
 		printf("\n   Didn't think you'd be a such a quitter...\n\n");
 }
