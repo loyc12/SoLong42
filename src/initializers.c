@@ -6,14 +6,14 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/12/05 16:08:38 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:00:51 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //puts values in fields used later on to prevent garbage affecting the program
-static void	set_level_data(t_data *d)
+static void	set_level_data(t_data *d) // * MOVE THESE CONSTS TO A #DEFINE
 {
 	d->m_flag = 1;
 	d->c_flag = 0;
@@ -22,20 +22,20 @@ static void	set_level_data(t_data *d)
 	d->max_bx = 0;
 	d->max_by = 0;
 	d->board_s = 0;
-	d->asset_n = 7;
-	d->asset_s = 64;
+	d->asset_n = 7; // *
+	d->asset_s = 64; // *
 	d->old = NULL;
 	d->md->state = STATE_NULL;
 }
 
 //puts values in fields used later one to prevent garbage affecting the program
-static void	set_game_data(t_meta *md)
+static void	set_game_data(t_meta *md) // * MOVE THESE CONSTS TO A #DEFINE
 {
-	md->lives = 42;
-	md->difficulty = 7;
-	md->instability = 1;
-	md->char_limit = 1560;
-	md->max_size = 76;
+	md->lives = LIVES; // *
+	md->difficulty = DIFFICULTY; // *
+	md->instability = INSTABILITY; // *
+	md->char_limit = 1560; // *
+	md->max_size = 76; // *
 	md->no_checks = 0;
 	md->try_c = 0;
 	md->try_n = 0;

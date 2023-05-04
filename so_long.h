@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:17:40 by llord             #+#    #+#             */
-/*   Updated: 2023/03/28 12:05:59 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:25:00 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <fcntl.h>
 # include <time.h>
 # include "MLX42/include/MLX42/MLX42.h"
+
+# define LIVES			42;
+# define DIFFICULTY		6;
+# define INSTABILITY	2; // should be called randomness tbqh
 
 typedef enum e_state
 {

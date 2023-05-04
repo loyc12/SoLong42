@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:27 by llord             #+#    #+#             */
-/*   Updated: 2022/11/30 14:23:59 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:22:41 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	move_player_to(t_data *d, t_tile *dst_tile)
 	d->m_flag++;
 	d->pc = dst_tile->bc;
 	if (dst_tile->type == TYPE_FLAG)
-	{	
+	{
 		d->flg_c--;
 		flag_r++;
 	}

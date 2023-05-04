@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 00:40:08 by W2Wizard          #+#    #+#             */
-/*   Updated: 2022/11/30 11:46:56 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:20:22 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	hook(void *param)
 	mlx_t	*mlx;
 
 	mlx = param;
-	
+
 	if (mlx_is_key_down(param, MLX_KEY_ESCAPE) || mlx_is_key_down(param, MLX_KEY_Q))
 		mlx_close_window(param);
 	if (mlx_is_key_down(param, MLX_KEY_UP) || mlx_is_key_down(param, MLX_KEY_W))
@@ -51,6 +51,7 @@ int32_t	main(void)
 	xpm_t	*xpm;
 	xpm = mlx_load_xpm42("./assets/XPM/dumbass.xpm42");
 	face = mlx_texture_to_image(mlx, &xpm->texture);
+	mlx_delete_xpm42(xpm);
 
 	//		white square does not cause leaks
 	//face = mlx_new_image(mlx, 128, 128);
@@ -71,6 +72,6 @@ int32_t	main(void)
 
 	//		properly closing the window
 	mlx_terminate(mlx);
-	
+
 	return (EXIT_SUCCESS);
 }

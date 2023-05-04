@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2022/11/30 15:57:23 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 10:22:07 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_level_end(t_data *d)
 	else if (d->md->state == STATE_SUCCEEDING)
 	{
 		printf("\n   Finished level %i in", d->md->lvl_c + 1);
-		printf(" %i  moves after %i attempt!\n", d->mv_c, d->md->try_c);
+		printf(" %i moves after %i attempt!\n", d->mv_c, d->md->try_c);
 	}
 	else if (d->md->state == STATE_DYING)
 		printf("\n   You got got sonny... Better luck next time!\n");
