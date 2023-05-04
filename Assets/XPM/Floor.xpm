@@ -1,10 +1,10 @@
 /* XPM */
-static char *_b04fe7012a340aee63dc2195c6892aeBJGPvnVcPwIkMZsV[] = {
+static char *TileFloor1683213987[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 3 1 ",
 "  c None",
 ". c black",
-"X c white",
+"X c #41C041",
 /* pixels */
 "                                                                ",
 "                                                                ",

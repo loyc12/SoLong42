@@ -1,14 +1,14 @@
 /* XPM */
-static char *Cone1667932430[] = {
+static char *Cone1683213986[] = {
 /* columns rows colors chars-per-pixel */
 "64 64 7 1 ",
 "  c None",
 ". c black",
-"X c gray72",
-"o c #D0D0D0",
-"O c gray91",
-"+ c #F4F4F4",
-"@ c white",
+"X c #FF5B5B",
+"o c #FF8989",
+"O c #FFB6B6",
+"+ c #FFCCCC",
+"@ c #FFE1E1",
 /* pixels */
 "                              ....                              ",
 "                              ....                              ",

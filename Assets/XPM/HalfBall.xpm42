@@ -2,10 +2,10 @@
 64 64 6 1 c
   #00000000
 . #000000FF
-X #B8B8B8FF
-o #D0D0D0FF
-O #E8E8E8FF
-+ #FFFFFFFF
+X #5B5BFFFF
+o #8989FFFF
+O #B6B6FFFF
++ #E1E1FFFF
                                                                 
                                                                 
                                                                 
@@ -24,34 +24,34 @@ O #E8E8E8FF
                                                                 
                         ................                        
                         ................                        
-                  ......OOOOOOOOOOOOOOOO......                  
-                  ......OOOOOOOOOOOOOOOO......                  
-              ....++++++++++++OOOOOOOOOOOOOOoo....              
-              ....++++++++++++OOOOOOOOOOOOOOoo....              
-            ..++++++++++++++++++++OOOOOOOOOOOOoooo..            
-            ..++++++++++++++++++++OOOOOOOOOOOOoooo..            
-          ..++++++++++++++++++++++++OOOOOOOOOOOOoooo..          
-          ..++++++++++++++++++++++++OOOOOOOOOOOOoooo..          
+                  ......+++++OOOOOOOOOOO......                  
+                  ......+++++OOOOOOOOOOO......                  
+              ....++++++++++++++++OOOOOOOOOOoo....              
+              ....++++++++++++++++OOOOOOOOOOoo....              
+            ..++++++++++++++++++++++OOOOOOOOOOoooo..            
+            ..++++++++++++++++++++++OOOOOOOOOOoooo..            
+          ..++++++++++++++++++++++++++OOOOOOOOOOoooo..          
+          ..++++++++++++++++++++++++++OOOOOOOOOOoooo..          
         ..++++++++++++++++++++++++++++OOOOOOOOOOOOoooo..        
         ..++++++++++++++++++++++++++++OOOOOOOOOOOOoooo..        
-      ..++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooo..      
-      ..++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooo..      
-    ..++++++++++++++++++++++++++++++++++OOOOOOOOOOoooooooo..    
-    ..++++++++++++++++++++++++++++++++++OOOOOOOOOOoooooooo..    
-    ..++++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooo..    
-    ..++++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooo..    
-  ..OO++++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooooo..  
-  ..OO++++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooooo..  
-  ..OOOO++++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
-  ..OOOO++++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
-  ..OOOO++++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
-  ..OOOO++++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
-..OOOOOOOO++++++++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooXX..
-..OOOOOOOO++++++++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooXX..
-..OOOOOOOOOO++++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooooXX..
-..OOOOOOOOOO++++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooooXX..
-..OOOOOOOOOOOOOO++++++++++++++OOOOOOOOOOOOOOOOOOOOooooooooooXX..
-..OOOOOOOOOOOOOO++++++++++++++OOOOOOOOOOOOOOOOOOOOooooooooooXX..
+      ..++++++++++++++++++++++++++++++++OOOOOOOOOOoooooo..      
+      ..++++++++++++++++++++++++++++++++OOOOOOOOOOoooooo..      
+    ..OO++++++++++++++++++++++++++++++++OOOOOOOOOOoooooooo..    
+    ..OO++++++++++++++++++++++++++++++++OOOOOOOOOOoooooooo..    
+    ..OO++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooo..    
+    ..OO++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooo..    
+  ..OOOO++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooooo..  
+  ..OOOO++++++++++++++++++++++++++++++++OOOOOOOOOOOOoooooooo..  
+  ..OOOOOO++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
+  ..OOOOOO++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
+  ..OOOOOO++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
+  ..OOOOOO++++++++++++++++++++++++++++OOOOOOOOOOOOOOoooooooo..  
+..OOOOOOOOOO++++++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooXX..
+..OOOOOOOOOO++++++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooXX..
+..OOOOOOOOOOOO++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooooXX..
+..OOOOOOOOOOOO++++++++++++++++++++OOOOOOOOOOOOOOOOooooooooooXX..
+..OOOOOOOOOOOOOOOO++++++++++++OOOOOOOOOOOOOOOOOOOOooooooooooXX..
+..OOOOOOOOOOOOOOOO++++++++++++OOOOOOOOOOOOOOOOOOOOooooooooooXX..
 ..OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooooooooXX..
 ..OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooooooooXX..
 ..ooOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOooooooooooXXXX..

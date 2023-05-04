@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 12:57:05 by llord             #+#    #+#             */
-/*   Updated: 2023/05/04 10:17:28 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 11:31:43 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	load_assets(t_data *d)
 	mlx_image_t	**assets;
 
 	assets = ft_calloc(d->asset_n, sizeof(mlx_image_t *));
-	assets[ID_FLOOR] = make_image(d, "./assets/XPM/TileFloor.xpm42");
+	assets[ID_FLOOR] = make_image(d, "./assets/XPM/Floor.xpm42");
 	assets[ID_SLAB] = make_image(d, "./assets/XPM/Slab.xpm42");
 	assets[ID_CUBE] = make_image(d, "./assets/XPM/Cube.xpm42");
 	if (0 < d->flg_c)
@@ -54,8 +54,8 @@ void	load_assets(t_data *d)
 		assets[ID_BALL] = make_image(d, "./assets/XPM/Ball.xpm42");
 	else
 		assets[ID_BALL] = make_image(d, "./assets/XPM/HalfBall.xpm42");
-	assets[ID_FLAG] = make_image(d, "./assets/XPM/FlagWhite.xpm42");
-	assets[ID_CONE] = make_image(d, "./assets/XPM/CONE.xpm42");
+	assets[ID_FLAG] = make_image(d, "./assets/XPM/Flag.xpm42");
+	assets[ID_CONE] = make_image(d, "./assets/XPM/Cone.xpm42");
 	d->assets = assets;
 }
 

@@ -6,7 +6,7 @@
 /*   By: llord <llord@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 00:40:08 by W2Wizard          #+#    #+#             */
-/*   Updated: 2023/05/04 10:20:22 by llord            ###   ########.fr       */
+/*   Updated: 2023/05/04 11:31:50 by llord            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int32_t	main(void)
 
 	//		face square causes leaks
 	xpm_t	*xpm;
-	xpm = mlx_load_xpm42("./assets/XPM/dumbass.xpm42");
+	xpm = mlx_load_xpm42("./assets/XPM/Eli.xpm42");
 	face = mlx_texture_to_image(mlx, &xpm->texture);
 	mlx_delete_xpm42(xpm);
 
