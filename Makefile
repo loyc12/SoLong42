@@ -254,7 +254,7 @@ example:
 
 # Installs/Updates homebrew (called manually cause slow af)
 brew:
-	$(HIDE) bash include/brew_install.sh
+	$(HIDE) bash brew_install.sh
 	@echo "$(BLUE)Brew installed $(DEFCOL)"
 	@echo "$(RED)CLOSE AND REOPEN TERMINAL IF IT DOESN'T WORK$(DEFCOL)"
 	@echo "$(GREEN)Exited normally! $(DEFCOL)"
