@@ -8,3 +8,6 @@ Your goal is to capture the flags and head to the exit while avoiding the enemie
 There are multiple levels :
 ![multiple levels](preview/4.png)
 ![pacman](preview/5.png)
+
+Ending text :
+![ending](preview/6.png)
